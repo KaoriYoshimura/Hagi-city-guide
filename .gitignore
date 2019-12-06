@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+node_modules/
 /.pnp
 .pnp.js
 node_modules/
@@ -30,3 +31,6 @@ yarn-error.log*
 
 # Config
 /config/default.json
+
+# uploaded files
+client/public/uploads/*

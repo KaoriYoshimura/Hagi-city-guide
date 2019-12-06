@@ -1,0 +1,44 @@
+// Colors
+$red: #D90404;
+$yellow: #FFD804;
+$white: #fff;
+$paleRed: lighten($red, 45);
+$gray: #333;
+
+// Font family, size
+$fontHeadingTitle:  'Lekton','Mukta', helvetica, 'Bebas Neue', cursive, Arial, sans-serif;
+$fontBody: 'Frank Ruhl Libre', 'Lekton', helvetica, 'Bebas Neue', cursive, Arial, sans-serif;
+$fontBodySize: 17px;
+
+// Color
+$backgroundColor: $white ;
+$primaryColor: $red;
+$primaryColorSub: $yellow;
+$subColor: $paleRed;
+
+// Font color
+$fontColorMain: $gray;
+$fontSubColor: $white;
+$hoverColor: $red;
+$navhoverColor: $yellow;
+$fontHeadingTitleColor: $red;
+$errorMessage: red;
+
+// Spacing
+$mainSpacing: 0.3rem;
+$spacingBetweenDiv: 1rem;
+$spacingForParagraph: 3rem;
+
+// Width
+$containerWidth: 95%;
+$maxWidth: 980px;
+
+// Radius
+$mainRadius: 0.3rem;
+
+// Transition
+$mainTransition: all 0.4s ease-in-out;
+
+// Shadow
+$boxShadow: -5px 0px 9px -1px rgba(0,0,0,0.47);
+$textShadow: 1px 1px 1px black;
