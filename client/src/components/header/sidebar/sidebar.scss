@@ -19,6 +19,7 @@
     ul {
         display: flex;
         flex-direction: column;
+        text-align: left;
     }
 
     li {
@@ -43,7 +44,6 @@
             background-color: $hoverColor;
         }
 
-        
         &:hover .close{
             opacity: 1;
         }
@@ -76,6 +76,7 @@
         opacity: 0;
         margin-top: 45px;
         position: absolute;
+        right: 20px;
     }
 
 }
