@@ -1,0 +1,51 @@
+body {
+   background-color: $backgroundColor;
+   font-family: $fontBody;
+   font-size: $fontBodySize;
+   color: $fontColorMain;
+   min-width: 450px;
+}
+
+* {
+   margin: 0px;
+   padding: 0px;
+}
+
+ul {
+   list-style-type: none;
+}
+
+a {
+   color: inherit;
+   text-decoration: none;
+}
+
+a:link,
+a:visited,
+a:hover,
+a> :active {
+   color: inherit;
+   text-decoration: none;
+}
+
+a {
+   &:hover {
+      color: $hoverColor;
+   }
+}
+
+.container {
+   width: $containerWidth;
+   margin: auto;
+   max-width: $maxWidth;
+}
+
+h1 {
+   color: $fontHeadingTitleColor;
+   font-family: $fontHeadingTitle;
+   font-size: 45px;
+   text-align: center;
+   margin-top: $spacingForParagraph;
+   margin-bottom: $spacingForParagraph;
+   text-transform: uppercase;
+}
