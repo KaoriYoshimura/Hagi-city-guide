@@ -1,0 +1,41 @@
+@import '../../style/styles';
+
+$path: "../../assets/images";
+
+@mixin heroImage($image, $height) {
+    background: linear-gradient(0deg, rgba($gray, 0.2), rgba($gray, 0.2)), url('#{$path}/#{$image}') center/cover no-repeat;
+    min-height: $height;
+
+    .heading {
+        color: $fontSubColor;
+    }
+}
+
+.hero-container {
+    text-align: center;
+    position: relative;
+
+    &.home {
+        @include heroImage("homeHero.jpg", 60vh)
+    }
+
+    &.news {
+    @include heroImage("newsHero.jpg", 40vh)
+    }
+
+    &.access {
+    @include heroImage("accessHero.jpg", 40vh)
+    }
+
+    &.contact {
+    @include heroImage("contactHero.jpg", 40vh)
+    }
+
+    .heading {
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+    }
+
+}

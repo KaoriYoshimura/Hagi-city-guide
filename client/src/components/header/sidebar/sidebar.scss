@@ -1,0 +1,85 @@
+@import '../../../style/styles';
+
+.side-bar {
+    transition: $mainTransition;
+    padding: $spacingBetweenDiv;
+    color:$fontColorMain;
+    height: 100%;
+    background-color: $white;
+    box-shadow: $boxShadow;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 55%;
+    z-index: 1;
+    transform: translateX(103%);
+    // transition: $mainTransition;
+
+
+    ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    li {
+        @include navBarStyle($fontColorMain, $hoverColor, none);
+    }
+
+    // Close button
+    .close-container{
+    position: relative;
+    margin-left: auto;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+
+        &:hover .border-left{
+            transform: rotate(-45deg);
+            background-color: $hoverColor;
+        }
+
+        &:hover .border-right{
+            transform: rotate(45deg);
+            background-color: $hoverColor;
+        }
+
+        
+        &:hover .close{
+            opacity: 1;
+        }
+    }
+
+    .border-left{
+        height: 4px;
+        width: 30px;
+        position: absolute;
+        margin-top: 24px;
+        background-color: $fontColorMain;
+        transform: rotate(45deg);
+        transition: $mainTransition;
+    }
+
+    .border-right{
+        height: 4px;
+        width: 30px;
+        position: absolute;
+        margin-top: 24px;
+        background-color: $fontColorMain;
+        transform: rotate(-45deg);
+        transition: $mainTransition;
+    }
+
+    .close{
+        font-size: 10px;
+        text-transform: uppercase;
+        transition: $mainTransition;
+        opacity: 0;
+        margin-top: 45px;
+        position: absolute;
+    }
+
+}
+
+.side-bar-open {
+    transform: translateX(0);
+}

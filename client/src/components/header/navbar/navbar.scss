@@ -1,0 +1,67 @@
+@import '../../../style/styles';
+
+.header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    z-index: 1;
+
+    .logo-container {
+        margin: auto 0;
+    }
+
+    .navBar {
+        display: flex;
+        align-items: center ;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        padding: 0 5px;
+    }
+
+    .react-icon {
+        color: $fontSubColor;
+        font-size: 2rem;
+        padding: $mainSpacing;
+        cursor: pointer;
+    }
+
+    .spacer {
+        flex:1;
+    }
+
+    li {
+        @include navBarStyle($fontSubColor, $navhoverColor, $textShadow);
+
+    }
+
+}
+
+@include tablet {
+    .navBar {
+        width: 100%;
+
+        .react-icon {
+            display: none;
+        }
+
+        .hide {
+            height: auto;
+        }
+
+        ul {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            text-align: center;
+        }
+
+    }
+}
+
+
+@include mobile {
+    .navMenus {
+        display: none;
+    }
+
+}
