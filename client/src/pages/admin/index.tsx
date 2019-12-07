@@ -1,10 +1,11 @@
 import React from 'react';
+import NewPost from '../../components/posts/newPost';
 
 const Admin = () => (
     <>
-        <div>
-            contents
-        </div>
+        <main>
+            {/* <NewPost /> */}
+        </main>
     </>
 );
 

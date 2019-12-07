@@ -37,7 +37,7 @@ export interface INewPostState {
     uploadedFile: {};
     title: string;
     description: string;
-    [x: number]: any
+    [x: number]: any;
 }
 
 export interface IFile {
