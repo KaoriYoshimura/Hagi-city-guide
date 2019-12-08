@@ -10,7 +10,8 @@ class NewPost extends Component<INewPostProps, INewPostState> {
         fileName: '',
         uploadedFile: {},
         title: '',
-        description: ''
+        description: '',
+        category: ''
     }
 
     onChangeFile = (e: any) => {
@@ -48,7 +49,8 @@ class NewPost extends Component<INewPostProps, INewPostState> {
         const newPost = {
             title: this.state.title,
             description: this.state.description,
-            image: this.state.fileName
+            image: this.state.fileName,
+            category: this.state.category,
         };
         console.log(newPost);
 
@@ -67,8 +69,10 @@ class NewPost extends Component<INewPostProps, INewPostState> {
                             {this.state.fileName}
                             {this.state.title}
                             {this.state.description}
+                            {this.state.category}
                         </label>
                         <input type="text" name="title" placeholder="Title" onChange={this.onChange} />
+                        <input type="text" name="category" placeholder="category" onChange={this.onChange} />
                         <input type="text" name="description" placeholder="Description" onChange={this.onChange} />
                         <input type="submit" />
                     </div>

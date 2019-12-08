@@ -3,7 +3,7 @@ import Hero from '../../components/hero';
 
 import Header from '../../components/header/header';
 import PAGES from '../../constants/pageData';
-import HomePosts from '../../components/posts/homePosts.js';
+import HomePosts from '../../components/posts/homePosts';
 
 
 const Home = () => (

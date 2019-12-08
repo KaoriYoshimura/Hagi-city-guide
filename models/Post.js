@@ -14,6 +14,10 @@ const postSchema = new Schema({
         required: true,
         type: String
     },
+    category: {
+        required: true,
+        type: String
+    },
     // category: {
     //     // required: true,
     //     type: String

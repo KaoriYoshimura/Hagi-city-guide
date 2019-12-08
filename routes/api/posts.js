@@ -20,12 +20,13 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { title, description, image } = req.body
+    const { title, description, image, category } = req.body
 
     const newPost = new Post({
         title,
         description,
-        image
+        image,
+        category
     })
 
     try {

@@ -37,6 +37,7 @@ export interface INewPostState {
     uploadedFile: {};
     title: string;
     description: string;
+    category: string;
     [x: number]: any;
 }
 
@@ -57,4 +58,11 @@ export interface INewPostProps {
 export interface IHomePostsState {
     fetchPosts: any;
     posts: [];
+}
+
+export interface IPosts {
+    id: string;
+    image: string;
+    title: string;
+    category: string;
 }
