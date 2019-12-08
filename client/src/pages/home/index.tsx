@@ -3,6 +3,7 @@ import Hero from '../../components/hero';
 
 import Header from '../../components/header/header';
 import PAGES from '../../constants/pageData';
+import HomePosts from '../../components/posts/homePosts.js';
 
 
 const Home = () => (
@@ -10,9 +11,7 @@ const Home = () => (
         <Hero pageName={PAGES.HOME} pageHeading="Welcome to Hagi">
             <Header />
         </Hero>
-        <div>
-            contents
-        </div>
+        <HomePosts />
     </>
 );
 

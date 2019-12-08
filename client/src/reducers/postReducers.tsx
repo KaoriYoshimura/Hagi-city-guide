@@ -1,20 +1,19 @@
-import { FETCH_USERS, SINGLE_USER, ADD_POST, DELETE_USER } from '../actions/post/types';
+import { FETCH_POSTS, SINGLE_USER, ADD_POST, DELETE_USER } from '../actions/post/types';
 
 const initialState = {
-    users: [],
-    user: {}
-}
+    posts: [],
+    post: {}
+};
 
 
 export default (state = initialState, action: any) => {
-    console.log('reducers')
+    console.log('reducers');
     switch (action.type) {
-
-        case FETCH_USERS:
+        case FETCH_POSTS:
             return {
                 ...state,
-                users: action.payload
-            }
+                posts: action.payload
+            };
 
         case SINGLE_USER:
             return {
@@ -25,7 +24,7 @@ export default (state = initialState, action: any) => {
             return {
                 ...state,
                 post: action.payload
-            }
+            };
 
         // case DELETE_USER:
         //     return {
