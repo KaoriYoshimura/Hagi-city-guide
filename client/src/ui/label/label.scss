@@ -1,0 +1,34 @@
+@import '../../style/styles';
+
+.label {
+    color: $fontSubColor;
+    padding: 3px 8px;
+    white-space: nowrap;
+    border-radius: 3px;
+    text-align: center;
+    display: inline-block;
+    font-weight: 700;
+    font-family: $fontHeadingTitleSub;
+    font-size: 15px;
+
+    &.access {
+        color: $guide;
+    }
+
+    &.worldheritage {
+        color: $worldheritage;
+    }
+
+    &.food {
+        color: $food;
+    }
+
+    &.regional {
+        color: $regional;
+    }
+
+    &.info {
+        color: $info;
+        border: 1px solid $info;
+    }
+}
