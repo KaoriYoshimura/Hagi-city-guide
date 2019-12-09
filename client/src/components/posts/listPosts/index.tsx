@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../../actions/post/postActions';
-import accessMap from '../../assets/images/accessMap.png'
+import { fetchPosts } from '../../../actions/post/postActions';
+import accessMap from '../../../assets/images/accessMap.png';
 import { Link } from 'react-router-dom';
-import { IPosts } from '../../interfaces/interfaces';
+import { IPosts } from '../../../interfaces/interfaces';
+import classNames from 'classnames';
 
 interface IHomePostsProps {
     props: any;
@@ -19,7 +20,7 @@ class HomePosts extends Component<IHomePostsProps> {
         const { posts } = this.props.props;
         console.log(posts);
         return (
-            <div>
+            <div className={classNames('container', 'homePosts')}>
                 <img src={accessMap} />
                 {posts.map((post: IPosts) => (
                     <article key={post.id}>

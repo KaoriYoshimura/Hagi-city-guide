@@ -5,10 +5,20 @@ $white: #fff;
 $paleRed: lighten($red, 45);
 $gray: #333;
 
+// Label colors
+$guide: #E88374 ;
+$worldheritage: #A58CFF ;
+$food: #6FD97E;
+$regional: #E88F07;
+$info: #6FD97E;
+
 // Font family, size
 $fontHeadingTitle:  'Frank Ruhl Libre','Lekton','Mukta', helvetica, 'Bebas Neue', cursive, Arial, sans-serif;
+$fontHeadingTitleSub:  'Mukta', helvetica, 'Bebas Neue', cursive, Arial, sans-serif;
 $fontBody: 'Frank Ruhl Libre', 'Lekton', helvetica, 'Bebas Neue', cursive, Arial, sans-serif;
 $fontBodySize: 17px;
+$fontHeadingTitleSize: 20px;
+
 
 // Color
 $backgroundColor: $white ;

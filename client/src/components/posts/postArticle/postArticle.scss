@@ -1,0 +1,30 @@
+@import '../../../style/styles';
+
+.article-container{
+    position: relative;
+
+    .text-background {
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        background: linear-gradient(180deg,transparent 0,rgba($gray,.45) 43%,rgba($gray,.75));
+    }
+
+    .text-container {
+        padding: 25px 10px 10px;
+        height: 40%;
+    }
+
+    .post-title {
+        color: $fontSubColor;
+        font-family: $fontHeadingTitleSub;
+        font-size: $fontHeadingTitleSize;
+        font-weight: bold;
+
+        &:hover {
+            color: $navhoverColor;
+        }
+    }
+}

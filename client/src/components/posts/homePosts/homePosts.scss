@@ -1,0 +1,63 @@
+@import '../../../style/styles';
+
+.home-posts {
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .item-container >div{
+        padding: 2px;
+    }
+
+}
+
+@include tablet {
+    .home-posts {
+        .item-container{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto;
+
+            .item-access {
+                grid-column: span 4;
+                grid-row: span 2;
+            }
+
+            .item-world-heritage {
+                grid-column: span 4;
+            }
+
+            .item-food, .item-spa {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .item-pottery {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+        .post {
+            grid-column: span 2;
+            grid-row: span 1;
+
+            figure {
+                height: 200px;
+            }
+        }
+    }
+}
+
+@include mobile {
+    .home-posts {
+        .post {
+            figure {
+                height: 300px;
+            }
+        }
+    }
+}

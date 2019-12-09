@@ -37,5 +37,29 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+
+    try {
+        const post = await Post.findById(req.params.id)
+        if (post.length === 0) {
+            res.json({ err: 'No User Exist with this id' })
+        } else {
+            res.json(post)
+        }
+    } catch (e) {
+        res.json({ Error: `Error is ${e}` })
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+
+    try {
+        await Post.findByIdAndRemove({ _id: req.params.id })
+        res.json({ success: 'User deleted successfully' })
+    } catch (e) {
+        res.json({ Error: `Error is ${e}` })
+    }
+})
+
 
 module.exports = router;

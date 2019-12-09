@@ -61,7 +61,7 @@ class NewPost extends Component<INewPostProps, INewPostState> {
 
     render() {
         return (
-            <>
+            <div>
                 <form onSubmit={this.onSubmit}>
                     <div>
                         <input type="file" onChange={this.onChangeFile} />
@@ -77,7 +77,7 @@ class NewPost extends Component<INewPostProps, INewPostState> {
                         <input type="submit" />
                     </div>
                 </form>
-            </>
+            </div>
         );
     }
 }

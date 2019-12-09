@@ -18,10 +18,7 @@ const postSchema = new Schema({
         required: true,
         type: String
     },
-    // category: {
-    //     // required: true,
-    //     type: String
-    // },
+
     // user: {
     //     type: Schema.Types.ObjectId,
     //     ref: 'users'
