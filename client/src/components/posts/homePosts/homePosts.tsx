@@ -79,6 +79,42 @@ class HomePosts extends Component<IHomePostsProps> {
         this.props.fetchPosts();
     }
 
+    createPostContent = (posts: IPosts[]) => {
+        console.log(posts);
+        const postContent = [];
+        const numberOfPosts = 14;
+
+        for (let i = 0; i < numberOfPosts; i++) {
+            postContent.push(<article
+                key={posts[i].id}
+                className={classNames(
+                    'article-container',
+                    posts[i].isFixed ? posts[i].fixedArticle : 'post'
+                )}
+            >
+                <Link to="#">
+                    <div className="image-container">
+                        <figure>
+                            <img src={
+                                // eslint-disable-next-line no-undef
+                                posts[i].isFixed ? require(`../../../assets/images/homePosts/${posts[i].image}`) : `/uploads/${posts[i].image}`
+                            } alt={posts[i].title} />
+                        </figure>
+                        <div className="text-background">
+                            <div className="text-container">
+
+                                <Label>{posts[i].category}</Label>
+                                <div className="post-title">{posts[i].title}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </Link>
+            </article>);
+        }
+        return postContent;
+    }
+
     reserveArray = (tempPosts: any) => {
         const postsToRun: any = [];
         console.log(tempPosts);
@@ -95,7 +131,7 @@ class HomePosts extends Component<IHomePostsProps> {
         console.log(defaultPost);
         console.log(tempPosts);
         if (tempPosts.length < 8) {
-            tempPosts = posts.push(defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost);
+            tempPosts = posts.push(defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost);
             console.log(tempPosts);
         }
 
@@ -105,83 +141,13 @@ class HomePosts extends Component<IHomePostsProps> {
         posts.splice(6, 0, itemFood);
         posts.splice(8, 0, itemSpa);
         posts.splice(11, 0, itemPottery);
-        posts.splice(-2, 10);
-        // const postsToRun = this.reserveArray(tempPosts);
-        // console.log(postsToRun);
-        // const lengthOfPosts = posts.length;
-        // const firstPost = posts.slice(lengthOfPosts - 1, lengthOfPosts);
-        // const secondPost = posts.slice(lengthOfPosts - 2, lengthOfPosts - 1);
-        // const thirdPost = posts.slice(lengthOfPosts - 3, lengthOfPosts - 2);
-        // const fourthPost = posts.slice(lengthOfPosts - 4, lengthOfPosts - 3);
-        // const fifthPost = posts.slice(lengthOfPosts - 5, lengthOfPosts - 4);
-        // const sixthPost = posts.slice(lengthOfPosts - 6, lengthOfPosts - 7);
-        // const seventhPost = posts.slice(6, 7);
         console.log(posts);
         return (
             <main className={classNames('container', 'home-posts')}>
                 <div className="item-container">
-                    {posts.map((post: IPosts) => (
-                        <article
-                            key={post.id}
-                            className={classNames(
-                                'article-container',
-                                post.isFixed ? post.fixedArticle : 'post'
-                            )}
-                        >
-                            <Link to="#">
-                                <div className="image-container">
-                                    <figure>
-                                        <img src={
-                                            // eslint-disable-next-line no-undef
-                                            post.isFixed ? require(`../../../assets/images/homePosts/${post.image}`) : `/uploads/${post.image}`
-                                        } alt={post.title} />
-                                    </figure>
-                                    <div className="text-background">
-                                        <div className="text-container">
-
-                                            <Label>{post.category}</Label>
-                                            <div className="post-title">{post.title}</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </Link>
-                        </article>
-                    ))}
+                    {this.createPostContent(posts)}
                 </div>
             </main>
-            // <main className={classNames('container', 'home-posts')}>
-            //     <div className="item-container">
-            //         {posts.map((post: IPosts) => (
-            //             <article
-            //                 key={post.id}
-            //                 className={classNames(
-            //                     'article-container',
-            //                     post.isFixed ? post.fixedArticle : 'post'
-            //                 )}
-            //             >
-            //                 <Link to="#">
-            //                     <div className="image-container">
-            //                         <figure>
-            //                             <img src={
-            //                                 // eslint-disable-next-line no-undef
-            //                                 post.isFixed ? require(`../../../assets/images/homePosts/${post.image}`) : `/uploads/${post.image}`
-            //                             } alt={post.title} />
-            //                         </figure>
-            //                         <div className="text-background">
-            //                             <div className="text-container">
-
-            //                                 <Label>{post.category}</Label>
-            //                                 <div className="post-title">{post.title}</div>
-            //                             </div>
-            //                         </div>
-            //                     </div>
-
-            //                 </Link>
-            //             </article>
-            //         ))}
-            //     </div>
-            // </main>
         );
     }
 }
