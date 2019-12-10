@@ -6,23 +6,24 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-    }
 
-    .item-container >div{
-        padding: 2px;
-    }
-
-    .article-container{
-        position: relative;
-
-        .text-background {
-            position: absolute;
-            bottom: 0px;
-            left: 0;
-            z-index: 1;
-            width: 100%;
-            background: linear-gradient(180deg,transparent 0,rgba($gray,.45) 43%,rgba($gray,.75));
+        &:hover {
+            opacity: 0.7;
         }
+    }
+
+    .image-container {
+        position: relative;
+    }
+
+    .text-background {
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        background: linear-gradient(180deg,transparent 0,rgba($gray,.45) 43%,rgba($gray,.75));
+    }
 
         .text-container {
             padding: 25px 10px 10px;
@@ -39,8 +40,6 @@
                 color: $navhoverColor;
             }
         }
-    }
-
 }
 
 @include tablet {
@@ -50,25 +49,40 @@
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
             // grid-template-rows: auto;
             grid-auto-rows: 200px;
+            grid-gap: 5px;
 
             .item-access {
                 grid-column: span 4;
                 grid-row: span 2;
+                figure {
+                    height: 404px;
+                }
             }
 
             .item-world-heritage {
                 grid-column: span 4;
+                figure {
+                    height: 200px;
+                }
             }
 
             .item-food, .item-spa {
                 grid-column: span 2;
                 grid-row: span 2;
+
+                figure {
+                    height: 404px;
+                }
             }
 
             .item-pottery {
                 grid-column: span 2;
                 grid-row: span 1;
-            }
+
+                figure {
+                    height: 404px;
+                }
+        }
         }
 
         .post {
@@ -84,6 +98,9 @@
 
 @include mobile {
     .home-posts {
+        .article-container {
+            padding: 5px 0;
+        }
         .post {
             figure {
                 height: 300px;

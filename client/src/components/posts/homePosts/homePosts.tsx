@@ -2,15 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/post/postActions';
-import imgAccessMap from '../../../assets/images/homePosts/accessMap.png';
-import imgWorldHeritage from '../../../assets/images/homePosts/worldHeritage.jpg';
-import imgFood from '../../../assets/images/homePosts/fugu.jpg';
-import imgSpa from '../../../assets/images/homePosts/onsen.jpg';
-import imgPottery from '../../../assets/images/homePosts/hagiyaki.jpg';
 import { Link } from 'react-router-dom';
 import { IPosts } from '../../../interfaces/interfaces';
 import classNames from 'classnames';
-import PostArticle from '../postArticle';
 import './homePosts.scss';
 import Label from '../../../ui/label';
 import VARIANT from '../../../constants/variant';
@@ -26,18 +20,16 @@ const accessMap = {
     description: '',
     image: 'accessMap.png',
     category: VARIANT.ACCESS,
-    // __v: 0,
     isFixed: true,
     fixedArticle: 'item-access',
 };
 
 const worldHeritage = {
     _id: 'accessMap',
-    title: 'How to access to Hagi',
+    title: 'Site of Japan’s Meiji Industrial Revolution',
     description: '',
     image: 'worldHeritage.jpg',
     category: VARIANT.WORLDHERITAGE,
-    // __v: 0,
     isFixed: true,
     fixedArticle: 'item-world-heritage',
 };
@@ -48,7 +40,6 @@ const itemFood = {
     description: '',
     image: 'fugu.jpg',
     category: VARIANT.FOOD,
-    // __v: 0,
     isFixed: true,
     fixedArticle: 'item-food',
 };
@@ -59,7 +50,6 @@ const itemSpa = {
     description: '',
     image: 'onsen.jpg',
     category: VARIANT.GUIDE,
-    // __v: 0,
     isFixed: true,
     fixedArticle: 'item-spa',
 };
@@ -70,7 +60,6 @@ const itemPottery = {
     description: '',
     image: 'hagiyaki.jpg',
     category: VARIANT.REGINAL,
-    // __v: 0,
     isFixed: true,
     fixedArticle: 'item-pottery',
 };
@@ -81,7 +70,6 @@ const defaultPost = {
     description: '',
     image: 'kikugahama.jpg',
     category: VARIANT.GUIDE,
-    // __v: 0,
     isFixed: true,
     fixedArticle: 'post',
 };
@@ -103,7 +91,6 @@ class HomePosts extends Component<IHomePostsProps> {
     render() {
         const { posts } = this.props.props;
         let tempPosts = [posts];
-        let testPosts = [];
 
         console.log(defaultPost);
         console.log(tempPosts);
@@ -118,7 +105,7 @@ class HomePosts extends Component<IHomePostsProps> {
         posts.splice(6, 0, itemFood);
         posts.splice(8, 0, itemSpa);
         posts.splice(11, 0, itemPottery);
-        posts.splice(-2, 12);
+        posts.splice(-2, 10);
         // const postsToRun = this.reserveArray(tempPosts);
         // console.log(postsToRun);
         // const lengthOfPosts = posts.length;
@@ -134,67 +121,67 @@ class HomePosts extends Component<IHomePostsProps> {
             <main className={classNames('container', 'home-posts')}>
                 <div className="item-container">
                     {posts.map((post: IPosts) => (
-                        <div
+                        <article
                             key={post.id}
-                            className={classNames(post.isFixed ? post.fixedArticle : 'post')}>
-                            <article className="article-container">
-                                <Link to="#">
-                                    <div className="image-container">
-                                        <figure>
-                                            <img src={
-                                                // eslint-disable-next-line no-undef
-                                                post.isFixed ? require(`../../../assets/images/homePosts/${post.image}`) : `/uploads/${post.image}`
-                                            } alt={post.title} />
-                                        </figure>
-                                    </div>
+                            className={classNames(
+                                'article-container',
+                                post.isFixed ? post.fixedArticle : 'post'
+                            )}
+                        >
+                            <Link to="#">
+                                <div className="image-container">
+                                    <figure>
+                                        <img src={
+                                            // eslint-disable-next-line no-undef
+                                            post.isFixed ? require(`../../../assets/images/homePosts/${post.image}`) : `/uploads/${post.image}`
+                                        } alt={post.title} />
+                                    </figure>
                                     <div className="text-background">
                                         <div className="text-container">
+
                                             <Label>{post.category}</Label>
                                             <div className="post-title">{post.title}</div>
                                         </div>
                                     </div>
-                                </Link>
-                            </article>
-                        </div>
+                                </div>
+
+                            </Link>
+                        </article>
                     ))}
-                    {/* <div className="item-access fixed">
-                        <img src={imgAccessMap} />
-                    </div>
-                    <div className="post">
-                        <PostArticle posts={firstPost} />
-                    </div>
-                    <div className="post">
-                        <PostArticle posts={secondPost} />
-                    </div>
-                    <div className="post">
-                        <PostArticle posts={thirdPost} />
-                    </div>
-                    <div className="item-world-heritage fixed">
-                        <img src={imgWorldHeritage} />
-                    </div>
-                    <div className="post">
-                        <PostArticle posts={firstPost} />
-                    </div>
-                    <div className="item-food fixed">
-                        <img src={imgFood} />
-                    </div>
-                    <div className="post">
-                        <PostArticle posts={firstPost} />
-                    </div>
-                    <div className="item-spa fixed">
-                        <img src={imgSpa} />
-                    </div>
-                    <div className="post">
-                        <PostArticle posts={firstPost} />
-                    </div>
-                    <div className="post">
-                        <PostArticle posts={firstPost} />
-                    </div>
-                    <div className="item-pottery fixed">
-                        <img src={imgPottery} />
-                    </div> */}
                 </div>
             </main>
+            // <main className={classNames('container', 'home-posts')}>
+            //     <div className="item-container">
+            //         {posts.map((post: IPosts) => (
+            //             <article
+            //                 key={post.id}
+            //                 className={classNames(
+            //                     'article-container',
+            //                     post.isFixed ? post.fixedArticle : 'post'
+            //                 )}
+            //             >
+            //                 <Link to="#">
+            //                     <div className="image-container">
+            //                         <figure>
+            //                             <img src={
+            //                                 // eslint-disable-next-line no-undef
+            //                                 post.isFixed ? require(`../../../assets/images/homePosts/${post.image}`) : `/uploads/${post.image}`
+            //                             } alt={post.title} />
+            //                         </figure>
+            //                         <div className="text-background">
+            //                             <div className="text-container">
+
+            //                                 <Label>{post.category}</Label>
+            //                                 <div className="post-title">{post.title}</div>
+            //                             </div>
+            //                         </div>
+            //                     </div>
+
+            //                 </Link>
+            //             </article>
+            //         ))}
+            //     </div>
+            // </main>
         );
     }
 }
