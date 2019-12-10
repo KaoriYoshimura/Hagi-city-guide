@@ -49,12 +49,6 @@ export interface IFile {
     name: string;
 }
 
-export interface INewPostProps {
-    addPost: any;
-    history: any;
-}
-
-
 export interface IHomePostsState {
     fetchPosts: any;
     posts: [];

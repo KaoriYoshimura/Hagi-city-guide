@@ -1,10 +1,11 @@
 import React from 'react';
-import NewPost from '../../components/posts/newPost';
+import PostForm from '../../components/posts/postForm';
+import classNames from 'classnames';
 
 const Admin = () => (
     <>
-        <main>
-            {/* <NewPost /> */}
+        <main className={classNames('container')}>
+            <PostForm />
         </main>
     </>
 );

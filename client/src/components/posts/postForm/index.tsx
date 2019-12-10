@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { addPost } from '../../actions/post/postActions';
-import { INewPostState, INewPostProps } from '../../interfaces/interfaces';
+import { addPost } from '../../../actions/post/postActions';
+import { INewPostState } from '../../../interfaces/interfaces';
+import classNames from 'classnames';
 
-class NewPost extends Component<INewPostProps, INewPostState> {
+export interface INewPostProps {
+    addPost: any;
+}
+
+class PostForm extends Component<INewPostProps, INewPostState> {
     state = {
         file: '',
         fileName: '',
@@ -55,12 +60,12 @@ class NewPost extends Component<INewPostProps, INewPostState> {
         console.log(newPost);
 
         this.props.addPost(newPost);
-        console.log(this.props.history);
-        this.props.history.push('/');
     };
 
     render() {
         return (
+            // Should remove main tag and add this component to admin page component in the future
+
             <div>
                 <form onSubmit={this.onSubmit}>
                     <div>
@@ -82,4 +87,4 @@ class NewPost extends Component<INewPostProps, INewPostState> {
     }
 }
 
-export default connect(null, { addPost })(NewPost);
+export default connect(null, { addPost })(PostForm);
