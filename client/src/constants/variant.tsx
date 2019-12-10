@@ -1,7 +1,7 @@
 const VARIANTS = {
     ACCESS: 'access',
     GUIDE: 'guide',
-    WORLDHERITAGE: 'worldheritage',
+    WORLDHERITAGE: 'world heritage',
     FOOD: 'food',
     REGINAL: 'regional',
     INFO: 'info',

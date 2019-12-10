@@ -65,4 +65,6 @@ export interface IPosts {
     image: string;
     title: string;
     category: string;
+    isFixed?: boolean;
+    fixedArticle?: string;
 }
