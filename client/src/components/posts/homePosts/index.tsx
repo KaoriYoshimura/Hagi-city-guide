@@ -143,11 +143,9 @@ class HomePosts extends Component<IHomePostsProps> {
         posts.splice(11, 0, itemPottery);
         console.log(posts);
         return (
-            <main className={classNames('container', 'home-posts')}>
-                <div className="item-container">
-                    {this.createPostContent(posts)}
-                </div>
-            </main>
+            <div className="item-container">
+                {this.createPostContent(posts)}
+            </div>
         );
     }
 }

@@ -1,6 +1,6 @@
 @import '../../../style/styles';
 
-.home-posts {
+.item-container {
     img {
         display: block;
         width: 100%;
@@ -43,7 +43,6 @@
 }
 
 @include tablet {
-    .home-posts {
         .item-container{
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -93,15 +92,14 @@
                 height: 200px;
             }
         }
-    }
 }
 
 @include mobile {
-    .home-posts {
+    .item-container {
         .article-container {
             padding: 5px 0;
         }
-        .post {
+        .item-world-heritage, .post {
             figure {
                 height: 300px;
             }
