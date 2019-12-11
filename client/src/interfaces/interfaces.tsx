@@ -56,7 +56,7 @@ export interface IHomePostsState {
 }
 
 export interface IPosts {
-    id: string;
+    _id: string;
     image: string;
     title: string;
     category: string;

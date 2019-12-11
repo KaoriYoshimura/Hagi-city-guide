@@ -1,20 +1,17 @@
-/* eslint-disable global-require */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/post/postActions';
-import { Link } from 'react-router-dom';
 import { IPosts } from '../../../interfaces/interfaces';
-import classNames from 'classnames';
 import './homePosts.scss';
-import Label from '../../../ui/label';
 import { VARIANTS } from '../../../constants/category';
+import PostArticle from '../postArticle';
 
 interface IHomePostsProps {
     props: any;
     fetchPosts(): any;
 }
 
-const accessMap = {
+const itemAccessMap = {
     _id: 'accessMap',
     title: 'How to access to Hagi',
     description: '',
@@ -24,7 +21,7 @@ const accessMap = {
     fixedArticle: 'item-access',
 };
 
-const worldHeritage = {
+const itemWorldHeritage = {
     _id: 'accessMap',
     title: 'Site of Japan’s Meiji Industrial Revolution',
     description: '',
@@ -34,7 +31,7 @@ const worldHeritage = {
     fixedArticle: 'item-world-heritage',
 };
 
-const itemFood = {
+const itemGourmet = {
     _id: 'food',
     title: 'Enjoy local food',
     description: '',
@@ -79,73 +76,54 @@ class HomePosts extends Component<IHomePostsProps> {
         this.props.fetchPosts();
     }
 
-    createPostContent = (posts: IPosts[]) => {
-        console.log(posts);
-        const postContent = [];
-        const numberOfPosts = 14;
-
-        for (let i = 0; i < numberOfPosts; i++) {
-            postContent.push(<article
-                key={posts[i].id}
-                className={classNames(
-                    'article-container',
-                    posts[i].isFixed ? posts[i].fixedArticle : 'post'
-                )}
-            >
-                <Link to="#">
-                    <div className="image-container">
-                        <figure>
-                            <img src={
-                                // eslint-disable-next-line no-undef
-                                posts[i].isFixed ? require(`../../../assets/images/homePosts/${posts[i].image}`) : `/uploads/${posts[i].image}`
-                            } alt={posts[i].title} />
-                        </figure>
-                        <div className="text-background">
-                            <div className="text-container">
-
-                                <Label variant={posts[i].category.replace(/\s+/g, '-').toLowerCase()}>{posts[i].category}</Label>
-                                <div className="post-title">{posts[i].title}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </Link>
-            </article>);
-        }
-        return postContent;
-    }
-
     reserveArray = (tempPosts: any) => {
         const postsToRun: any = [];
-        console.log(tempPosts);
         for (let i = tempPosts.length - 1; i >= 0; i--) {
             postsToRun.push(tempPosts[i]);
         }
         return postsToRun;
     }
 
+    createAccessMapArticle = (article: IPosts) => {
+        const fixedArticle = [];
+        fixedArticle.push(article);
+        return fixedArticle;
+    }
+
     render() {
         const { posts } = this.props.props;
-        let tempPosts = [posts];
-        posts.reverse();
+        const homePostArray = this.reserveArray(posts);
 
-        console.log(defaultPost);
-        console.log(tempPosts);
-        if (tempPosts.length < 8) {
-            tempPosts = posts.push(defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost);
-            console.log(tempPosts);
+        if (homePostArray.length < 8) {
+            homePostArray.push(defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost);
         }
 
-        console.log(tempPosts);
-        posts.splice(0, 0, accessMap);
-        posts.splice(4, 0, worldHeritage);
-        posts.splice(6, 0, itemFood);
-        posts.splice(8, 0, itemSpa);
-        posts.splice(11, 0, itemPottery);
-        console.log(posts);
+        const firstPost = homePostArray.slice(0, 1);
+        const secondPost = homePostArray.slice(1, 2);
+        const thirdPost = homePostArray.slice(2, 3);
+        const forthPost = homePostArray.slice(3, 4);
+        const fifthPost = homePostArray.slice(4, 5);
+        const sixthPost = homePostArray.slice(5, 6);
+        const seventhPost = homePostArray.slice(6, 7);
+        const eigthPost = homePostArray.slice(7, 8);
+        const ninthPost = homePostArray.slice(8, 9);
+
         return (
             <div className="item-container">
-                {this.createPostContent(posts)}
+                <PostArticle posts={this.createAccessMapArticle(itemAccessMap)} />
+                <PostArticle posts={firstPost} />
+                <PostArticle posts={secondPost} />
+                <PostArticle posts={thirdPost} />
+                <PostArticle posts={this.createAccessMapArticle(itemWorldHeritage)} />
+                <PostArticle posts={forthPost} />
+                <PostArticle posts={this.createAccessMapArticle(itemGourmet)} />
+                <PostArticle posts={fifthPost} />
+                <PostArticle posts={this.createAccessMapArticle(itemSpa)} />
+                <PostArticle posts={sixthPost} />
+                <PostArticle posts={seventhPost} />
+                <PostArticle posts={this.createAccessMapArticle(itemPottery)} />
+                <PostArticle posts={eigthPost} />
+                <PostArticle posts={ninthPost} />
             </div>
         );
     }
@@ -155,5 +133,4 @@ const mapStateToProps = (state: any) => ({
     props: state.posts
 });
 
-// {fetchPosts: fetchPost} shorthand
 export default connect(mapStateToProps, { fetchPosts })(HomePosts);
