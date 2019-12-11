@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import Moment from 'react-moment';
 import { fetchPosts } from '../../../actions/post/postActions';
 import { IPosts } from '../../../interfaces/interfaces';
 import classNames from 'classnames';
@@ -23,22 +24,6 @@ class PostListAdmin extends Component<IHomePostsProps> {
         console.log(posts, posts.length);
         return (
             <div className={classNames('container', 'homePosts')}>
-                {/* {posts.map((post: IPosts) => (
-                    <article key={post.id}>
-                        <Link to="#">
-                            <div className="imageWrapper">
-                                <figure>
-                                    <img src={`/uploads/${post.image}`} alt={post.title} />
-                                </figure>
-                            </div>
-                            <div className="textWrapper">
-                                <div>{post.category}</div>
-                                <div>{post.title}</div>
-                            </div>
-                        </Link>
-                    </article>
-                ))} */}
-
                 <div className="post-list-admin-container">
                     {/* Show table if there is post */}
                     {posts.length > 0 ? (
@@ -61,7 +46,7 @@ class PostListAdmin extends Component<IHomePostsProps> {
                                         <tr key={post._id}>
                                             <td>{post._id}</td>
                                             {/* <td>{post.date}</td> */}
-                                            <td>date</td>
+                                            <td><Moment format="DD/MM/YYYY HH:mm">{post.date}</Moment></td>
                                             <td>{post.title}</td>
                                             <td>{post.category}</td>
                                             <td className="list-center">

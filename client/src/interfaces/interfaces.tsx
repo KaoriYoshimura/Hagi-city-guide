@@ -62,4 +62,5 @@ export interface IPosts {
     category: string;
     isFixed?: boolean;
     fixedArticle?: string;
+    date?: string;
 }

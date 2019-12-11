@@ -23,10 +23,11 @@ const postSchema = new Schema({
     //     type: Schema.Types.ObjectId,
     //     ref: 'users'
     // },
-    // data: {
-    //     type: Date,
-    //     default: Date.now
-    // }
+
+    date: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const Post = mongoose.model('users', postSchema)
