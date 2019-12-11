@@ -127,6 +127,7 @@ class HomePosts extends Component<IHomePostsProps> {
     render() {
         const { posts } = this.props.props;
         let tempPosts = [posts];
+        posts.reverse();
 
         console.log(defaultPost);
         console.log(tempPosts);

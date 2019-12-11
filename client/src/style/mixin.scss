@@ -41,6 +41,18 @@
 
 }
 
+@mixin buttonStyle ($bgColor, $fColor) {
+    padding: 0.5rem 1rem;
+    background: $bgColor;
+    color: $fColor;
+    display: inline-block;
+    text-transform: uppercase;
+    border-radius: 2px;
+    border: 1px solid $bgColor;
+    cursor: pointer;
+    margin: $mainSpacing;
+}
+
 @mixin mobile {
     @media screen and (max-width: 767px) {
         @content;

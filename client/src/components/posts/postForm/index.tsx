@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { addPost } from '../../../actions/post/postActions';
 import { INewPostState } from '../../../interfaces/interfaces';
-import classNames from 'classnames';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
+
+import './postForm.scss';
 
 export interface INewPostProps {
     addPost: any;
@@ -19,7 +21,6 @@ class PostForm extends Component<INewPostProps, INewPostState> {
         description: '',
         category: '',
         options: CATEGORY_OPTIONS,
-        value: '?'
     }
 
     onChangeFile = (e: any) => {
@@ -66,29 +67,36 @@ class PostForm extends Component<INewPostProps, INewPostState> {
     };
 
     render() {
-        const { options, value } = this.state;
+        const { options } = this.state;
         return (
             <div className="post-form-container">
                 <h2>Creat a new post</h2>
                 <form className="post-form" onSubmit={this.onSubmit}>
                     <div>
-                        <label>Image <span>&#42;</span></label>
-                        <input type="file" onChange={this.onChangeFile} />
-                        <label>Title <span>&#42;</span></label>
-                        <input type="text" name="title" placeholder="Please enter a title" onChange={this.onChange} />
-                        <label>Category <span>&#42;</span></label>
-                        <select name="category" value={value} onChange={this.onChange}>
-                            <option value="" selected>Please choose category</option>
+                        <label>Title <span className="required">&#42;</span></label>
+                        <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} />
+                    </div>
+                    <div>
+                        <label>Category <span className="required">&#42;</span></label>
+                        <select name="category" onChange={this.onChange}>
+                            <option value="">Please choose category</option>
                             {options.map(option => (
                                 <option key={option.value} value={option.value}>
                                     {option.name}
                                 </option>
                             ))}
                         </select>
-                        <label>Image <span>&#42;</span></label>
-                        <input type="text" name="description" placeholder="Description" onChange={this.onChange} />
-                        <label>Image <span>&#42;</span></label>
-                        <input type="submit" />
+                    </div>
+                    <div>
+                        <label>Description <span className="required">&#42;</span></label>
+                        <textarea name="description" placeholder="Please write description" onChange={this.onChange} />
+                    </div>
+                    <div>
+                        <label>Image <span className="required">&#42;</span></label>
+                        <input type="file" onChange={this.onChangeFile} />
+                    </div>
+                    <div>
+                        <input type="submit" value="post" />
                     </div>
                 </form>
             </div>
