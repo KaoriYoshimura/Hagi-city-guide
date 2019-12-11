@@ -1,5 +1,10 @@
 @import '../../style/styles';
 
+@mixin label($color) {
+    color: $color;
+    border: $color 1px solid;
+}
+
 .label {
     color: $fontSubColor;
     padding: 3px 8px;
@@ -13,23 +18,30 @@
     text-transform: uppercase;
 
     &.access {
-        color: $guide;
+        @include label($access)
     }
 
-    &.worldheritage {
-        color: $worldheritage;
+    &.guide {
+        @include label($guide)
     }
 
-    &.food {
-        color: $food;
+    &.world-heritage {
+        @include label($worldheritage)
     }
 
-    &.regional {
-        color: $regional;
+    &.gourmet {
+        @include label($gourmet)
+    }
+
+    &.local-specialities {
+        @include label($local)
     }
 
     &.info {
-        color: $info;
-        border: 1px solid $info;
+        @include label($info)
+    }
+
+    &.event {
+        @include label($event)
     }
 }

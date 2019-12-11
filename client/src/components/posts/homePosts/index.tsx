@@ -7,7 +7,7 @@ import { IPosts } from '../../../interfaces/interfaces';
 import classNames from 'classnames';
 import './homePosts.scss';
 import Label from '../../../ui/label';
-import VARIANT from '../../../constants/variant';
+import { VARIANTS } from '../../../constants/category';
 
 interface IHomePostsProps {
     props: any;
@@ -19,7 +19,7 @@ const accessMap = {
     title: 'How to access to Hagi',
     description: '',
     image: 'accessMap.png',
-    category: VARIANT.ACCESS,
+    category: VARIANTS.ACCESS,
     isFixed: true,
     fixedArticle: 'item-access',
 };
@@ -29,7 +29,7 @@ const worldHeritage = {
     title: 'Site of Japan’s Meiji Industrial Revolution',
     description: '',
     image: 'worldHeritage.jpg',
-    category: VARIANT.WORLDHERITAGE,
+    category: VARIANTS.WORLDHERITAGE,
     isFixed: true,
     fixedArticle: 'item-world-heritage',
 };
@@ -39,7 +39,7 @@ const itemFood = {
     title: 'Enjoy local food',
     description: '',
     image: 'fugu.jpg',
-    category: VARIANT.FOOD,
+    category: VARIANTS.GOURMET,
     isFixed: true,
     fixedArticle: 'item-food',
 };
@@ -49,7 +49,7 @@ const itemSpa = {
     title: 'Enjoy our spa - onsen -',
     description: '',
     image: 'onsen.jpg',
-    category: VARIANT.GUIDE,
+    category: VARIANTS.GUIDE,
     isFixed: true,
     fixedArticle: 'item-spa',
 };
@@ -59,7 +59,7 @@ const itemPottery = {
     title: 'Our Hagiyaki',
     description: '',
     image: 'hagiyaki.jpg',
-    category: VARIANT.REGINAL,
+    category: VARIANTS.LOCAL,
     isFixed: true,
     fixedArticle: 'item-pottery',
 };
@@ -69,7 +69,7 @@ const defaultPost = {
     title: '',
     description: '',
     image: 'kikugahama.jpg',
-    category: VARIANT.GUIDE,
+    category: VARIANTS.GUIDE,
     isFixed: true,
     fixedArticle: 'post',
 };
@@ -103,7 +103,7 @@ class HomePosts extends Component<IHomePostsProps> {
                         <div className="text-background">
                             <div className="text-container">
 
-                                <Label>{posts[i].category}</Label>
+                                <Label variant={posts[i].category.replace(/\s+/g, '-').toLowerCase()}>{posts[i].category}</Label>
                                 <div className="post-title">{posts[i].title}</div>
                             </div>
                         </div>

@@ -39,6 +39,7 @@ export interface INewPostState {
     description: string;
     category: string;
     [x: number]: any;
+    options: any;
 }
 
 export interface IFile {

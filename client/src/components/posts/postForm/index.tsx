@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { addPost } from '../../../actions/post/postActions';
 import { INewPostState } from '../../../interfaces/interfaces';
 import classNames from 'classnames';
+import { CATEGORY_OPTIONS } from '../../../constants/category';
 
 export interface INewPostProps {
     addPost: any;
@@ -16,7 +17,9 @@ class PostForm extends Component<INewPostProps, INewPostState> {
         uploadedFile: {},
         title: '',
         description: '',
-        category: ''
+        category: '',
+        options: CATEGORY_OPTIONS,
+        value: '?'
     }
 
     onChangeFile = (e: any) => {
@@ -63,22 +66,28 @@ class PostForm extends Component<INewPostProps, INewPostState> {
     };
 
     render() {
+        const { options, value } = this.state;
         return (
-            // Should remove main tag and add this component to admin page component in the future
-
-            <div>
-                <form onSubmit={this.onSubmit}>
+            <div className="post-form-container">
+                <h2>Creat a new post</h2>
+                <form className="post-form" onSubmit={this.onSubmit}>
                     <div>
+                        <label>Image <span>&#42;</span></label>
                         <input type="file" onChange={this.onChangeFile} />
-                        <label>
-                            {this.state.fileName}
-                            {this.state.title}
-                            {this.state.description}
-                            {this.state.category}
-                        </label>
-                        <input type="text" name="title" placeholder="Title" onChange={this.onChange} />
-                        <input type="text" name="category" placeholder="category" onChange={this.onChange} />
+                        <label>Title <span>&#42;</span></label>
+                        <input type="text" name="title" placeholder="Please enter a title" onChange={this.onChange} />
+                        <label>Category <span>&#42;</span></label>
+                        <select name="category" value={value} onChange={this.onChange}>
+                            <option value="" selected>Please choose category</option>
+                            {options.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.name}
+                                </option>
+                            ))}
+                        </select>
+                        <label>Image <span>&#42;</span></label>
                         <input type="text" name="description" placeholder="Description" onChange={this.onChange} />
+                        <label>Image <span>&#42;</span></label>
                         <input type="submit" />
                     </div>
                 </form>
