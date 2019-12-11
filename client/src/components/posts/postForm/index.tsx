@@ -70,7 +70,6 @@ class PostForm extends Component<INewPostProps, INewPostState> {
         const { options } = this.state;
         return (
             <div className="post-form-container">
-                <h2>Creat a new post</h2>
                 <form className="post-form" onSubmit={this.onSubmit}>
                     <div>
                         <label>Title <span className="required">&#42;</span></label>
