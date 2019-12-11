@@ -24,7 +24,7 @@
 
         input[type=text], textarea, select{
             box-sizing: border-box;
-            border:1px solid $fontColorMain;
+            border:1px solid $uiBackgroundColor;
             padding: 7px;
             margin:0px;
             outline: none;
@@ -32,8 +32,8 @@
 
 
             &:focus {
-                background-color: lighten($fontColorMain, 70);
-                box-shadow: 0 0 8pxlighten($fontColorMain, 70);
+                background-color: lighten($uiBackgroundColor, 70);
+                box-shadow: 0 0 8pxlighten($uiBackgroundColor, 70);
             }
         }
 
@@ -43,10 +43,10 @@
         }
 
         input[type=submit] {
-            @include buttonStyle($fontColorMain, $fontSubColor);
+            @include buttonStyle($uiBackgroundColor, $fontSubColor);
 
             &:hover {
-                @include buttonStyle(lighten($fontColorMain, 30), $fontSubColor)
+                @include buttonStyle(lighten($uiBackgroundColor, 20), $fontSubColor)
             }
         }
 
