@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import Moment from 'react-moment';
-import { fetchPosts } from '../../../actions/post/postActions';
+import { fetchPosts, deletePost } from '../../../actions/post/postActions';
 import { IPosts } from '../../../interfaces/interfaces';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,11 +12,16 @@ import './postListAdmin.scss';
 interface IHomePostsProps {
     props: any;
     fetchPosts(): any;
+    deletePost(id: string): any;
 }
 
 class PostListAdmin extends Component<IHomePostsProps> {
     componentDidMount() {
         this.props.fetchPosts();
+    }
+
+    onClickDelete = (id: string) => {
+        this.props.deletePost(id);
     }
 
     render() {
@@ -60,7 +65,7 @@ class PostListAdmin extends Component<IHomePostsProps> {
                                                 <FontAwesomeIcon
                                                     icon={faTrash}
                                                     className="admin-icon"
-                                                // onClick={() => this.increment(bookings.booking_id)}
+                                                    onClick={() => this.onClickDelete(post._id)}
                                                 />
                                             </td>
                                         </tr>
@@ -70,9 +75,9 @@ class PostListAdmin extends Component<IHomePostsProps> {
                         </div>
                     ) : (
                             // Show message instead of table if there is no post
-                            <p>
+                            <p className="error-message">
                                 There is no post or database connection problem.
-              </p>
+                            </p>
                         )}
                 </div>
             </div>
@@ -85,4 +90,4 @@ const mapStateToProps = (state: any) => ({
 });
 
 // {fetchPosts: fetchPost} shorthand
-export default connect(mapStateToProps, { fetchPosts })(PostListAdmin);
+export default connect(mapStateToProps, { fetchPosts, deletePost })(PostListAdmin);

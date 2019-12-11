@@ -69,9 +69,14 @@
         margin: $mainSpacing;
         vertical-align: middle;
         font-size: 1.5rem;
+        cursor: pointer;
     }
 
     .list-center {
+        text-align: center;
+    }
+
+    .error-message {
         text-align: center;
     }
 

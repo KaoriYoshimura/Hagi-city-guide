@@ -1,13 +1,20 @@
-import { FETCH_POSTS, SINGLE_USER, ADD_POST, DELETE_USER } from '../actions/post/types';
+import { FETCH_POSTS, SINGLE_USER, ADD_POST, DELETE_POST } from '../actions/post/types';
 
-const initialState = {
+interface IPostState {
+    _id: string;
+}
+interface IPostInitialState {
+    posts: IPostState[];
+    post: {};
+}
+
+const initialState: IPostInitialState = {
     posts: [],
-    post: {}
+    post: {},
 };
 
 
 export default (state = initialState, action: any) => {
-    console.log('reducers');
     switch (action.type) {
         case FETCH_POSTS:
             return {
@@ -19,18 +26,19 @@ export default (state = initialState, action: any) => {
             return {
                 ...state,
                 user: action.payload
-            }
+            };
+
         case ADD_POST:
             return {
                 ...state,
                 post: action.payload
             };
 
-        // case DELETE_USER:
-        //     return {
-        //         ...state,
-        //         user: state.users.filter(user => user._id !== action.payload)
-        //     }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post._id !== action.payload)
+            };
 
         default:
             return state;
