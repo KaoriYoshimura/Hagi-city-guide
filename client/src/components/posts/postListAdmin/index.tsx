@@ -55,11 +55,12 @@ class PostListAdmin extends Component<IHomePostsProps> {
                                             <td>{post.title}</td>
                                             <td>{post.category}</td>
                                             <td className="list-center">
-                                                <FontAwesomeIcon
-                                                    icon={faEdit}
-                                                    className="admin-icon"
-                                                // onClick={() => this.decrement(bookings.booking_id)}
-                                                />
+                                                <Link to={`/admin/${post._id}`}>
+                                                    <FontAwesomeIcon
+                                                        icon={faEdit}
+                                                        className="admin-icon"
+                                                    />
+                                                </Link>
                                             </td>
                                             <td className="list-center">
                                                 <FontAwesomeIcon
