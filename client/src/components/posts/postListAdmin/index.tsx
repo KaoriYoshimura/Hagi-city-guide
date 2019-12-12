@@ -26,7 +26,6 @@ class PostListAdmin extends Component<IHomePostsProps> {
 
     render() {
         const { posts } = this.props.props;
-        console.log(posts, posts.length);
         return (
             <div className={classNames('container', 'homePosts')}>
                 <div className="post-list-admin-container">
@@ -50,7 +49,6 @@ class PostListAdmin extends Component<IHomePostsProps> {
                                     {posts.map((post: IPosts) => (
                                         <tr key={post._id}>
                                             <td>{post._id}</td>
-                                            {/* <td>{post.date}</td> */}
                                             <td><Moment format="DD/MM/YYYY HH:mm">{post.date}</Moment></td>
                                             <td>{post.title}</td>
                                             <td>{post.category}</td>

@@ -42,12 +42,12 @@ router.get('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
         if (post.length === 0) {
-            res.json({ err: 'No User Exist with this id' })
+            res.json({ err: 'THe Post does not exist with this id' })
         } else {
             res.json(post)
         }
     } catch (e) {
-        res.json({ Error: `Error is ${e}` })
+        res.json({ Error: e })
     }
 })
 
@@ -61,5 +61,14 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+
+    try {
+        await Post.findByIdAndUpdate({ _id: req.params.id }, req.body)
+        res.json({ success: 'Post has been updated successfully' })
+    } catch (e) {
+        res.json({ Error: e })
+    }
+})
 
 module.exports = router;

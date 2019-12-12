@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Home from './pages/home';
 import Admin from './pages/admin';
-import { Provider } from 'react-redux';
-import store from './store';
+import EditPost from './components/posts/editPost';
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
           {/* <Route exact path="/news" component={News} /> */}
           {/* <Route exact path="/" component={Access} /> */}
           <Route exact path="/admin" component={Admin} />
-          <Route exact path="/admin/:id" component={Admin} />
+          <Route exact path="/admin/:id" component={EditPost} />
           {/* <Route exact path="/" component={Contact} /> */}
         </Switch>
       </Router>

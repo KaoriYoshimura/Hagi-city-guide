@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-app.get('/', (req, res) => res.send('API running'));
-
 // Parse application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({
     extended: false
