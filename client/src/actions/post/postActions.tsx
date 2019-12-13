@@ -20,7 +20,7 @@ export const fetchPosts = () => (dispatch: (arg0: { type: string; payload: any }
 };
 
 export const fetchSinglePost = (id: string) => (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    console.log('single fetchPosts action');
+    console.log('single fetchPost action');
     axios.get(`/api/posts/${id}`)
         .then(res => dispatch({
             type: FETCH_POST,

@@ -1,11 +1,11 @@
 export const VARIANTS = {
-    ACCESS: 'access',
-    GUIDE: 'guide',
-    WORLDHERITAGE: 'world heritage',
-    GOURMET: 'gourmet',
-    LOCAL: 'local specialities',
-    INFO: 'info',
-    EVENT: 'event',
+    ACCESS: 'Access',
+    GUIDE: 'Guide',
+    WORLDHERITAGE: 'World Heritage',
+    GOURMET: 'Gourmet',
+    LOCAL: 'Local Specialities',
+    INFO: 'Info',
+    EVENT: 'Event',
 };
 
 export const CATEGORY_OPTIONS = [

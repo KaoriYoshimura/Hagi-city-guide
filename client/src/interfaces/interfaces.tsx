@@ -31,6 +31,11 @@ export interface IEvent {
     preventDefault: Function;
 }
 
+export interface ICategoryOptions {
+    name: string;
+    value: string;
+}
+
 export interface INewPostState {
     file: string;
     fileName: string;
@@ -39,7 +44,7 @@ export interface INewPostState {
     description: string;
     category: string;
     [x: number]: any;
-    options: any;
+    options: ICategoryOptions[];
 }
 
 export interface IFile {
@@ -63,4 +68,5 @@ export interface IPosts {
     isFixed?: boolean;
     fixedArticle?: string;
     date?: string;
+    description: string;
 }

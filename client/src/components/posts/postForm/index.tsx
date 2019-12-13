@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { addPost } from '../../../actions/post/postActions';
 import { INewPostState } from '../../../interfaces/interfaces';

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Home from './pages/home';
+import AdminEditPost from './pages/adminEditPost';
 import Admin from './pages/admin';
 import EditPost from './components/posts/editPost';
 
@@ -16,7 +17,7 @@ const App = () => {
           {/* <Route exact path="/news" component={News} /> */}
           {/* <Route exact path="/" component={Access} /> */}
           <Route exact path="/admin" component={Admin} />
-          <Route exact path="/admin/:id" component={EditPost} />
+          <Route exact path="/admin/:id" component={AdminEditPost} />
           {/* <Route exact path="/" component={Contact} /> */}
         </Switch>
       </Router>

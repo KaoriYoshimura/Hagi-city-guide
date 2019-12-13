@@ -1,50 +1,159 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
-import { RouteComponentProps } from 'react-router-dom';
-import { IPosts } from '../../../interfaces/interfaces';
+import axios from 'axios';
 
-interface IMatchParams {
+import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
+import { IPosts, ICategoryOptions } from '../../../interfaces/interfaces';
+import { CATEGORY_OPTIONS } from '../../../constants/category';
+
+
+interface IEditPostsProps {
+    fetchSinglePost: any;
+    editPost: any;
+    post: IPosts;
     id: string;
 }
 
-interface IEditPostsProps extends RouteComponentProps<IMatchParams> {
-    fetchSinglePost: any;
-    editPost: any;
-    match: any;
-    post: IPosts;
-}
-
-// interface RouteComponentProps<P> {
-//     match: IMatch<P>;
-//     location: H.Location;
-//     history: H.History;
-//     staticContext?: any;
-// }
-
-// export interface IMatch<P> {
-//     params: P;
-//     isExact: boolean;
-//     path: string;
-//     url: string;
-// }
-
 interface IEditPostState {
-    post: [];
-
+    post?: [];
+    file: string;
+    fileName: string;
+    uploadedFile: {};
+    [x: number]: any;
+    options: any;
+    title: string;
+    description: string;
+    category: string;
+    image: string | any;
 }
 
 class EditPost extends Component<IEditPostsProps, IEditPostState> {
-    componentDidMount() {
-        this.props.fetchSinglePost(this.props.match.params.id);
+    constructor(props: IEditPostsProps) {
+        super(props);
+        this.state = {
+            file: '',
+            fileName: '',
+            uploadedFile: {},
+            title: '',
+            description: '',
+            category: '',
+            image: '',
+            options: CATEGORY_OPTIONS,
+        };
     }
 
+    componentDidMount() {
+        this.props.fetchSinglePost(this.props.id);
+    }
+
+    // eslint-disable-next-line react/no-deprecated
+    componentWillReceiveProps(newProps: any) {
+        const postFromDB = newProps.post;
+        console.log(newProps);
+        this.setState({
+            title: postFromDB.title,
+            category: postFromDB.category,
+            description: postFromDB.description,
+            image: `/uploads/${postFromDB.image}`
+        });
+    }
+
+    onChangeFile = (e: any) => {
+        this.setState({ file: e.target.files[0] });
+        // this.setState({ image: e.target.files[0] });
+        this.setState({ fileName: e.target.files[0].name });
+        // this.setState({ image: e.target.files[0].name });
+
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            this.setState({
+                image: reader.result
+            });
+        };
+        if (file) {
+            reader.readAsDataURL(file);
+            this.setState({
+                image: reader.result
+            });
+        }
+    };
+
+    onChange = (e: any) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    onSubmit = async (e: any) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('file', this.state.file);
+        try {
+            const res = await axios.post('/api/uploadFile', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            });
+
+            const { fileName, filePath } = res.data;
+
+            this.setState({ uploadedFile: { fileName, filePath } });
+        } catch (err) {
+            if (err.response.status === 500) {
+                console.log('There was a problem with the server');
+            } else {
+                console.log(err.response.data.msg);
+            }
+        }
+
+        const updatedPost = {
+            title: this.state.title,
+            description: this.state.description,
+            image: this.state.fileName,
+            category: this.state.category,
+        };
+        console.log(updatedPost);
+
+        this.props.editPost(this.props.id, updatedPost);
+    };
+
     render() {
-        // const { post } = this.props.props;
-        console.log(this.props.match.params.id);
-        console.log(this.props.post);
+        const { title, category, image, description, options } = this.state;
+
+        console.log(this.props);
         return (
-            <div>test</div>
+            <div className="edit-post-container">
+                <form className="post-form" onSubmit={this.onSubmit}>
+                    <div>
+                        <label>Title <span className="required">&#42;</span></label>
+                        <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} value={title} />
+                    </div>
+                    <div>
+                        <label>Category <span className="required">&#42;</span></label>
+                        <select name="category" onChange={this.onChange}>
+                            <option value={category}>{category}</option>
+                            {options.map((option: ICategoryOptions) => (
+                                <option key={option.value} value={option.value}>
+                                    {option.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label>Description <span className="required">&#42;</span></label>
+                        <textarea name="description" onChange={this.onChange} value={description} />
+                    </div>
+                    <div>
+                        <label>Image <span className="required">&#42;</span></label>
+                        <img src={image} />
+                        <input type="file" onChange={this.onChangeFile} />
+                    </div>
+                    <div>
+                        <input type="submit" value="post" />
+                    </div>
+                </form>
+            </div>
         );
     }
 }
