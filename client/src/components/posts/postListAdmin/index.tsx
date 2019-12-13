@@ -38,6 +38,7 @@ class PostListAdmin extends Component<IHomePostsProps> {
                                         {/* Table header */}
                                         <th>ID</th>
                                         <th>Datum</th>
+                                        <th>Updated on</th>
                                         <th>Title</th>
                                         <th>category</th>
                                         <th>Edit</th>
@@ -50,6 +51,7 @@ class PostListAdmin extends Component<IHomePostsProps> {
                                         <tr key={post._id}>
                                             <td>{post._id}</td>
                                             <td><Moment format="DD/MM/YYYY HH:mm">{post.date}</Moment></td>
+                                            <td><Moment format="DD/MM/YYYY HH:mm">{post.updated}</Moment></td>
                                             <td>{post.title}</td>
                                             <td>{post.category}</td>
                                             <td className="list-center">

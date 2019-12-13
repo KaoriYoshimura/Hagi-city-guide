@@ -69,4 +69,5 @@ export interface IPosts {
     fixedArticle?: string;
     date?: string;
     description: string;
+    updated?: string;
 }

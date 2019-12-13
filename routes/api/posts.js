@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
         title,
         description,
         image,
-        category
+        category,
     })
 
     try {
@@ -42,7 +42,7 @@ router.get('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
         if (post.length === 0) {
-            res.json({ err: 'THe Post does not exist with this id' })
+            res.json({ err: 'The Post does not exist with this id' })
         } else {
             res.json(post)
         }

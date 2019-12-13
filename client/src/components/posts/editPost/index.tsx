@@ -6,7 +6,6 @@ import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
 import { IPosts, ICategoryOptions } from '../../../interfaces/interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 
-
 interface IEditPostsProps {
     fetchSinglePost: any;
     editPost: any;
@@ -54,15 +53,15 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
             title: postFromDB.title,
             category: postFromDB.category,
             description: postFromDB.description,
-            image: `/uploads/${postFromDB.image}`
+            image: `/uploads/${postFromDB.image}`,
+            file: postFromDB.image,
+            fileName: postFromDB.image
         });
     }
 
     onChangeFile = (e: any) => {
         this.setState({ file: e.target.files[0] });
-        // this.setState({ image: e.target.files[0] });
         this.setState({ fileName: e.target.files[0].name });
-        // this.setState({ image: e.target.files[0].name });
 
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -107,13 +106,15 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
             }
         }
 
+        const date = new Date();
+
         const updatedPost = {
             title: this.state.title,
             description: this.state.description,
             image: this.state.fileName,
             category: this.state.category,
+            updated: date
         };
-        console.log(updatedPost);
 
         this.props.editPost(this.props.id, updatedPost);
     };

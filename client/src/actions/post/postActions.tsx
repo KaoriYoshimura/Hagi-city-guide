@@ -36,11 +36,19 @@ export const deletePost = (id: string) => (dispatch: (arg0: { type: any; payload
         }));
 };
 
-export const editPost = (id: string, updatedPost: PostActionTypes) => (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    console.log('editPost action');
-    axios.put(`/api/users/${id}`, updatedPost)
-        .then(res => dispatch({
+export const editPost = (id: string, updatedPost: PostActionTypes) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
+    console.log(updatedPost);
+    try {
+        const res = await axios.put(`/api/posts/${id}`, updatedPost);
+
+        dispatch({
             type: EDIT_POST,
             payload: res.data
-        }));
+        });
+    } catch (err) {
+        dispatch({
+            type: EDIT_POST,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
 };
