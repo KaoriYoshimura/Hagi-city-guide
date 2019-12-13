@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import EditPost from '../../components/posts/editPost';
 import './adminEditPost.scss';
+import Button from '../../ui/button';
 
 interface IMatchParams {
     id: string;
@@ -18,6 +19,14 @@ class AdminEditPost extends Component<IEditPostsProps> {
                 <main className={classNames('container', 'admin-edit-post-container')}>
                     <h2>Edit post</h2>
                     <EditPost id={this.props.match.params.id} />
+                    <div className="link-container">
+                        <Link to={'/'}>
+                            <Button>Home</Button>
+                        </Link>
+                        <Link to={'/'}>
+                            <Button>Admin Top</Button>
+                        </Link>
+                    </div>
                 </main>
             </>
 

@@ -1,0 +1,13 @@
+@import '../../style/styles.scss';
+
+.button-container {
+
+    &.default {
+     @include buttonStyle($uiButtonBackgroundColor, $fontSubColor);
+
+            &:hover {
+                @include buttonStyle(lighten($uiButtonBackgroundColor, 20), $fontSubColor)
+            }
+    }
+
+}
