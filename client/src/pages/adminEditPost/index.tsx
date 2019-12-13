@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import classNames from 'classnames';
 
 import EditPost from '../../components/posts/editPost';
+import './adminEditPost.scss';
 
 interface IMatchParams {
     id: string;

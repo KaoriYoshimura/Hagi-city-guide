@@ -5,6 +5,7 @@ import axios from 'axios';
 import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
 import { IPosts, ICategoryOptions } from '../../../interfaces/interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
+import './editPost.scss';
 
 interface IEditPostsProps {
     fetchSinglePost: any;
@@ -48,7 +49,6 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
     // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(newProps: any) {
         const postFromDB = newProps.post;
-        console.log(newProps);
         this.setState({
             title: postFromDB.title,
             category: postFromDB.category,
@@ -120,9 +120,8 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
     };
 
     render() {
-        const { title, category, image, description, options } = this.state;
+        const { title, category, image, description, options, fileName } = this.state;
 
-        console.log(this.props);
         return (
             <div className="edit-post-container">
                 <form className="post-form" onSubmit={this.onSubmit}>
@@ -147,8 +146,11 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
                     </div>
                     <div>
                         <label>Image <span className="required">&#42;</span></label>
-                        <img src={image} />
-                        <input type="file" onChange={this.onChangeFile} />
+                        <input type="file" onChange={this.onChangeFile} className="file-input" />
+                        <figure className="image-preview">
+                            <img src={image} />
+                        </figure>
+                        <label>{fileName}</label>
                     </div>
                     <div>
                         <input type="submit" value="post" />
