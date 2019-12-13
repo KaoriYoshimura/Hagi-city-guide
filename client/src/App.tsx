@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import store from './store';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Home from './pages/home';
-import AdminEditPost from './pages/adminEditPost';
-import Admin from './pages/admin';
-import EditPost from './components/posts/editPost';
+import AdminEditPost from './pages/admin/adminEditPost';
+import AdminPostList from './pages/admin/adminPostList';
+import AdminPostForm from './pages/admin/adminPostForm';
 
 const App = () => {
   return (
@@ -16,8 +16,9 @@ const App = () => {
           <Route exact path="/" component={Home} />
           {/* <Route exact path="/news" component={News} /> */}
           {/* <Route exact path="/" component={Access} /> */}
-          <Route exact path="/admin" component={Admin} />
+          <Route exact path="/admin" component={AdminPostList} />
           <Route exact path="/admin/:id" component={AdminEditPost} />
+          <Route exact path="/admin/form" component={AdminPostForm} />
           {/* <Route exact path="/" component={Contact} /> */}
         </Switch>
       </Router>

@@ -3,7 +3,7 @@ import { RouteComponentProps, Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import EditPost from '../../components/posts/editPost';
-import './adminEditPost.scss';
+import './admin.scss';
 import Button from '../../ui/button';
 
 interface IMatchParams {
@@ -23,8 +23,8 @@ class AdminEditPost extends Component<IEditPostsProps> {
                         <Link to={'/'}>
                             <Button>Home</Button>
                         </Link>
-                        <Link to={'/'}>
-                            <Button>Admin Top</Button>
+                        <Link to={'/admin'}>
+                            <Button>Admin List</Button>
                         </Link>
                     </div>
                 </main>
