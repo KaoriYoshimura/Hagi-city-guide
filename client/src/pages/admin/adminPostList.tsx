@@ -8,14 +8,21 @@ import Button from '../../ui/button';
 
 const AdminPostList = () => (
     <>
+        <header>
+            <h1>Posts</h1>
+        </header>
         <main className={classNames('container', 'admin-container')}>
-            <h2>Post list</h2>
             <PostListAdmin />
-            <Link to={'/admin/form'}>
-                <Button>
-                    Create a new post
-            </Button>
-            </Link>
+            <div className="link-container">
+                <Link to={'/'}>
+                    <Button>Home</Button>
+                </Link>
+                <Link to={'/admin-form'}>
+                    <Button>
+                        Create a new post
+                    </Button>
+                </Link>
+            </div>
         </main>
     </>
 );

@@ -148,12 +148,15 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
                         <label>Image <span className="required">&#42;</span></label>
                         <input type="file" onChange={this.onChangeFile} className="file-input" />
                         <figure className="image-preview">
-                            <img src={image} />
+                            <img
+                                src={image}
+                                alt={title}
+                            />
                         </figure>
                         <label>{fileName}</label>
                     </div>
                     <div>
-                        <input type="submit" value="post" />
+                        <input type="submit" value="update" />
                     </div>
                 </form>
             </div>

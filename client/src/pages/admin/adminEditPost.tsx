@@ -16,15 +16,17 @@ class AdminEditPost extends Component<IEditPostsProps> {
     render() {
         return (
             <>
-                <main className={classNames('container', 'admin-edit-post-container')}>
-                    <h2>Edit post</h2>
+                <header>
+                    <h1>Edit post</h1>
+                </header>
+                <main className={classNames('container', 'admin-container')}>
                     <EditPost id={this.props.match.params.id} />
                     <div className="link-container">
                         <Link to={'/'}>
                             <Button>Home</Button>
                         </Link>
                         <Link to={'/admin'}>
-                            <Button>Admin List</Button>
+                            <Button>Posts</Button>
                         </Link>
                     </div>
                 </main>
