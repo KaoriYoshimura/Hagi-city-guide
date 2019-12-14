@@ -1,105 +1,120 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { addPost } from '../../../actions/post/postActions';
-import { INewPostState } from '../../../interfaces/interfaces';
-import { CATEGORY_OPTIONS } from '../../../constants/category';
 
+
+import { fetchSinglePost } from '../../../actions/post/postActions';
+import { CATEGORY_OPTIONS } from '../../../constants/category';
+import { IPost, ICategoryOptions } from '../../../interfaces/interfaces';
 import './postForm.scss';
 
-export interface INewPostProps {
-    addPost: any;
+interface IEditPostState {
+    post: IPost | any;
+    [x: number]: any;
+    options: any;
+    value: any;
 }
 
-class PostForm extends Component<INewPostProps, INewPostState> {
-    state = {
-        file: '',
-        fileName: '',
-        uploadedFile: {},
-        title: '',
-        description: '',
-        category: '',
-        options: CATEGORY_OPTIONS,
-    }
+interface IPostFormProps {
+    fetchSinglePost: Function;
+    onSubmitForm: Function;
+    onChangeInput: Function;
+    onChangeFile: Function;
+    options: ICategoryOptions[];
+    post: IPost;
+    submitValue: string;
+    id: string | null;
+    value: any;
 
-    onChangeFile = (e: any) => {
-        this.setState({ file: e.target.files[0] });
-        this.setState({ fileName: e.target.files[0].name });
-    };
+}
 
-    onChange = (e: any) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
+interface IEvent {
+    name: string | number;
+    value: any;
+}
 
-    onSubmit = async (e: any) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.append('file', this.state.file);
-        try {
-            const res = await axios.post('/api/uploadFile', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-            });
-
-            const { fileName, filePath } = res.data;
-
-            this.setState({ uploadedFile: { fileName, filePath } });
-        } catch (err) {
-            if (err.response.status === 500) {
-                console.log('There was a problem with the server');
-            } else {
-                console.log(err.response.data.msg);
-            }
-        }
-
-        const newPost = {
-            title: this.state.title,
-            description: this.state.description,
-            image: this.state.fileName,
-            category: this.state.category,
+class PostForm extends Component<IPostFormProps, IEditPostState> {
+    constructor(props: IPostFormProps) {
+        super(props);
+        this.state = {
+            options: CATEGORY_OPTIONS,
+            post: this.props.value,
+            value: '',
         };
-        console.log(newPost);
+    }
 
-        this.props.addPost(newPost);
-    };
+    componentDidMount() {
+        if (this.props.id !== null) {
+            this.props.fetchSinglePost(this.props.id);
+        }
+    }
+
+    onSubmit = () => {
+        this.props.onSubmitForm();
+    }
+
+    onChange = (e: { target: IEvent }) => {
+        console.log(this.props.value)
+        console.log(this.state)
+        const { name, value } = e.target;
+        this.setState(prevState => {
+            const post = Object.assign({}, prevState.post);
+            post[name] = value;
+        });
+        if (this.props.onChangeInput !== undefined) {
+            this.props.onChangeInput(e);
+        }
+    }
+
+    onChangeFile = () => {
+        this.props.onChangeFile();
+    }
 
     render() {
-        const { options } = this.state;
+        const { options, submitValue } = this.props;
+        const { category, description, image, title, fileName } = this.props.post;
+        const { post } = this.state;
+
         return (
-            <div className="post-form-container">
-                <form className="post-form" onSubmit={this.onSubmit}>
-                    <div>
-                        <label>Title <span className="required">&#42;</span></label>
-                        <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} />
-                    </div>
-                    <div>
-                        <label>Category <span className="required">&#42;</span></label>
-                        <select name="category" onChange={this.onChange}>
-                            <option value="">Please choose category</option>
-                            {options.map(option => (
-                                <option key={option.value} value={option.value}>
-                                    {option.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label>Description <span className="required">&#42;</span></label>
-                        <textarea name="description" placeholder="Please write description" onChange={this.onChange} />
-                    </div>
-                    <div>
-                        <label>Image <span className="required">&#42;</span></label>
-                        <input type="file" onChange={this.onChangeFile} />
-                    </div>
-                    <div>
-                        <input type="submit" value="post" />
-                    </div>
-                </form>
-            </div>
+            <form className="post-form" onSubmit={this.onSubmit}>
+                <div>
+                    <label>Title <span className="required">&#42;</span></label>
+                    <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} value={post.title} />
+                </div>
+                <div>
+                    <label>Category <span className="required">&#42;</span></label>
+                    <select name="category" onChange={this.onChange}>
+                        <option value={category}>{category}</option>
+                        {options.map((option: ICategoryOptions) => (
+                            <option key={option.value} value={option.value}>
+                                {option.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label>Description <span className="required">&#42;</span></label>
+                    <textarea name="description" onChange={this.onChange} value={description} />
+                </div>
+                <div>
+                    <label>Image <span className="required">&#42;</span></label>
+                    <input type="file" onChange={this.onChangeFile} className="file-input" />
+                    <figure className="image-preview">
+                        <img
+                            src={image}
+                            alt={title}
+                        />
+                    </figure>
+                    <label>{fileName}</label>
+                </div>
+                <div>
+                    <input type="submit" value={submitValue} />
+                </div>
+            </form>
         );
     }
 }
+const mapStateToProps = (state: any) => ({
+    post: state.posts.post
+});
 
-export default connect(null, { addPost })(PostForm);
+export default connect(mapStateToProps, { fetchSinglePost })(PostForm);

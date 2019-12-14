@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import PostForm from '../../components/posts/postForm';
+import NewPost from '../../components/posts/newPost';
 import './admin.scss';
 import Button from '../../ui/button';
 
@@ -14,13 +14,13 @@ const AdminPostForm = () => {
                 <h1 className="test">New post</h1>
             </header>
             <main className={classNames('container', 'admin-container')}>
-                <PostForm />
+                <NewPost />
                 <div className="link-container">
                     <Link to={'/'}>
                         <Button>Home</Button>
                     </Link>
                     <Link to={'/admin'}>
-                        <Button>Lists</Button>
+                        <Button>Post List</Button>
                     </Link>
                 </div>
             </main>

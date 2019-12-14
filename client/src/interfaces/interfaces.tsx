@@ -21,6 +21,15 @@ export interface IHeroProps {
     pageName: string;
 }
 
+export interface IPost {
+    category: string;
+    description: string;
+    image: string | any;
+    title: string;
+    file: string;
+    fileName: string;
+    uploadedFile?: {};
+}
 export interface IMainProps {
     pageName: string;
     children: any;

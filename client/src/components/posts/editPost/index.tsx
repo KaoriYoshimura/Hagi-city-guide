@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
-import { IPosts, ICategoryOptions } from '../../../interfaces/interfaces';
+import { IPosts, ICategoryOptions, IPost } from '../../../interfaces/interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import './editPost.scss';
 
@@ -15,30 +15,25 @@ interface IEditPostsProps {
 }
 
 interface IEditPostState {
-    post?: [];
-    file: string;
-    fileName: string;
-    uploadedFile: {};
+    post: IPost | any;
     [x: number]: any;
     options: any;
-    title: string;
-    description: string;
-    category: string;
-    image: string | any;
 }
 
 class EditPost extends Component<IEditPostsProps, IEditPostState> {
     constructor(props: IEditPostsProps) {
         super(props);
         this.state = {
-            file: '',
-            fileName: '',
-            uploadedFile: {},
-            title: '',
-            description: '',
-            category: '',
-            image: '',
             options: CATEGORY_OPTIONS,
+            post: {
+                file: '',
+                fileName: '',
+                uploadedFile: {},
+                title: '',
+                description: '',
+                category: '',
+                image: '',
+            }
         };
     }
 
@@ -49,45 +44,68 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
     // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(newProps: any) {
         const postFromDB = newProps.post;
-        this.setState({
-            title: postFromDB.title,
-            category: postFromDB.category,
-            description: postFromDB.description,
-            image: `/uploads/${postFromDB.image}`,
-            file: postFromDB.image,
-            fileName: postFromDB.image
-        });
+        this.setState(prevState => ({
+            post: {
+                ...prevState.post,
+                title: postFromDB.title,
+                category: postFromDB.category,
+                description: postFromDB.description,
+                image: `/uploads/${postFromDB.image}`,
+                file: postFromDB.image,
+                fileName: postFromDB.image
+            }
+        }));
     }
 
     onChangeFile = (e: any) => {
-        this.setState({ file: e.target.files[0] });
-        this.setState({ fileName: e.target.files[0].name });
+        const { files } = e.target;
+
+        this.setState(prevState => ({
+            post: {
+                ...prevState.post,
+                file: files[0],
+                fileName: files[0].name
+            }
+        }));
 
         const file = e.target.files[0];
         const reader = new FileReader();
 
         reader.onloadend = () => {
-            this.setState({
-                image: reader.result
-            });
+            this.setState(prevState => ({
+                post: {
+                    ...prevState.post,
+                    image: reader.result,
+                }
+            }));
         };
+
         if (file) {
             reader.readAsDataURL(file);
-            this.setState({
-                image: reader.result
-            });
+            this.setState(prevState => ({
+                post: {
+                    ...prevState.post,
+                    image: reader.result,
+                }
+            }));
         }
     };
 
     onChange = (e: any) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
+        const { name, value } = e.target;
+
+        this.setState(prevState => {
+            const post = Object.assign({}, prevState.post);
+            post[name] = value;
+            return { post };
+        });
+    };
 
     onSubmit = async (e: any) => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('file', this.state.file);
+        formData.append('file', this.state.post.file);
         try {
             const res = await axios.post('/api/uploadFile', formData, {
                 headers: {
@@ -97,7 +115,12 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
 
             const { fileName, filePath } = res.data;
 
-            this.setState({ uploadedFile: { fileName, filePath } });
+            this.setState(prevState => ({
+                post: {
+                    ...prevState.post,
+                    uploadedFile: { fileName, filePath }
+                }
+            }));
         } catch (err) {
             if (err.response.status === 500) {
                 console.log('There was a problem with the server');
@@ -109,10 +132,10 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
         const date = new Date();
 
         const updatedPost = {
-            title: this.state.title,
-            description: this.state.description,
-            image: this.state.fileName,
-            category: this.state.category,
+            title: this.state.post.title,
+            description: this.state.post.description,
+            image: this.state.post.fileName,
+            category: this.state.post.category,
             updated: date
         };
 
@@ -120,19 +143,19 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
     };
 
     render() {
-        const { title, category, image, description, options, fileName } = this.state;
+        const { post, options } = this.state;
 
         return (
             <div className="edit-post-container">
                 <form className="post-form" onSubmit={this.onSubmit}>
                     <div>
                         <label>Title <span className="required">&#42;</span></label>
-                        <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} value={title} />
+                        <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} value={post.title} />
                     </div>
                     <div>
                         <label>Category <span className="required">&#42;</span></label>
                         <select name="category" onChange={this.onChange}>
-                            <option value={category}>{category}</option>
+                            <option value={post.category}>{post.category}</option>
                             {options.map((option: ICategoryOptions) => (
                                 <option key={option.value} value={option.value}>
                                     {option.name}
@@ -142,18 +165,18 @@ class EditPost extends Component<IEditPostsProps, IEditPostState> {
                     </div>
                     <div>
                         <label>Description <span className="required">&#42;</span></label>
-                        <textarea name="description" onChange={this.onChange} value={description} />
+                        <textarea name="description" onChange={this.onChange} value={post.description} />
                     </div>
                     <div>
                         <label>Image <span className="required">&#42;</span></label>
                         <input type="file" onChange={this.onChangeFile} className="file-input" />
                         <figure className="image-preview">
                             <img
-                                src={image}
-                                alt={title}
+                                src={post.image}
+                                alt={post.title}
                             />
                         </figure>
-                        <label>{fileName}</label>
+                        <label>{post.fileName}</label>
                     </div>
                     <div>
                         <input type="submit" value="update" />
