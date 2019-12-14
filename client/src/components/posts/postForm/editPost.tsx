@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
-import { IPosts, ICategoryOptions, IPost } from '../../../interfaces/interfaces';
+import { IPosts, ICategoryOptions, IPostFormState } from '../../../interfaces/interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
-import './editPost.scss';
+import './postForm.scss';
 
 interface IEditPostsProps {
     fetchSinglePost: any;
@@ -14,13 +14,7 @@ interface IEditPostsProps {
     id: string;
 }
 
-interface IEditPostState {
-    post: IPost | any;
-    [x: number]: any;
-    options: any;
-}
-
-class EditPost extends Component<IEditPostsProps, IEditPostState> {
+class EditPost extends Component<IEditPostsProps, IPostFormState> {
     constructor(props: IEditPostsProps) {
         super(props);
         this.state = {

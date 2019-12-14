@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import NewPost from '../../components/posts/newPost';
+import NewPost from '../../components/posts/postForm/newPost';
 import './admin.scss';
 import Button from '../../ui/button';
 

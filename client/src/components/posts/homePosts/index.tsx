@@ -93,10 +93,12 @@ class HomePosts extends Component<IHomePostsProps> {
     render() {
         const { posts } = this.props.props;
         const homePostArray = this.reserveArray(posts);
+        console.log(homePostArray);
 
-        if (homePostArray.length < 8) {
+        if (homePostArray.length <= 7) {
             homePostArray.push(defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost);
         }
+        console.log(homePostArray);
 
         const firstPost = homePostArray.slice(0, 1);
         const secondPost = homePostArray.slice(1, 2);
@@ -124,6 +126,8 @@ class HomePosts extends Component<IHomePostsProps> {
                 <PostArticle posts={this.createAccessMapArticle(itemPottery)} />
                 <PostArticle posts={eigthPost} />
                 <PostArticle posts={ninthPost} />
+                <PostArticle posts={firstPost} />
+
             </div>
         );
     }

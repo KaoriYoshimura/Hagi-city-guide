@@ -45,15 +45,10 @@ export interface ICategoryOptions {
     value: string;
 }
 
-export interface INewPostState {
-    file: string;
-    fileName: string;
-    uploadedFile: {};
-    title: string;
-    description: string;
-    category: string;
+export interface IPostFormState {
+    post: IPost | any;
     [x: number]: any;
-    options: ICategoryOptions[];
+    options: any;
 }
 
 export interface IFile {

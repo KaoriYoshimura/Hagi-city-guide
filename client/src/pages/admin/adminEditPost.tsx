@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import EditPost from '../../components/posts/editPost';
+import EditPost from '../../components/posts/postForm/editPost';
 import './admin.scss';
 import Button from '../../ui/button';
 

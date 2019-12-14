@@ -2,40 +2,77 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { addPost } from '../../../actions/post/postActions';
-import { INewPostState } from '../../../interfaces/interfaces';
+import { IPostFormState } from '../../../interfaces/interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
+import './postForm.scss';
 
-import './newPost.scss';
-
-export interface INewPostProps {
+interface INewPostProps {
     addPost: any;
 }
 
-class NewPost extends Component<INewPostProps, INewPostState> {
+class NewPost extends Component<INewPostProps, IPostFormState> {
     state = {
-        file: '',
-        fileName: '',
-        uploadedFile: {},
-        title: '',
-        description: '',
-        category: '',
         options: CATEGORY_OPTIONS,
+        post: {
+            file: '',
+            fileName: '',
+            uploadedFile: {},
+            title: '',
+            description: '',
+            category: '',
+            image: '',
+        }
     }
 
     onChangeFile = (e: any) => {
-        this.setState({ file: e.target.files[0] });
-        this.setState({ fileName: e.target.files[0].name });
+        const { files } = e.target;
+
+        this.setState(prevState => ({
+            post: {
+                ...prevState.post,
+                file: files[0],
+                fileName: files[0].name
+            }
+        }));
+
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            this.setState(prevState => ({
+                post: {
+                    ...prevState.post,
+                    image: reader.result,
+                }
+            }));
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+            this.setState(prevState => ({
+                post: {
+                    ...prevState.post,
+                    image: reader.result,
+                }
+            }));
+        }
     };
 
     onChange = (e: any) => {
-        this.setState({ [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        this.setState(prevState => {
+            const post = Object.assign({}, prevState.post);
+            post[name] = value;
+            return { post };
+        });
     }
 
     onSubmit = async (e: any) => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('file', this.state.file);
+        formData.append('file', this.state.post.file);
         try {
             const res = await axios.post('/api/uploadFile', formData, {
                 headers: {
@@ -45,7 +82,12 @@ class NewPost extends Component<INewPostProps, INewPostState> {
 
             const { fileName, filePath } = res.data;
 
-            this.setState({ uploadedFile: { fileName, filePath } });
+            this.setState(prevState => ({
+                post: {
+                    ...prevState.post,
+                    uploadedFile: { fileName, filePath }
+                }
+            }));
         } catch (err) {
             if (err.response.status === 500) {
                 console.log('There was a problem with the server');
@@ -55,17 +97,17 @@ class NewPost extends Component<INewPostProps, INewPostState> {
         }
 
         const newPost = {
-            title: this.state.title,
-            description: this.state.description,
-            image: this.state.fileName,
-            category: this.state.category,
+            title: this.state.post.title,
+            description: this.state.post.description,
+            image: this.state.post.fileName,
+            category: this.state.post.category,
         };
 
         this.props.addPost(newPost);
     };
 
     render() {
-        const { options } = this.state;
+        const { post, options } = this.state;
         return (
             <div className="post-form-container">
                 <form className="post-form" onSubmit={this.onSubmit}>
@@ -90,7 +132,18 @@ class NewPost extends Component<INewPostProps, INewPostState> {
                     </div>
                     <div>
                         <label>Image <span className="required">&#42;</span></label>
-                        <input type="file" onChange={this.onChangeFile} />
+                        <input type="file" onChange={this.onChangeFile} className="file-input" />
+                        {post.image ? (
+                            <figure className="image-preview">
+                                <img
+                                    src={post.image}
+                                    alt={post.title}
+                                />
+                            </figure>
+                        ) : null}
+                        {post.fileName ? (
+                            <label>{post.fileName}</label>
+                        ) : null}
                     </div>
                     <div>
                         <input type="submit" value="post" />
