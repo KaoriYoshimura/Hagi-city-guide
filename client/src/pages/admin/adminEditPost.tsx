@@ -26,7 +26,7 @@ class AdminEditPost extends Component<IEditPostsProps> {
                             <Button>Home</Button>
                         </Link>
                         <Link to={'/admin'}>
-                            <Button>Posts</Button>
+                            <Button>Admin top</Button>
                         </Link>
                     </div>
                 </main>

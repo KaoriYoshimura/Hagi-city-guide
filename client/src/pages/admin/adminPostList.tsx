@@ -9,7 +9,7 @@ import Button from '../../ui/button';
 const AdminPostList = () => (
     <>
         <header>
-            <h1>Posts</h1>
+            <h1>Admin</h1>
         </header>
         <main className={classNames('container', 'admin-container')}>
             <PostListAdmin />

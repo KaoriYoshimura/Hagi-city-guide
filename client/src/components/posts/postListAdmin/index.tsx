@@ -50,8 +50,14 @@ class PostListAdmin extends Component<IHomePostsProps> {
                                     {posts.map((post: IPosts) => (
                                         <tr key={post._id}>
                                             <td>{post._id}</td>
+
                                             <td><Moment format="DD/MM/YYYY HH:mm">{post.date}</Moment></td>
-                                            <td><Moment format="DD/MM/YYYY HH:mm">{post.updated}</Moment></td>
+                                            <td>
+                                                {post.updated === null
+                                                    ? null : (
+                                                        <Moment format="DD/MM/YYYY HH:mm">{post.updated}</Moment>
+                                                    )}
+                                            </td>
                                             <td>{post.title}</td>
                                             <td>{post.category}</td>
                                             <td className="list-center">

@@ -7,6 +7,8 @@
         flex-direction: row;
         margin: 10px 0 20px;
         padding: 10px 0;
+        border-top: none;
+        border-bottom: 1px solid lighten($gray, 50);
     }
 
     .image-container {
@@ -33,6 +35,7 @@
     }
 
     .text-container {
+        margin-top: 10;
         margin-left:15px;
         width: 60%;
     }
@@ -41,6 +44,7 @@
         color: $fontColorMain;
         border-left: 5px solid $primaryColor;
         padding-left: 5px;
+        margin-bottom: $mainSpacing;
         font-size: $fontHeadingTitleSize;
 
         &:hover {
@@ -48,8 +52,14 @@
         }
     }
 
+    .post-date {
+        font-family: $fontHeadingTitleSub;
+        font-size: 15px;
+    }
+
     .post-description {
-        color: lighten($gray, 20)
+        color: lighten($gray, 20);
+        margin-top: $spacingBetweenDiv;
     }
 
 }

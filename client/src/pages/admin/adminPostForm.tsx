@@ -20,7 +20,7 @@ const AdminPostForm = () => {
                         <Button>Home</Button>
                     </Link>
                     <Link to={'/admin'}>
-                        <Button>Post List</Button>
+                        <Button>Admin top</Button>
                     </Link>
                 </div>
             </main>

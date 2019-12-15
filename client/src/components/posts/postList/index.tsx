@@ -52,13 +52,19 @@ class PostList extends Component<IHomePostsProps> {
                                     </div>
                                     <div className="text-container">
                                         <h2 className="post-title"><Link to="#">{post.title}</Link></h2>
-                                        <Truncate
-                                            className="post-description"
-                                            lines={5}
-                                            ellipsis={<span>...</span>}
-                                        >
-                                            {post.description}
-                                        </Truncate>
+                                        <p className="post-date">Created: <Moment format="DD/MM/YYYY">{post.date}</Moment></p>
+                                        {post.updated === null
+                                            ? null : (
+                                                <p className="post-date">Updated: <Moment format="DD/MM/YYYY">{post.updated}</Moment></p>
+                                            )}
+                                        <div className="post-description">
+                                            <Truncate
+                                                lines={5}
+                                                ellipsis={<span>...</span>}
+                                            >
+                                                {post.description}
+                                            </Truncate>
+                                        </div>
                                     </div>
                                 </div>
                             </article>

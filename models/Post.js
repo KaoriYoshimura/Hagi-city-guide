@@ -31,7 +31,7 @@ const postSchema = new Schema({
 
     updated: {
         type: Date,
-        default: Date.now
+        default: null
     }
 });
 
