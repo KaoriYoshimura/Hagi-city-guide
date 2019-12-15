@@ -1,6 +1,6 @@
 const PAGES = {
     HOME: 'home',
-    NEWS: 'news',
+    POSTS: 'posts',
     ACCESS: 'access',
     ADMIN: 'admin',
     CONTACT: 'contact',

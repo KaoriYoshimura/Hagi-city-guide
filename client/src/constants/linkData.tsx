@@ -7,9 +7,9 @@ export const links = [
     },
     {
         id: 2,
-        text: 'News',
-        path: '/news',
-        component: 'News',
+        text: 'Posts',
+        path: '/posts',
+        component: 'Posts',
     },
     {
         id: 3,

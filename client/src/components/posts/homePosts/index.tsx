@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/post/postActions';
 import { IPosts } from '../../../interfaces/interfaces';
+import reverseArray from '../../reverseArray';
+
 import './homePosts.scss';
+
 import { VARIANTS } from '../../../constants/category';
 import PostArticle from '../postArticle';
 
@@ -76,14 +79,6 @@ class HomePosts extends Component<IHomePostsProps> {
         this.props.fetchPosts();
     }
 
-    reserveArray = (tempPosts: any) => {
-        const postsToRun: any = [];
-        for (let i = tempPosts.length - 1; i >= 0; i--) {
-            postsToRun.push(tempPosts[i]);
-        }
-        return postsToRun;
-    }
-
     createAccessMapArticle = (article: IPosts) => {
         const fixedArticle = [];
         fixedArticle.push(article);
@@ -92,7 +87,7 @@ class HomePosts extends Component<IHomePostsProps> {
 
     render() {
         const { posts } = this.props.props;
-        const homePostArray = this.reserveArray(posts);
+        const homePostArray = reverseArray(posts);
         console.log(homePostArray);
 
         if (homePostArray.length <= 7) {

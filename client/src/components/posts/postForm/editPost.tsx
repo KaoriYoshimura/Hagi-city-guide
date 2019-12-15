@@ -140,7 +140,7 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
         const { post, options } = this.state;
 
         return (
-            <div className="edit-post-container">
+            <div className="post-form-container">
                 <form className="post-form" onSubmit={this.onSubmit}>
                     <div>
                         <label>Title <span className="required">&#42;</span></label>

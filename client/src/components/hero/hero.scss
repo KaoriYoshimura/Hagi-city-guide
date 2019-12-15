@@ -20,7 +20,7 @@ $path: "../../assets/images";
         @include heroImage("homeHero.jpg", 60vh)
     }
 
-    &.news {
+    &.posts {
     @include heroImage("newsHero.jpg", 40vh)
     }
 
