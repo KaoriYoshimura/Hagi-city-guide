@@ -4,6 +4,8 @@ import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
 import { IPosts } from '../../../interfaces/interfaces';
 import Label from '../../../ui/label';
 
+import './singlePost.scss';
+
 interface IEditPostsProps {
     fetchSinglePost: any;
     editPost: any;
@@ -16,7 +18,7 @@ interface IEditPostState {
 
 }
 
-class EditPost extends Component<IEditPostsProps, IEditPostState> {
+class SinglePost extends Component<IEditPostsProps, IEditPostState> {
     componentDidMount() {
         this.props.fetchSinglePost('5df1543287cf3c16142685f9');
     }
@@ -48,4 +50,4 @@ const mapStateToProps = (state: any) => ({
     post: state.posts.post
 });
 
-export default connect(mapStateToProps, { fetchSinglePost, editPost })(EditPost);
+export default connect(mapStateToProps, { fetchSinglePost, editPost })(SinglePost);

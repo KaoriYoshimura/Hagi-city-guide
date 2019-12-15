@@ -1,3 +1,5 @@
+import { RouteComponentProps } from 'react-router-dom';
+
 export interface IisSideBarOpen {
     isSideBarOpen: boolean;
 }
@@ -75,3 +77,11 @@ export interface IPosts {
     description: string;
     updated?: string;
 }
+
+// For match.params.id
+export interface IMatchParams {
+    id: string;
+}
+
+// For Post and AdminEditPost
+export type IPostProps = RouteComponentProps<IMatchParams>

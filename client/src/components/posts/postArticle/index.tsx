@@ -15,7 +15,7 @@ const PostArticle = (props: any) => (
                     post.isFixed ? post.fixedArticle : 'post'
                 )}
             >
-                <Link to="#">
+                <Link to={`/posts/${post._id}`}>
                     <div className="image-container">
                         <figure>
                             <img src={

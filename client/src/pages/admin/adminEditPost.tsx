@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import EditPost from '../../components/posts/postForm/editPost';
 import './admin.scss';
 import Button from '../../ui/button';
+import { IPostProps } from '../../interfaces/interfaces';
 
-interface IMatchParams {
-    id: string;
-}
-
-type IEditPostsProps = RouteComponentProps<IMatchParams>
-
-class AdminEditPost extends Component<IEditPostsProps> {
+class AdminEditPost extends Component<IPostProps> {
     render() {
         return (
             <>
