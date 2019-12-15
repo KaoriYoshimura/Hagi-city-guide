@@ -24,6 +24,9 @@
         font-size: 2rem;
         padding: $mainSpacing;
         cursor: pointer;
+        &.blackVariant {
+            color: $fontColorMain;
+        }
     }
 
     .spacer {
@@ -33,6 +36,9 @@
     li {
         @include navBarStyle($fontSubColor, $navhoverColor, $textShadow);
 
+        &.blackVariant {
+            @include navBarStyle($fontColorMain, $hoverColor, none);
+        }
     }
 
 }

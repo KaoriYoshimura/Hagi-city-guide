@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
 import { IPosts } from '../../../interfaces/interfaces';
-import Label from '../../../ui/label';
+import Moment from 'react-moment';
+
 
 import './singlePost.scss';
 
@@ -13,35 +14,32 @@ interface IEditPostsProps {
     id: string;
 }
 
-interface IEditPostState {
-    post: [];
-
-}
-
-class SinglePost extends Component<IEditPostsProps, IEditPostState> {
+class SinglePost extends Component<IEditPostsProps> {
     componentDidMount() {
-        this.props.fetchSinglePost('5df1543287cf3c16142685f9');
+        this.props.fetchSinglePost(this.props.id);
     }
-
 
     render() {
         const { post } = this.props;
-        console.log(post);
         return (
-            <section className="edit-post-container">
-                <Label></Label>
+            <article className="single-post-container">
+                <h1 className="post-title">{post.title}</h1>
+                <p className="post-date">Created: <Moment format="DD/MM/YYYY">{post.date}</Moment></p>
+                {post.updated === null
+                    ? null : (
+                        <p className="post-date">Updated: <Moment format="DD/MM/YYYY">{post.updated}</Moment></p>
+                    )}
                 <figure className="post-img">
                     <img
                         src={`/uploads/${post.image}`}
                         alt={post.title}
                     />
                 </figure>
-                <div className="post-content">
-                    <h2 className="post-title">{post.title}</h2>
+                <div className="post-description">
                     <p>{post.description}</p>
                 </div>
 
-            </section>
+            </article>
         );
     }
 }

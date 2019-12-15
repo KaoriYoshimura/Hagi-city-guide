@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 
-import { IisSideBarOpen } from '../../interfaces/interfaces';
-import Navbar from '../../components/header/navbar/navbar';
-import SideBar from '../../components/header/sidebar/sidebar';
+import Navbar from './navbar';
+import SideBar from './sidebar/index.';
 import BackDrop from '../../ui/backDrop/backDrop';
+import { IBlackVariantProps } from '../../interfaces/interfaces';
 
-class Header extends Component<{}, IisSideBarOpen> {
+
+interface IisSideBarOpen {
+    isSideBarOpen: boolean;
+}
+
+class Header extends Component<IBlackVariantProps, IisSideBarOpen> {
     state = {
         isSideBarOpen: false,
     }
@@ -28,7 +33,10 @@ class Header extends Component<{}, IisSideBarOpen> {
         }
         return (
             <>
-                <Navbar sideBarToggleClickHandler={this.sideBarToggleClickHandler} />
+                <Navbar
+                    sideBarToggleClickHandler={this.sideBarToggleClickHandler}
+                    isBlackVariant={this.props.blackVariant}
+                />
                 <SideBar
                     onClickClose={this.backdropClickHandler}
                     onClickDisplay={this.state.isSideBarOpen}

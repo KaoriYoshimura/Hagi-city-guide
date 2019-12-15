@@ -25,7 +25,6 @@ class PostList extends Component<IHomePostsProps> {
     render() {
         const { posts } = this.props.props;
         const postAray = reverseArray(posts);
-        console.log(postAray);
 
         return (
             <div className={classNames('container', 'homePosts')}>
@@ -35,14 +34,11 @@ class PostList extends Component<IHomePostsProps> {
                         postAray.map((post: IPosts) => (
                             <article
                                 key={post._id}
-                                className={classNames(
-                                    'post-container',
-                                    post.isFixed ? post.fixedArticle : 'post'
-                                )}
+                                className="post-container"
                             >
                                 <div className="post-content">
                                     <div className="image-container">
-                                        <Link to="#">
+                                        <Link to={`/posts/${post._id}`}>
                                             <figure>
                                                 <img src={`/uploads/${post.image}`
                                                 } alt={post.title} />
@@ -51,7 +47,7 @@ class PostList extends Component<IHomePostsProps> {
                                         </Link>
                                     </div>
                                     <div className="text-container">
-                                        <h2 className="post-title"><Link to="#">{post.title}</Link></h2>
+                                        <h2 className="post-title"><Link to={`/posts/${post._id}`}>{post.title}</Link></h2>
                                         <p className="post-date">Created: <Moment format="DD/MM/YYYY">{post.date}</Moment></p>
                                         {post.updated === null
                                             ? null : (

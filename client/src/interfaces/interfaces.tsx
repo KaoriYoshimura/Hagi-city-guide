@@ -1,16 +1,11 @@
 import { RouteComponentProps } from 'react-router-dom';
 
-export interface IisSideBarOpen {
-    isSideBarOpen: boolean;
+export interface IBlackVariantProps {
+    blackVariant: boolean;
 }
-
 export interface IonClickSideBar {
     onClickClose: any;
     onClickDisplay?: any;
-}
-
-export interface INavBarProps {
-    sideBarToggleClickHandler: any;
 }
 
 export interface ISubSidyComponents {
