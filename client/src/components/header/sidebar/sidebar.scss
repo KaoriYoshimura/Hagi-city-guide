@@ -13,17 +13,11 @@
     width: 40%;
     z-index: 100;
     transform: translateX(103%);
-    // transition: $mainTransition;
-
 
     ul {
         display: flex;
         flex-direction: column;
         text-align: left;
-    }
-
-    li {
-        @include navBarStyle($fontColorMain, $hoverColor, none);
     }
 
     // Close button

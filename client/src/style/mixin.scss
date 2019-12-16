@@ -1,29 +1,5 @@
 @import './variables';
 
-@mixin navBarStyle($color, $hoverColor, $textShadow) {
-        margin: 1rem 0;
-        padding: 0 $spacingBetweenDiv;
-
-        a {
-            text-transform: uppercase;
-            position: relative;
-            border-bottom: 2px solid transparent;
-            font-weight: bold;
-            color: $color;
-            text-shadow: $textShadow;
-
-            &:hover {
-                color: $hoverColor;
-            }
-        }
-
-        .active {
-            color: $hoverColor;
-        }
-
-
-}
-
 @mixin buttonStyle ($bgColor, $fColor) {
     padding: 0.5rem 1rem;
     background: $bgColor;

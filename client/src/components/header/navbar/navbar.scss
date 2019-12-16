@@ -33,14 +33,6 @@
         flex:1;
     }
 
-    li {
-        @include navBarStyle($fontSubColor, $navhoverColor, $textShadow);
-
-        &.blackVariant {
-            @include navBarStyle($fontColorMain, $hoverColor, none);
-        }
-    }
-
 }
 
 @include tablet {
@@ -55,7 +47,7 @@
             height: auto;
         }
 
-        ul {
+        .nav-links>ul {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             text-align: center;
@@ -66,7 +58,7 @@
 
 
 @include mobile {
-    .navMenus {
+    .nav-links {
         display: none;
     }
 

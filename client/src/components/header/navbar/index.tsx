@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { links } from '../../../constants/linkData';
 import Logo from '../../logo/logo';
+import NavLinks from '../navLinks';
 
 import './navbar.scss';
 
@@ -31,24 +30,10 @@ const Navbar = (props: INavBarProps) => (
                 )}
                 onClick={props.sideBarToggleClickHandler}
             />
-            <ul className="navMenus">
-                {links.map(link => {
-                    return (
-                        <li
-                            className={classNames(props.isBlackVariant ? 'blackVariant' : null)}
-                            key={link.id}
-                        >
-                            <NavLink
-                                to={link.path}
-                                exact
-                            >
-                                {link.text}
-                            </NavLink>
-                        </li>
-                    );
-                })}
-            </ul>
+            <div className="nav-links">
+                <NavLinks isBlackVariant={props.isBlackVariant} />
+            </div>
         </nav >
-    </header>
+    </header >
 );
 export default Navbar;

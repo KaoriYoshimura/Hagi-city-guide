@@ -1,0 +1,36 @@
+@import '../../../style/styles';
+
+@mixin navLinksStyle($color, $hoverColor, $textShadow) {
+        margin: 1rem 0;
+        padding: 0 $spacingBetweenDiv;
+
+        a {
+            text-transform: uppercase;
+            position: relative;
+            border-bottom: 2px solid transparent;
+            font-weight: bold;
+            color: $color;
+            text-shadow: $textShadow;
+
+            &:hover {
+                color: $hoverColor;
+            }
+        }
+
+        .active {
+            color: $hoverColor;
+        }
+
+
+}
+
+.nav-links-container {
+    li {
+        @include navLinksStyle($fontSubColor, $navhoverColor, $textShadow);
+
+    }
+        &.blackVariant {
+            @include navLinksStyle($fontColorMain, $hoverColor, none);
+        }
+    }
+

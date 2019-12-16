@@ -1,10 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-import './sidebar.scss';
-import { links } from '../../../constants/linkData';
-import { IonClickSideBar } from '../../../interfaces';
 import classNames from 'classnames';
+import { IonClickSideBar } from '../../../interfaces';
+import NavLinks from '../navLinks';
+import './sidebar.scss';
 
 const SideBar = (props: IonClickSideBar) => {
     return (
@@ -17,20 +15,7 @@ const SideBar = (props: IonClickSideBar) => {
                 <div className="border-right"></div>
                 <label className="close">close</label>
             </div>
-            <ul>
-                {links.map(link => {
-                    return (
-                        <li key={link.id}>
-                            <NavLink
-                                to={link.path}
-                                exact
-                            >
-                                {link.text}
-                            </NavLink>
-                        </li>
-                    );
-                })}
-            </ul>
+            <NavLinks isBlackVariant={true} />
         </nav>
     );
 };
