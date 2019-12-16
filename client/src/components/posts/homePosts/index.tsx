@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/post/postActions';
-import { IPosts, IFixedArticle } from '../../../interfaces/interfaces';
+import { IPosts, IFixedArticle } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
-import { VARIANTS } from '../../../constants/category';
 import * as fixedItems from '../../../constants/homeFixedItems';
+import { defaultItems } from '../../../constants/homeDefaultItems';
 import PostArticle from '../homeArticle/postArticle';
 import FixedArticle from '../homeArticle/fixedArticle';
 
@@ -15,16 +15,6 @@ interface IHomePostsProps {
     props: any;
     fetchPosts(): any;
 }
-
-const defaultPost = {
-    _id: '',
-    title: '',
-    description: '',
-    image: 'kikugahama.jpg',
-    category: VARIANTS.GUIDE,
-    isDefault: true,
-    fixedArticle: 'post',
-};
 
 class HomePosts extends Component<IHomePostsProps> {
     componentDidMount() {
@@ -43,7 +33,9 @@ class HomePosts extends Component<IHomePostsProps> {
         console.log(homePostArray);
 
         if (homePostArray.length <= 7) {
-            homePostArray.push(defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost, defaultPost);
+            defaultItems.map((item: any) => (
+                homePostArray.push(item)
+            ));
         }
         console.log(homePostArray);
 

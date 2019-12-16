@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import classNames from 'classnames';
 import { fetchPosts, deletePost } from '../../../actions/post/postActions';
-import { IPosts } from '../../../interfaces/interfaces';
+import { IPosts } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
 import Label from '../../../ui/label';
 import Truncate from 'react-truncate';

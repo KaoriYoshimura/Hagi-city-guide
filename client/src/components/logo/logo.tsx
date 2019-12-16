@@ -4,7 +4,7 @@ import logoWhite from '../../assets/logo/logo_white.png';
 import logoGray from '../../assets/logo/logo_gray.png';
 import './logo.scss';
 import { Link } from 'react-router-dom';
-import { IBlackVariantProps } from '../../interfaces/interfaces';
+import { IBlackVariantProps } from '../../interfaces';
 
 const Logo = (props: IBlackVariantProps) => (
     <Link to={'/'}>

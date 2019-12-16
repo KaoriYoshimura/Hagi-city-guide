@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import EditPost from '../../components/posts/postForm/editPost';
 import './admin.scss';
 import Button from '../../ui/button';
-import { IPostProps } from '../../interfaces/interfaces';
+import { IPostProps } from '../../interfaces';
 
 class AdminEditPost extends Component<IPostProps> {
     render() {

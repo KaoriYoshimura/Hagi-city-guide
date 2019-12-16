@@ -67,7 +67,7 @@ export interface IPosts {
     title: string;
     category: string;
     isDefault?: boolean;
-    fixedArticle?: string;
+    defaultAlt?: string;
     date?: string;
     description: string;
     updated?: string;
@@ -78,6 +78,7 @@ export interface IFixedArticle {
     title: string;
     image: string;
     category: string;
+    isDefault: boolean;
 }
 
 // For match.params.id

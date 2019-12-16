@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { addPost } from '../../../actions/post/postActions';
-import { IPostFormState } from '../../../interfaces/interfaces';
+import { IPostFormState } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import './postForm.scss';
 

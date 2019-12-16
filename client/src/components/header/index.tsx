@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Navbar from './navbar';
 import SideBar from './sidebar/index.';
 import BackDrop from '../../ui/backDrop/backDrop';
-import { IBlackVariantProps } from '../../interfaces/interfaces';
+import { IBlackVariantProps } from '../../interfaces';
 
 
 interface IisSideBarOpen {

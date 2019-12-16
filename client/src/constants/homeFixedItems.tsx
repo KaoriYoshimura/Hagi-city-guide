@@ -1,15 +1,16 @@
 import { VARIANTS } from './category';
-import imgAccessMap from '../assets/images/homePosts/accessMap.png';
-import imgWorldHeritage from '../assets/images/homePosts/worldHeritage.jpg';
-import imgGourmet from '../assets/images/homePosts/fugu.jpg';
-import imgSpa from '../assets/images/homePosts/onsen.jpg';
-import imgLocal from '../assets/images/homePosts/hagiyaki.jpg';
+import imgAccessMap from '../assets/images/homeFixed/accessMap.png';
+import imgWorldHeritage from '../assets/images/homeFixed/worldHeritage.jpg';
+import imgGourmet from '../assets/images/homeFixed/fugu.jpg';
+import imgSpa from '../assets/images/homeFixed/onsen.jpg';
+import imgLocal from '../assets/images/homeFixed/hagiyaki.jpg';
 
 export const accessMap = {
     link: 'http://www.hagishi.com/en/access/',
     title: 'How to access to Hagi',
     image: imgAccessMap,
     category: VARIANTS.ACCESS,
+    isDefault: false,
 };
 
 export const worldHeritage = {
@@ -17,6 +18,7 @@ export const worldHeritage = {
     title: 'Site of Japan’s Meiji Industrial Revolution',
     image: imgWorldHeritage,
     category: VARIANTS.WORLDHERITAGE,
+    isDefault: false,
 };
 
 export const gourmet = {
@@ -24,6 +26,7 @@ export const gourmet = {
     title: 'Enjoy local food',
     image: imgGourmet,
     category: VARIANTS.GOURMET,
+    isDefault: false,
 };
 
 export const guide = {
@@ -31,6 +34,7 @@ export const guide = {
     title: 'Enjoy our spa - onsen -',
     image: imgSpa,
     category: VARIANTS.GUIDE,
+    isDefault: false,
 };
 
 export const local = {
@@ -38,4 +42,5 @@ export const local = {
     title: 'Our local specialities',
     image: imgLocal,
     category: VARIANTS.LOCAL,
+    isDefault: false,
 };

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import Header from '../../components/header';
 import SinglePost from '../../components/posts/singlePost';
-import { IPostProps } from '../../interfaces/interfaces';
+import { IPostProps } from '../../interfaces';
 import Footer from '../../components/footer';
 
 

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import './sidebar.scss';
 import { links } from '../../../constants/linkData';
-import { IonClickSideBar } from '../../../interfaces/interfaces';
+import { IonClickSideBar } from '../../../interfaces';
 import classNames from 'classnames';
 
 const SideBar = (props: IonClickSideBar) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { IFixedArticle } from '../../../interfaces/interfaces';
+import { IFixedArticle } from '../../../interfaces';
 import Label from '../../../ui/label';
 import './homeArticle.scss';
 

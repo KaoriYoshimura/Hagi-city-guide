@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import Moment from 'react-moment';
 import { fetchPosts, deletePost } from '../../../actions/post/postActions';
-import { IPosts } from '../../../interfaces/interfaces';
+import { IPosts } from '../../../interfaces';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './postListAdmin.scss';

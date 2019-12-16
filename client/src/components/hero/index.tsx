@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './hero.scss';
-import { IHeroProps } from '../../interfaces/interfaces';
+import { IHeroProps } from '../../interfaces';
 import classNames from 'classnames';
 
 const Hero = (props: IHeroProps) => {

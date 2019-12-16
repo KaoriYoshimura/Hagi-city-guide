@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
-import { IPosts, ICategoryOptions, IPostFormState } from '../../../interfaces/interfaces';
+import { IPosts, ICategoryOptions, IPostFormState } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import './postForm.scss';
 

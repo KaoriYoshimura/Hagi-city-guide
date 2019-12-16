@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IPosts } from '../../../interfaces/interfaces';
+import { IPosts } from '../../../interfaces';
 import Label from '../../../ui/label';
 import './homeArticle.scss';
 
@@ -16,8 +16,12 @@ const PostArticle = (props: any) => (
                         <figure>
                             <img src={
                                 // eslint-disable-next-line global-require
-                                post.isDefault ? require(`../../../assets/images/homePosts/${post.image}`) : `/uploads/${post.image}`
-                            } alt={post.title} />
+                                post.isDefault ? require(`../../../assets/images/homeDefault/${post.image}`) : `/uploads/${post.image}`
+                            }
+                                alt={
+                                    post.isDefault ? post.defaultAlt : post.title
+                                }
+                            />
                         </figure>
                         <div className="text-background">
                             <div className="text-container">
