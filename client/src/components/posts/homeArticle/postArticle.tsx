@@ -1,27 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { IPosts } from '../../../interfaces/interfaces';
-import './postArticle.scss';
 import Label from '../../../ui/label';
-import classNames from 'classnames';
+import './homeArticle.scss';
 
 const PostArticle = (props: any) => (
     <>
         {props.posts.map((post: IPosts) => (
             <article
                 key={post._id}
-                className={classNames(
-                    'article-container',
-                    post.isFixed ? post.fixedArticle : 'post'
-                )}
+                className="article-container post"
             >
                 <Link to={`/posts/${post._id}`}>
                     <div className="image-container">
                         <figure>
                             <img src={
-                                // eslint-disable-next-line no-undef
                                 // eslint-disable-next-line global-require
-                                post.isFixed ? require(`../../../assets/images/homePosts/${post.image}`) : `/uploads/${post.image}`
+                                post.isDefault ? require(`../../../assets/images/homePosts/${post.image}`) : `/uploads/${post.image}`
                             } alt={post.title} />
                         </figure>
                         <div className="text-background">

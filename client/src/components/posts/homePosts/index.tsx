@@ -1,76 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/post/postActions';
-import { IPosts } from '../../../interfaces/interfaces';
+import { IPosts, IFixedArticle } from '../../../interfaces/interfaces';
 import reverseArray from '../../reverseArray';
+import { VARIANTS } from '../../../constants/category';
+import * as fixedItems from '../../../constants/homeFixedItems';
+import PostArticle from '../homeArticle/postArticle';
+import FixedArticle from '../homeArticle/fixedArticle';
 
 import './homePosts.scss';
 
-import { VARIANTS } from '../../../constants/category';
-import PostArticle from '../postArticle';
 
 interface IHomePostsProps {
     props: any;
     fetchPosts(): any;
 }
 
-const itemAccessMap = {
-    _id: 'accessMap',
-    title: 'How to access to Hagi',
-    description: '',
-    image: 'accessMap.png',
-    category: VARIANTS.ACCESS,
-    isFixed: true,
-    fixedArticle: 'item-access',
-};
-
-const itemWorldHeritage = {
-    _id: 'accessMap',
-    title: 'Site of Japan’s Meiji Industrial Revolution',
-    description: '',
-    image: 'worldHeritage.jpg',
-    category: VARIANTS.WORLDHERITAGE,
-    isFixed: true,
-    fixedArticle: 'item-world-heritage',
-};
-
-const itemGourmet = {
-    _id: 'food',
-    title: 'Enjoy local food',
-    description: '',
-    image: 'fugu.jpg',
-    category: VARIANTS.GOURMET,
-    isFixed: true,
-    fixedArticle: 'item-food',
-};
-
-const itemSpa = {
-    _id: 'spa',
-    title: 'Enjoy our spa - onsen -',
-    description: '',
-    image: 'onsen.jpg',
-    category: VARIANTS.GUIDE,
-    isFixed: true,
-    fixedArticle: 'item-spa',
-};
-
-const itemPottery = {
-    _id: 'pottery',
-    title: 'Our Hagiyaki',
-    description: '',
-    image: 'hagiyaki.jpg',
-    category: VARIANTS.LOCAL,
-    isFixed: true,
-    fixedArticle: 'item-pottery',
-};
-
 const defaultPost = {
-    _id: 'defaultPost1',
+    _id: '',
     title: '',
     description: '',
     image: 'kikugahama.jpg',
     category: VARIANTS.GUIDE,
-    isFixed: true,
+    isDefault: true,
     fixedArticle: 'post',
 };
 
@@ -79,7 +31,7 @@ class HomePosts extends Component<IHomePostsProps> {
         this.props.fetchPosts();
     }
 
-    createAccessMapArticle = (article: IPosts) => {
+    createAccessMapArticle = (article: IPosts | IFixedArticle) => {
         const fixedArticle = [];
         fixedArticle.push(article);
         return fixedArticle;
@@ -107,22 +59,20 @@ class HomePosts extends Component<IHomePostsProps> {
 
         return (
             <div className="item-container">
-                <PostArticle posts={this.createAccessMapArticle(itemAccessMap)} />
+                <FixedArticle posts={this.createAccessMapArticle(fixedItems.accessMap)} />
                 <PostArticle posts={firstPost} />
                 <PostArticle posts={secondPost} />
                 <PostArticle posts={thirdPost} />
-                <PostArticle posts={this.createAccessMapArticle(itemWorldHeritage)} />
+                <FixedArticle posts={this.createAccessMapArticle(fixedItems.worldHeritage)} />
                 <PostArticle posts={forthPost} />
-                <PostArticle posts={this.createAccessMapArticle(itemGourmet)} />
+                <FixedArticle posts={this.createAccessMapArticle(fixedItems.gourmet)} />
                 <PostArticle posts={fifthPost} />
-                <PostArticle posts={this.createAccessMapArticle(itemSpa)} />
+                <FixedArticle posts={this.createAccessMapArticle(fixedItems.guide)} />
                 <PostArticle posts={sixthPost} />
                 <PostArticle posts={seventhPost} />
-                <PostArticle posts={this.createAccessMapArticle(itemPottery)} />
+                <FixedArticle posts={this.createAccessMapArticle(fixedItems.local)} />
                 <PostArticle posts={eigthPost} />
                 <PostArticle posts={ninthPost} />
-                <PostArticle posts={firstPost} />
-
             </div>
         );
     }

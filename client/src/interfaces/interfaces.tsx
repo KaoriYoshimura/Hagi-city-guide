@@ -66,11 +66,18 @@ export interface IPosts {
     image: string;
     title: string;
     category: string;
-    isFixed?: boolean;
+    isDefault?: boolean;
     fixedArticle?: string;
     date?: string;
     description: string;
     updated?: string;
+}
+
+export interface IFixedArticle {
+    link: string;
+    title: string;
+    image: string;
+    category: string;
 }
 
 // For match.params.id
