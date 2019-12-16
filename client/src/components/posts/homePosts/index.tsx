@@ -30,14 +30,12 @@ class HomePosts extends Component<IHomePostsProps> {
     render() {
         const { posts } = this.props.props;
         const homePostArray = reverseArray(posts);
-        console.log(homePostArray);
 
         if (homePostArray.length <= 7) {
             defaultItems.map((item: any) => (
                 homePostArray.push(item)
             ));
         }
-        console.log(homePostArray);
 
         const firstPost = homePostArray.slice(0, 1);
         const secondPost = homePostArray.slice(1, 2);

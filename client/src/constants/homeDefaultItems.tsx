@@ -17,15 +17,7 @@ export const defaultItems = [
         isDefault: true,
         defaultAlt: 'Kikuya',
     },
-    {
-        _id: '',
-        title: '',
-        description: '',
-        image: 'amadai.jpg',
-        category: '',
-        isDefault: true,
-        defaultAlt: 'Amadai',
-    },
+
     {
         _id: '',
         title: '',
@@ -79,5 +71,14 @@ export const defaultItems = [
         category: '',
         isDefault: true,
         defaultAlt: 'tsubaki',
+    },
+    {
+        _id: '',
+        title: '',
+        description: '',
+        image: 'amadai.jpg',
+        category: '',
+        isDefault: true,
+        defaultAlt: 'Amadai',
     },
 ];

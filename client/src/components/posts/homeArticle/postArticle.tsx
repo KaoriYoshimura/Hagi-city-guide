@@ -25,8 +25,7 @@ const PostArticle = (props: any) => (
                         </figure>
                         <div className="text-background">
                             <div className="text-container">
-
-                                <Label variant={post.category.replace(/\s+/g, '-').toLowerCase()}>{post.category}</Label>
+                                {post.isDefault ? null : <Label variant={post.category.replace(/\s+/g, '-').toLowerCase()}>{post.category}</Label>}
                                 <div className="post-title">{post.title}</div>
                             </div>
                         </div>
