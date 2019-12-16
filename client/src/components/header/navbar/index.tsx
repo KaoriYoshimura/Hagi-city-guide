@@ -19,7 +19,7 @@ const Navbar = (props: INavBarProps) => (
         <nav
             className="navBar"
         >
-            <div className={'logo-container'} >
+            <div className="logo-container">
                 <Logo blackVariant={props.isBlackVariant} />
             </div>
             <div className="spacer" />
