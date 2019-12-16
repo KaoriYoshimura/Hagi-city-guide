@@ -1,0 +1,57 @@
+@import '../../style/styles';
+
+.footer-container {
+    .footer-top-container{
+        background-color: $paleRed;
+        padding: $spacingBetweenDiv;
+        margin-top: $spacingBetweenDiv;
+        min-height: 150px;
+        display: flex;
+    }
+
+    .footer-bottom-container {
+        background-color: $primaryColorSub;
+    }
+
+    .footer-ii {
+        display: flex;
+        justify-content: center;
+        padding: $spacingBetweenDiv;
+    }
+
+    .link-item {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        width: 200px;
+    }
+
+    .icon-label {
+        padding-left: 10px;
+    }
+}
+
+@include tablet {
+    .footer-container {
+        ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+    }
+}
+
+@include desktop {
+    .footer-container {
+        ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}

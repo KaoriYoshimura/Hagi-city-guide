@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Header from '../../components/header';
 import SinglePost from '../../components/posts/singlePost';
 import { IPostProps } from '../../interfaces/interfaces';
+import Footer from '../../components/footer';
 
 
 class Post extends Component<IPostProps> {
@@ -14,6 +15,7 @@ class Post extends Component<IPostProps> {
                 <main className={classNames('container', 'posts')}>
                     <SinglePost id={this.props.match.params.id} />
                 </main>
+                <Footer />
             </>
         );
     }

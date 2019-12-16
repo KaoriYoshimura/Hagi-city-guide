@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Header from '../../components/header';
 import PAGES from '../../constants/pageData';
 import HomePosts from '../../components/posts/homePosts';
+import Footer from '../../components/footer';
 
 
 const Home = () => (
@@ -15,6 +16,7 @@ const Home = () => (
         <main className={classNames('container', 'home-posts')}>
             <HomePosts />
         </main>
+        <Footer />
     </>
 );
 
