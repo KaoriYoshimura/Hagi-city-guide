@@ -29,6 +29,23 @@
     .icon-label {
         padding-left: 10px;
     }
+
+    .footer-bottom-content {
+        padding: $spacingBetweenDiv;
+        display: flex;
+        min-height: 100px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo-container {
+        width: 100px;
+    }
+
+    .text-container {
+        width: 200px;
+        padding-left: 10px;
+    }
 }
 
 @include tablet {
@@ -53,5 +70,11 @@
             grid-gap: 1rem;
             grid-template-columns: repeat(4, 1fr);
         }
+
+        .footer-bottom-content {
+            flex-direction: row;
+        }
+
     }
+
 }

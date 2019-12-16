@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { footerLinks } from '../../constants/footerLinks';
 import './footer.scss';
@@ -23,7 +22,7 @@ const Footer = () => {
     return (
         <footer className="footer-container">
             <div className="footer-top-container">
-                <div className=" container">
+                <div className="container">
                     <ul>
                         {footerLinks.map(link => {
                             return (
@@ -47,17 +46,21 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom-container">
-                <div className="container">
-                    <Logo blackVariant />
-                    <p>
-                        Medieinstitutet i Sverige<br />
-                        Tulegatan 41<br />
-                        113 53 STOCKHOLM</p>
+                <div className="footer-bottom-content container">
+                    <div className="logo-container">
+                        <Logo blackVariant />
+                    </div>
+                    <div className="text-container">
+                        <p>
+                            Medieinstitutet i Sverige<br />
+                            Tulegatan 41<br />
+                            113 53 STOCKHOLM</p>
+
+                    </div>
                 </div>
             </div>
         </footer>
-    )
-
+    );
 };
 
 export default Footer;
