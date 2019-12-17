@@ -3,10 +3,10 @@
 .button-container {
 
     &.default {
-     @include buttonStyle($uiButtonBackgroundColor, $fontSubColor);
+     @include buttonStyle($white, $primaryColor, $uiButtonBackgroundColor);
 
             &:hover {
-                @include buttonStyle(lighten($uiButtonBackgroundColor, 20), $fontSubColor)
+                @include buttonStyle($primaryColor, $fontSubColor, $primaryColor)
             }
     }
 

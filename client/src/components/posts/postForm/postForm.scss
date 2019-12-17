@@ -72,11 +72,12 @@
         }
 
         input[type=submit] {
-            @include buttonStyle($uiBackgroundColor, $fontSubColor);
+            @include buttonStyle($uiBackgroundColor, $fontSubColor, $uiBackgroundColor);
 
             &:hover {
-                @include buttonStyle(lighten($uiBackgroundColor, 20), $fontSubColor)
+                @include buttonStyle(lighten($uiBackgroundColor, 10), $fontSubColor, $uiBackgroundColor)
             }
+
         }
 
         .input-title {

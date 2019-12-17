@@ -1,13 +1,13 @@
 @import './variables';
 
-@mixin buttonStyle ($bgColor, $fColor) {
+@mixin buttonStyle ($bgColor, $fColor, $bColor) {
     padding: 0.5rem 1rem;
     background: $bgColor;
     color: $fColor;
     display: inline-block;
     text-transform: uppercase;
     border-radius: 2px;
-    border: 1px solid $bgColor;
+    border: 1px solid $bColor;
     cursor: pointer;
     margin: $mainSpacing;
 }

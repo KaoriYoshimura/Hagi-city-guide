@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { addPost } from '../../../actions/post/postActions';
 import { IPostFormState } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
+import Message from '../../../ui/message/';
 import './postForm.scss';
 
 interface INewPostProps {
@@ -21,7 +22,12 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
             description: '',
             category: '',
             image: '',
-        }
+        },
+        message: {
+            variant: '',
+            text: ''
+        },
+        isMessageDisplay: false
     }
 
     onChangeFile = (e: any) => {
@@ -88,68 +94,98 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
                     uploadedFile: { fileName, filePath }
                 }
             }));
+
+            const newPost = {
+                title: this.state.post.title,
+                description: this.state.post.description,
+                image: this.state.post.fileName,
+                category: this.state.post.category,
+            };
+
+            this.props.addPost(newPost);
+
+            this.setState(prevState => ({
+                message: {
+                    ...prevState.message,
+                    text: 'Post has been successfully created',
+                }
+            }));
         } catch (err) {
             if (err.response.status === 500) {
+                this.setState(prevState => ({
+                    message: {
+                        ...prevState.message,
+                        variant: 'danger',
+                        text: 'Post has been successfully created',
+                    }
+                }));
                 console.log('There was a problem with the server');
             } else {
-                console.log(err.response.data.msg);
+                this.setState(prevState => ({
+                    message: {
+                        ...prevState.message,
+                        variant: 'danger',
+                        text: err.response.data.msg,
+                    },
+                    isMessageDisplay: true
+                }));
             }
         }
-
-        const newPost = {
-            title: this.state.post.title,
-            description: this.state.post.description,
-            image: this.state.post.fileName,
-            category: this.state.post.category,
-        };
-
-        this.props.addPost(newPost);
     };
 
+    messageClickHandler = () => {
+        console.log('test');
+        this.setState({ isMessageDisplay: false });
+    }
+
     render() {
-        const { post, options } = this.state;
+        const { post, options, message, isMessageDisplay } = this.state;
         return (
-            <div className="post-form-container">
-                <form className="post-form" onSubmit={this.onSubmit}>
-                    <div>
-                        <label>Title <span className="required">&#42;</span></label>
-                        <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} />
-                    </div>
-                    <div>
-                        <label>Category <span className="required">&#42;</span></label>
-                        <select name="category" onChange={this.onChange}>
-                            <option value="">Please choose category</option>
-                            {options.map(option => (
-                                <option key={option.value} value={option.value}>
-                                    {option.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label>Description <span className="required">&#42;</span></label>
-                        <textarea name="description" placeholder="Please write description" onChange={this.onChange} />
-                    </div>
-                    <div>
-                        <label>Image <span className="required">&#42;</span></label>
-                        <input type="file" onChange={this.onChangeFile} className="file-input" />
-                        {post.image ? (
-                            <figure className="image-preview">
-                                <img
-                                    src={post.image}
-                                    alt={post.title}
-                                />
-                            </figure>
-                        ) : null}
-                        {post.fileName ? (
-                            <label>{post.fileName}</label>
-                        ) : null}
-                    </div>
-                    <div>
-                        <input type="submit" value="post" />
-                    </div>
-                </form>
-            </div>
+            <>
+                <div className="post-form-container">
+                    <form className="post-form" onSubmit={this.onSubmit}>
+                        <div>
+                            <label>Title <span className="required">&#42;</span></label>
+                            <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} />
+                        </div>
+                        <div>
+                            <label>Category <span className="required">&#42;</span></label>
+                            <select name="category" onChange={this.onChange}>
+                                <option value="">Please choose category</option>
+                                {options.map(option => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label>Description <span className="required">&#42;</span></label>
+                            <textarea name="description" placeholder="Please write description" onChange={this.onChange} />
+                        </div>
+                        <div>
+                            <label>Image <span className="required">&#42;</span></label>
+                            <input type="file" onChange={this.onChangeFile} className="file-input" />
+                            {post.image ? (
+                                <figure className="image-preview">
+                                    <img
+                                        src={post.image}
+                                        alt={post.title}
+                                    />
+                                </figure>
+                            ) : null}
+                            {post.fileName ? (
+                                <label>{post.fileName}</label>
+                            ) : null}
+                        </div>
+                        <div>
+                            <input type="submit" value="post" />
+                            {message.text ? <Message variant={message.variant} onClickClose={this.messageClickHandler} display={isMessageDisplay}>{message.text}</Message> : null}
+
+                        </div>
+                    </form>
+                </div>
+            </>
         );
     }
 }

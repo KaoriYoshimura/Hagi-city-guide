@@ -1,0 +1,41 @@
+@import '../../style/styles';
+
+@mixin message($color) {
+    background-color: $color;
+}
+
+.message-container {
+    color: $fontSubColor;
+    padding: 15px 30px 15px 15px;
+    border-radius: 3px;
+    text-align: left;
+    font-family: $fontHeadingTitleSub;
+    width: 80%;
+    position: relative;
+    right: 0;
+    z-index: 100;
+    transform: translateX(-150%);
+    transition: $mainTransition;
+
+
+    &.info {
+        @include message($uiInfoColor)
+    }
+
+    &.danger {
+        @include message(red)
+    }
+
+    .close-button {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: $fontSubColor;
+        font-size: $fontBodySize;
+    }
+
+}
+
+.message-show {
+    transform: translateX(0%);
+}

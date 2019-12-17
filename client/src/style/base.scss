@@ -35,11 +35,18 @@ a> :active {
 }
 
 h1 {
-   color: $fontHeadingTitleColor;
    font-family: $fontHeadingTitle;
    font-size: 45px;
    text-align: center;
    margin-top: $spacingBetweenDiv;
    margin-bottom: $spacingForParagraph;
    text-transform: uppercase;
+}
+
+button {
+   appearance: none;
+   margin: 0;
+   padding: 0;
+   border: none;
+   background-color: transparent;
 }

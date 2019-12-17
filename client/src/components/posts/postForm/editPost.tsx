@@ -27,7 +27,11 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
                 description: '',
                 category: '',
                 image: '',
-            }
+            },
+            message: {
+                variant: '',
+                text: ''
+            },
         };
     }
 

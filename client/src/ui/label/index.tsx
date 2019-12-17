@@ -4,10 +4,11 @@ import './label.scss';
 
 interface ILabelProps {
     variant?: string;
-    children: string;
+    children: any;
+    className?: string;
 }
 
-const Label = (props: any) => {
+const Label = (props: ILabelProps) => {
     return (
         <span
             className={classNames(

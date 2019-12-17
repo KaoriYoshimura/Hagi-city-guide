@@ -42,10 +42,16 @@ export interface ICategoryOptions {
     value: string;
 }
 
+export interface IMessageState {
+    variant: string;
+    text: string;
+}
 export interface IPostFormState {
     post: IPost | any;
     [x: number]: any;
     options: any;
+    message: IMessageState;
+    isMessageDisplay?: boolean;
 }
 
 export interface IFile {

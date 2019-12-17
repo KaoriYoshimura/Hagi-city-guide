@@ -4,6 +4,7 @@ $yellow: #FFD804;
 $white: #fff;
 $paleRed: lighten($red, 45);
 $gray: #333;
+$green: #008C28;
 
 // Label colors
 $access: #fff3a3 ;
@@ -29,7 +30,8 @@ $primaryColor: $red;
 $primaryColorSub: $yellow;
 $subColor: $paleRed;
 $uiBackgroundColor: $gray;
-$uiButtonBackgroundColor: $red;
+$uiButtonBackgroundColor: $red; //Avoid using
+$uiInfoColor: $green;
 
 // Font color
 $fontColorMain: $gray;
