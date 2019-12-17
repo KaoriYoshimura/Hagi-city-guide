@@ -6,6 +6,7 @@ import { IPostFormState } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import Message from '../../../ui/message/';
 import './postForm.scss';
+import { Redirect } from 'react-router-dom';
 
 interface INewPostProps {
     addPost: any;
@@ -27,7 +28,8 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
             variant: '',
             text: ''
         },
-        isMessageDisplay: false
+        isMessageDisplay: false,
+        shouldRedirect: false
     }
 
     onChangeFile = (e: any) => {
@@ -103,23 +105,17 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
             };
 
             this.props.addPost(newPost);
+            this.setState({ shouldRedirect: true });
 
-            this.setState(prevState => ({
-                message: {
-                    ...prevState.message,
-                    text: 'Post has been successfully created',
-                }
-            }));
         } catch (err) {
             if (err.response.status === 500) {
                 this.setState(prevState => ({
                     message: {
                         ...prevState.message,
                         variant: 'danger',
-                        text: 'Post has been successfully created',
+                        text: 'There was a problem with the server',
                     }
                 }));
-                console.log('There was a problem with the server');
             } else {
                 this.setState(prevState => ({
                     message: {
@@ -134,12 +130,16 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
     };
 
     messageClickHandler = () => {
-        console.log('test');
         this.setState({ isMessageDisplay: false });
     }
 
     render() {
-        const { post, options, message, isMessageDisplay } = this.state;
+        const { post, options, message, isMessageDisplay, shouldRedirect } = this.state;
+        if (shouldRedirect) {
+            return (
+                <Redirect to={'/admin'} />
+            );
+        }
         return (
             <>
                 <div className="post-form-container">
@@ -180,8 +180,7 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
                         </div>
                         <div>
                             <input type="submit" value="post" />
-                            {message.text ? <Message variant={message.variant} onClickClose={this.messageClickHandler} display={isMessageDisplay}>{message.text}</Message> : null}
-
+                            <Message variant={message.variant} onClickClose={this.messageClickHandler} display={isMessageDisplay}>{message.text}</Message>
                         </div>
                     </form>
                 </div>

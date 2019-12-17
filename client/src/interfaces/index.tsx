@@ -52,6 +52,7 @@ export interface IPostFormState {
     options: any;
     message: IMessageState;
     isMessageDisplay?: boolean;
+    shouldRedirect?: boolean;
 }
 
 export interface IFile {

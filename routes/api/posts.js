@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
             res.json(post);
         }
     } catch (e) {
-        res.json({ Error: `Error1: ${e}` });
+        res.json({ Error: `Error: ${e}` });
     }
 });
 
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
         const post = await newPost.save()
         res.json(post)
     } catch (e) {
-        res.json({ Error: `Error is ${e}` })
+        res.json({ Error: `Error: ${e}` })
     }
 })
 
@@ -57,7 +57,7 @@ router.delete('/:id', async (req, res) => {
         await Post.findByIdAndRemove({ _id: req.params.id })
         res.json({ success: 'User deleted successfully' })
     } catch (e) {
-        res.json({ Error: `Error is ${e}` })
+        res.json({ Error: `Error: ${e}` })
     }
 })
 
