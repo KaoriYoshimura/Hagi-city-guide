@@ -14,7 +14,7 @@
     position: relative;
     right: 0;
     z-index: 100;
-    transform: translateX(-150%);
+    transform: translateX(-250%);
 
     &.info {
         @include message($uiInfoColor)

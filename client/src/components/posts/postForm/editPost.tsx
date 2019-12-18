@@ -6,6 +6,8 @@ import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
 import { IPosts, ICategoryOptions, IPostFormState } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import './postForm.scss';
+import { Redirect } from 'react-router-dom';
+import Message from '../../../ui/message';
 
 interface IEditPostsProps {
     fetchSinglePost: any;
@@ -32,6 +34,8 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
                 variant: '',
                 text: ''
             },
+            isMessageDisplay: false,
+            shouldRedirect: false
         };
     }
 
@@ -87,6 +91,7 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
                 }
             }));
         }
+        console.log(this.state.post);
     };
 
     onChange = (e: any) => {
@@ -97,14 +102,16 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
             post[name] = value;
             return { post };
         });
+        console.log(this.state.post);
     };
 
     onSubmit = async (e: any) => {
         e.preventDefault();
 
-        const formData = new FormData();
-        formData.append('file', this.state.post.file);
-        try {
+        if (this.state.post.file === File) {
+            console.log(this.state.post.file);
+            const formData = new FormData();
+            formData.append('file', this.state.post.file);
             const res = await axios.post('/api/uploadFile', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -119,30 +126,55 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
                     uploadedFile: { fileName, filePath }
                 }
             }));
-        } catch (err) {
-            if (err.response.status === 500) {
-                console.log('There was a problem with the server');
-            } else {
-                console.log(err.response.data.msg);
-            }
         }
 
-        const date = new Date();
 
-        const updatedPost = {
-            title: this.state.post.title,
-            description: this.state.post.description,
-            image: this.state.post.fileName,
-            category: this.state.post.category,
-            updated: date
-        };
+        try {
+            const date = new Date();
 
-        this.props.editPost(this.props.id, updatedPost);
+            const updatedPost = {
+                title: this.state.post.title,
+                description: this.state.post.description,
+                image: this.state.post.fileName,
+                category: this.state.post.category,
+                updated: date
+            };
+
+            this.props.editPost(this.props.id, updatedPost);
+            this.setState({ shouldRedirect: true });
+        } catch (err) {
+            if (err.response.status === 500) {
+                this.setState(prevState => ({
+                    message: {
+                        ...prevState.message,
+                        variant: 'danger',
+                        text: 'There was a problem with the server',
+                    }
+                }));
+            } else {
+                this.setState(prevState => ({
+                    message: {
+                        ...prevState.message,
+                        variant: 'danger',
+                        text: err.response.data.msg,
+                    },
+                    isMessageDisplay: true
+                }));
+            }
+        }
     };
 
-    render() {
-        const { post, options } = this.state;
+    messageClickHandler = () => {
+        this.setState({ isMessageDisplay: false });
+    }
 
+    render() {
+        const { post, options, message, isMessageDisplay, shouldRedirect } = this.state;
+        if (shouldRedirect) {
+            return (
+                <Redirect to={'/admin'} />
+            );
+        }
         return (
             <div className="post-form-container">
                 <form className="post-form" onSubmit={this.onSubmit}>
@@ -178,6 +210,8 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
                     </div>
                     <div>
                         <input type="submit" value="update" />
+                        <Message variant={message.variant} onClickClose={this.messageClickHandler} display={isMessageDisplay}>{message.text}</Message>
+
                     </div>
                 </form>
             </div>

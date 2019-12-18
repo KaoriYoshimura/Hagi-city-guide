@@ -106,7 +106,6 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
 
             this.props.addPost(newPost);
             this.setState({ shouldRedirect: true });
-
         } catch (err) {
             if (err.response.status === 500) {
                 this.setState(prevState => ({
