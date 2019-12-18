@@ -68,7 +68,7 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
         }
     };
 
-    onChange = (e: any) => {
+    onChange = async (e: any) => {
         const { name, value } = e.target;
 
         this.setState(prevState => {
@@ -76,43 +76,48 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
             post[name] = value;
             return { post };
         });
-    }
-
-    onSubmit = async (e: any) => {
-        e.preventDefault();
 
         const formData = new FormData();
         formData.append('file', this.state.post.file);
-        try {
-            const res = await axios.post('/api/uploadFile', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-            });
+        const res = await axios.post('/api/uploadFile', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        });
 
-            const { fileName, filePath } = res.data;
+        const { fileName, filePath } = res.data;
 
-            this.setState(prevState => ({
-                post: {
-                    ...prevState.post,
-                    uploadedFile: { fileName, filePath }
+        this.setState(prevState => ({
+            post: {
+                ...prevState.post,
+                uploadedFile: { fileName, filePath }
+            }
+        }));
+    }
+
+    onSubmit = (e: any) => {
+        e.preventDefault();
+
+        const { post } = this.state;
+        if (post.title === '' || post.description === '' || post.image === '' || post.category === '') {
+            this.props.setMessage('Please fill in all field.', COLOR_VARIANTS.DANGER);
+        } else {
+            try {
+                const newPost = {
+                    title: this.state.post.title,
+                    description: this.state.post.description,
+                    image: this.state.post.fileName,
+                    category: this.state.post.category,
+                };
+
+                this.props.addPost(newPost);
+                this.props.setMessage('Post has been added successfully', COLOR_VARIANTS.INFO);
+            } catch (err) {
+                if (err.response.status === 500) {
+                    this.props.setMessage('There was a problem with the server', COLOR_VARIANTS.DANGER);
+                } else {
+                    this.props.setMessage(err.response.data.msg, COLOR_VARIANTS.DANGER);
                 }
-            }));
-
-            const newPost = {
-                title: this.state.post.title,
-                description: this.state.post.description,
-                image: this.state.post.fileName,
-                category: this.state.post.category,
-            };
-
-            this.props.addPost(newPost);
-            this.props.setMessage('Post has been added successfully', COLOR_VARIANTS.INFO);
-        } catch (err) {
-            if (err.response.status === 500) {
-                this.props.setMessage('There was a problem with the server', COLOR_VARIANTS.DANGER);
-            } else {
-                this.props.setMessage(err.response.data.msg, COLOR_VARIANTS.DANGER);
             }
         }
     };
