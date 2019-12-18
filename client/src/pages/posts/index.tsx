@@ -7,16 +7,18 @@ import PAGES from '../../constants/pageData';
 import PostList from '../../components/posts/postList';
 import Footer from '../../components/footer';
 
+import './posts.scss';
 
 const Posts = () => (
     <>
         <Hero pageName={PAGES.POSTS} pageHeading="Posts">
             <Header blackVariant={false} />
         </Hero>
-        <main className={classNames('container', 'posts')}>
+        <main className={classNames('container', 'posts-container')}>
             <PostList />
+            <div className="push" />
         </main>
-        <Footer />
+        <Footer className="posts-footer" />
     </>
 );
 

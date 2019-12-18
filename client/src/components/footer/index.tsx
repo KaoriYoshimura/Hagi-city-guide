@@ -6,6 +6,7 @@ import airplain from '../../assets/icons/airplane.png';
 import contact from '../../assets/icons/contact.png';
 import info from '../../assets/icons/info.png';
 import wifi from '../../assets/icons/wifi.png';
+import classNames from 'classnames';
 
 const setImage = (img: string | undefined) => {
     if (img === 'airplane.png') {
@@ -18,9 +19,16 @@ const setImage = (img: string | undefined) => {
     return wifi;
 };
 
-const Footer = () => {
+interface IFooterProps {
+    className?: string;
+}
+
+const Footer = (props: IFooterProps) => {
     return (
-        <footer className="footer-container">
+        <footer className={classNames(
+            'footer-container',
+            props.className ? props.className : null
+        )}>
             <div className="footer-top-container">
                 <div className="container">
                     <ul>

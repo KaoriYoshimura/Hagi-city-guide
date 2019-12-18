@@ -68,7 +68,7 @@ class PostList extends Component<IHomePostsProps> {
                     ) : (
                             // Show message instead of table if there is no post
                             <p className="error-message">
-                                There is no post or database connection problem.
+                                Currently there is no post yet.
                             </p>
                         )}
                 </div>
