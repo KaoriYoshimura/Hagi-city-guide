@@ -1,4 +1,4 @@
-import { FETCH_POSTS, FETCH_POST, ADD_POST, DELETE_POST } from '../actions/post/types';
+import { FETCH_POSTS, FETCH_POST, ADD_POST, DELETE_POST } from '../actions/types';
 
 interface IPostState {
     _id: string;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../../../actions/post/postActions';
+import { fetchPosts } from '../../../actions/postActions';
 import { IPosts, IFixedArticle } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
 import * as fixedItems from '../../../constants/homeFixedItems';

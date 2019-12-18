@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
+import { fetchSinglePost, editPost } from '../../../actions/postActions';
 import { IPosts, ICategoryOptions, IPostFormState } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
-import './postForm.scss';
-import { Redirect } from 'react-router-dom';
+import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import Message from '../../../ui/message';
+import './postForm.scss';
+import { setMessage } from '../../../actions/messageActions';
 
 interface IEditPostsProps {
     fetchSinglePost: any;
     editPost: any;
     post: IPosts;
     id: string;
+    setMessage: any;
 }
 
 class EditPost extends Component<IEditPostsProps, IPostFormState> {
@@ -91,7 +93,6 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
                 }
             }));
         }
-        console.log(this.state.post);
     };
 
     onChange = (e: any) => {
@@ -102,14 +103,12 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
             post[name] = value;
             return { post };
         });
-        console.log(this.state.post);
     };
 
     onSubmit = async (e: any) => {
         e.preventDefault();
 
         if (this.state.post.file === File) {
-            console.log(this.state.post.file);
             const formData = new FormData();
             formData.append('file', this.state.post.file);
             const res = await axios.post('/api/uploadFile', formData, {
@@ -141,25 +140,13 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
             };
 
             this.props.editPost(this.props.id, updatedPost);
-            this.setState({ shouldRedirect: true });
+            this.props.setMessage('Post has been updated successfully', COLOR_VARIANTS.INFO);
         } catch (err) {
             if (err.response.status === 500) {
-                this.setState(prevState => ({
-                    message: {
-                        ...prevState.message,
-                        variant: 'danger',
-                        text: 'There was a problem with the server',
-                    }
-                }));
+                this.props.setMessage('There was a problem with the server', COLOR_VARIANTS.DANGER);
+
             } else {
-                this.setState(prevState => ({
-                    message: {
-                        ...prevState.message,
-                        variant: 'danger',
-                        text: err.response.data.msg,
-                    },
-                    isMessageDisplay: true
-                }));
+                this.props.setMessage(err.response.data.msg, COLOR_VARIANTS.DANGER);
             }
         }
     };
@@ -169,12 +156,7 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
     }
 
     render() {
-        const { post, options, message, isMessageDisplay, shouldRedirect } = this.state;
-        if (shouldRedirect) {
-            return (
-                <Redirect to={'/admin'} />
-            );
-        }
+        const { post, options } = this.state;
         return (
             <div className="post-form-container">
                 <form className="post-form" onSubmit={this.onSubmit}>
@@ -210,10 +192,9 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
                     </div>
                     <div>
                         <input type="submit" value="update" />
-                        <Message variant={message.variant} onClickClose={this.messageClickHandler} display={isMessageDisplay}>{message.text}</Message>
-
                     </div>
                 </form>
+                <Message />
             </div>
         );
     }
@@ -223,4 +204,4 @@ const mapStateToProps = (state: any) => ({
     post: state.posts.post
 });
 
-export default connect(mapStateToProps, { fetchSinglePost, editPost })(EditPost);
+export default connect(mapStateToProps, { fetchSinglePost, editPost, setMessage })(EditPost);

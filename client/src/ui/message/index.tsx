@@ -1,45 +1,43 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import './message.scss';
 
 interface IMessageProps {
-    variant: string;
-    children: string;
-    display: boolean;
-    onClickClose: any;
+    messages: any;
 }
 
+interface IMessage {
+    id: string;
+    messageVariant: string;
+    msg: string;
+}
 class Message extends Component<IMessageProps> {
-    static defaultProps: any; // Tell compilier there is props
 
     render() {
-        return (
-            <div
-                className={classNames(
-                    'message-container',
-                    this.props.variant,
-                    this.props.display ? 'message-show' : null
-                )}
-                role="alert"
-            >
-                {this.props.children}
-                <button
-                    type="button"
-                    className="close-button"
-                    data-dismiss="alert"
-                    aria-label="Close"
-                    onClick={this.props.onClickClose}
-                >
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        );
+        const { messages } = this.props;
+        if (messages !== null && messages.length > 0) {
+            return (
+                messages.map((message: IMessage) => (
+                    <div
+                        key={message.id}
+                        className={classNames(
+                            'message-container',
+                            message.messageVariant,
+                        )}
+                    >
+                        {message.msg}
+                    </div>
+                ))
+            );
+        }
+        return null;
     }
 }
 
-Message.defaultProps = {
-    variant: 'info'
-};
+const mapStateToProps = (state: { message: any }) => ({
+    messages: state.message
+});
 
-export default Message;
+export default connect(mapStateToProps)(Message);

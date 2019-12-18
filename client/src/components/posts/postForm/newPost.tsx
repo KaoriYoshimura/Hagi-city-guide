@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { addPost } from '../../../actions/post/postActions';
+import { addPost } from '../../../actions/postActions';
+import { setMessage } from '../../../actions/messageActions';
 import { IPostFormState } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import Message from '../../../ui/message/';
+import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import './postForm.scss';
-import { Redirect } from 'react-router-dom';
 
 interface INewPostProps {
     addPost: any;
+    setMessage: any;
 }
 
 class NewPost extends Component<INewPostProps, IPostFormState> {
@@ -105,25 +107,12 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
             };
 
             this.props.addPost(newPost);
-            this.setState({ shouldRedirect: true });
+            this.props.setMessage('Post has been added successfully', COLOR_VARIANTS.INFO);
         } catch (err) {
             if (err.response.status === 500) {
-                this.setState(prevState => ({
-                    message: {
-                        ...prevState.message,
-                        variant: 'danger',
-                        text: 'There was a problem with the server',
-                    }
-                }));
+                this.props.setMessage('There was a problem with the server', COLOR_VARIANTS.DANGER);
             } else {
-                this.setState(prevState => ({
-                    message: {
-                        ...prevState.message,
-                        variant: 'danger',
-                        text: err.response.data.msg,
-                    },
-                    isMessageDisplay: true
-                }));
+                this.props.setMessage(err.response.data.msg, COLOR_VARIANTS.DANGER);
             }
         }
     };
@@ -133,59 +122,52 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
     }
 
     render() {
-        const { post, options, message, isMessageDisplay, shouldRedirect } = this.state;
-        if (shouldRedirect) {
-            return (
-                <Redirect to={'/admin'} />
-            );
-        }
+        const { post, options } = this.state;
         return (
-            <>
-                <div className="post-form-container">
-                    <form className="post-form" onSubmit={this.onSubmit}>
-                        <div>
-                            <label>Title <span className="required">&#42;</span></label>
-                            <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} />
-                        </div>
-                        <div>
-                            <label>Category <span className="required">&#42;</span></label>
-                            <select name="category" onChange={this.onChange}>
-                                <option value="">Please choose category</option>
-                                {options.map(option => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div>
-                            <label>Description <span className="required">&#42;</span></label>
-                            <textarea name="description" placeholder="Please write description" onChange={this.onChange} />
-                        </div>
-                        <div>
-                            <label>Image <span className="required">&#42;</span></label>
-                            <input type="file" onChange={this.onChangeFile} className="file-input" />
-                            {post.image ? (
-                                <figure className="image-preview">
-                                    <img
-                                        src={post.image}
-                                        alt={post.title}
-                                    />
-                                </figure>
-                            ) : null}
-                            {post.fileName ? (
-                                <label>{post.fileName}</label>
-                            ) : null}
-                        </div>
-                        <div>
-                            <input type="submit" value="post" />
-                            <Message variant={message.variant} onClickClose={this.messageClickHandler} display={isMessageDisplay}>{message.text}</Message>
-                        </div>
-                    </form>
-                </div>
-            </>
+            <div className="post-form-container">
+                <form className="post-form" onSubmit={this.onSubmit}>
+                    <div>
+                        <label>Title <span className="required">&#42;</span></label>
+                        <input type="text" className="input-title" name="title" placeholder="Please enter a title" onChange={this.onChange} />
+                    </div>
+                    <div>
+                        <label>Category <span className="required">&#42;</span></label>
+                        <select name="category" onChange={this.onChange}>
+                            <option value="">Please choose category</option>
+                            {options.map(option => (
+                                <option key={option.value} value={option.value}>
+                                    {option.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label>Description <span className="required">&#42;</span></label>
+                        <textarea name="description" placeholder="Please write description" onChange={this.onChange} />
+                    </div>
+                    <div>
+                        <label>Image <span className="required">&#42;</span></label>
+                        <input type="file" onChange={this.onChangeFile} className="file-input" />
+                        {post.image ? (
+                            <figure className="image-preview">
+                                <img
+                                    src={post.image}
+                                    alt={post.title}
+                                />
+                            </figure>
+                        ) : null}
+                        {post.fileName ? (
+                            <label>{post.fileName}</label>
+                        ) : null}
+                    </div>
+                    <div>
+                        <input type="submit" value="post" />
+                    </div>
+                </form>
+                <Message />
+            </div>
         );
     }
 }
 
-export default connect(null, { addPost })(NewPost);
+export default connect(null, { addPost, setMessage })(NewPost);

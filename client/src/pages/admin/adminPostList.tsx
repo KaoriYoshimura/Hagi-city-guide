@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-
+import { setMessage } from '../../actions/messageActions';
 import PostListAdmin from '../../components/posts/postListAdmin';
-import './admin.scss';
 import Button from '../../ui/button';
+
+import './admin.scss';
 
 const AdminPostList = () => (
     <>
@@ -27,4 +29,4 @@ const AdminPostList = () => (
     </>
 );
 
-export default AdminPostList;
+export default connect(null, { setMessage })(AdminPostList);

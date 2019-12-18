@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSinglePost, editPost } from '../../../actions/post/postActions';
+import { fetchSinglePost, editPost } from '../../../actions/postActions';
 import { IPosts } from '../../../interfaces';
 import Moment from 'react-moment';
 

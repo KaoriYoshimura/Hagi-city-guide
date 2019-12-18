@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import classNames from 'classnames';
-import { fetchPosts, deletePost } from '../../../actions/post/postActions';
+import { fetchPosts, deletePost } from '../../../actions/postActions';
 import { IPosts } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
 import Label from '../../../ui/label';

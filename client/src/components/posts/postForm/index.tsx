@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
-import { fetchSinglePost } from '../../../actions/post/postActions';
+import { fetchSinglePost } from '../../../actions/postActions';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import { IPost, ICategoryOptions } from '../../../interfaces';
 import './postForm.scss';

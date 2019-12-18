@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         await Post.findByIdAndRemove({ _id: req.params.id })
-        res.json({ success: 'User deleted successfully' })
+        res.json({ success: 'Post deleted successfully' })
     } catch (e) {
         res.json({ Error: `Error: ${e}` })
     }

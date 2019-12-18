@@ -14,7 +14,7 @@
     position: relative;
     right: 0;
     z-index: 100;
-    transform: translateX(-250%);
+    margin: 0 auto;
 
     &.info {
         @include message($uiInfoColor)
@@ -23,17 +23,4 @@
     &.danger {
         @include message(red)
     }
-
-    .close-button {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        color: $fontSubColor;
-        font-size: $fontBodySize;
-    }
-
-}
-
-.message-show {
-    transform: translateX(0%);
 }
