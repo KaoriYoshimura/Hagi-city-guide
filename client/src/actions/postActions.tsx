@@ -1,11 +1,9 @@
 import axios from 'axios';
 import { FETCH_POSTS, FETCH_POST, ADD_POST, EDIT_POST, DELETE_POST, PostActionTypes } from './types';
 
-export const addPost = (newUser: PostActionTypes) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    console.log('addPost actions');
-
+export const addPost = (newPost: PostActionTypes) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
     try {
-        const res = await axios.post('/api/posts', newUser);
+        const res = await axios.post('/api/posts', newPost);
 
         dispatch({
             type: ADD_POST,
@@ -14,7 +12,7 @@ export const addPost = (newUser: PostActionTypes) => async (dispatch: (arg0: { t
     } catch (err) {
         dispatch({
             type: ADD_POST,
-            payload: { msg: 'Uploaded successfully' }
+            payload: { msg: err.response.statusText, status: err.response.status }
         });
     }
 };

@@ -14,7 +14,7 @@ export const accessMap = {
 };
 
 export const worldHeritage = {
-    link: 'http://www.hagishi.com/en/sightseeing/',
+    link: 'http://www.hagishi.com/en/world-heritage/',
     title: 'Site of Japan’s Meiji Industrial Revolution',
     image: imgWorldHeritage,
     category: VARIANTS.WORLDHERITAGE,
