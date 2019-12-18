@@ -6,6 +6,7 @@ import './message.scss';
 
 interface IMessageProps {
     messages: any;
+    className?: string;
 }
 
 interface IMessage {
@@ -16,7 +17,7 @@ interface IMessage {
 class Message extends Component<IMessageProps> {
 
     render() {
-        const { messages } = this.props;
+        const { messages, className } = this.props;
         if (messages !== null && messages.length > 0) {
             return (
                 messages.map((message: IMessage) => (
@@ -25,6 +26,7 @@ class Message extends Component<IMessageProps> {
                         className={classNames(
                             'message-container',
                             message.messageVariant,
+                            className ? className : null
                         )}
                     >
                         {message.msg}

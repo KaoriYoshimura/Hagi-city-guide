@@ -13,7 +13,7 @@ const AdminPostList = () => (
         <header>
             <h1>Admin</h1>
         </header>
-        <main className={classNames('container', 'admin-container')}>
+        <main className={classNames('admin-container', 'admin-list-container')}>
             <PostListAdmin />
             <div className="link-container">
                 <Link to={'/'}>

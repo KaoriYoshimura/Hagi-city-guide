@@ -28,7 +28,6 @@
         th {
             background-color: $uiBackgroundColor;
             color: $fontSubColor;
-            font-weight: bold;
             border-left: 2px solid lighten($uiBackgroundColor, 50);
             text-align: center;
             text-transform: uppercase;
@@ -70,7 +69,7 @@
         vertical-align: middle;
         font-size: 1.5rem;
         cursor: pointer;
-        color: lighten($uiBackgroundColor, 10);
+        color: lighten($uiBackgroundColor, 20);
     }
 
     .list-center {
@@ -79,6 +78,11 @@
 
     .error-message {
         text-align: center;
+    }
+
+    .delete-message {
+        margin: 0 0 10px auto;
+        width: 400px;
     }
 
 }

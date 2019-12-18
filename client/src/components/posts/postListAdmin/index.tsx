@@ -4,15 +4,19 @@ import { Link } from 'react-router-dom';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import Moment from 'react-moment';
 import { fetchPosts, deletePost } from '../../../actions/postActions';
+import { setMessage } from '../../../actions/messageActions';
 import { IPosts } from '../../../interfaces';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { COLOR_VARIANTS } from '../../../constants/colorVariant';
+import Message from '../../../ui/message/';
 import './postListAdmin.scss';
 
 interface IHomePostsProps {
     props: any;
     fetchPosts(): any;
     deletePost(id: string): any;
+    setMessage: any;
 }
 
 class PostListAdmin extends Component<IHomePostsProps> {
@@ -21,14 +25,16 @@ class PostListAdmin extends Component<IHomePostsProps> {
     }
 
     onClickDelete = (id: string) => {
+        this.props.setMessage('Post has been deleted successfully', COLOR_VARIANTS.INFO);
         this.props.deletePost(id);
     }
 
     render() {
         const { posts } = this.props.props;
         return (
-            <div className={classNames('container', 'homePosts')}>
+            <div className={classNames('homePosts')}>
                 <div className="post-list-admin-container">
+                    <Message className="delete-message" />
                     {/* Show table if there is post */}
                     {posts.length > 0 ? (
                         <div className="table-wrapper">
@@ -97,4 +103,4 @@ const mapStateToProps = (state: any) => ({
 });
 
 // {fetchPosts: fetchPost} shorthand
-export default connect(mapStateToProps, { fetchPosts, deletePost })(PostListAdmin);
+export default connect(mapStateToProps, { fetchPosts, deletePost, setMessage })(PostListAdmin);
