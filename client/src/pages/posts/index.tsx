@@ -16,7 +16,6 @@ const Posts = () => (
         </Hero>
         <main className={classNames('container', 'posts-container')}>
             <PostList />
-            <div className="push" />
         </main>
         <Footer className="posts-footer" />
     </>
