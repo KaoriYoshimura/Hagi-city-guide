@@ -14,14 +14,10 @@ const NavLinks = (props: INavBarProps) => (
         props.isBlackVariant ? 'blackVariant' : null
     )}>
         <li>
-            <NavLink to={'/'} exact>
-                top
-            </NavLink>
+            <NavLink to={'/'} exact>top</NavLink>
         </li>
         <li>
-            <NavLink to={'/posts'} exact>
-                posts
-            </NavLink>
+            <NavLink to={'/posts'} exact>posts</NavLink>
         </li>
         <li>
             <a href={'http://www.hagishi.com/en/access/'} target="_blank" rel="noopener noreferrer">
@@ -29,14 +25,10 @@ const NavLinks = (props: INavBarProps) => (
             </a>
         </li>
         <li>
-            <NavLink to={'/admin'} exact>
-                admin
-            </NavLink>
+            <NavLink to={'/admin'} exact>admin</NavLink>
         </li>
         <li>
-            <NavLink to={'/contact'} exact>
-                contact
-            </NavLink>
+            <a href="mailto: info@hagi.com">contact</a>
         </li>
     </ul>
 );

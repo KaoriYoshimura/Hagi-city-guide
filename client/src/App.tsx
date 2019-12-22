@@ -18,11 +18,9 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/posts" component={Posts} />
           <Route exact path="/posts/:id" component={Post} />
-          {/* <Route exact path="/" component={Access} /> */}
           <Route exact path="/admin" component={AdminPostList} />
           <Route exact path="/admin/:id" component={AdminEditPost} />
           <Route exact path="/admin-form" component={AdminPostForm} />
-          {/* <Route exact path="/" component={Contact} /> */}
         </Switch>
       </Router>
     </Provider>
