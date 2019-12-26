@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/postActions';
-import { IPosts, IFixedArticle } from '../../../interfaces';
+import { IPosts, IFixedArticle, IPostRootState } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
 import * as fixedItems from '../../../constants/homeFixedItems';
 import { defaultItems } from '../../../constants/homeDefaultItems';
@@ -9,11 +9,13 @@ import PostArticle from '../homeArticle/postArticle';
 import FixedArticle from '../homeArticle/fixedArticle';
 
 import './homePosts.scss';
-
-
 interface IHomePostsProps {
-    props: any;
-    fetchPosts(): any;
+    posts: IPostRootState;
+    fetchPosts: () => void;
+}
+
+export interface IHopePostsState {
+    posts: IPostRootState;
 }
 
 class HomePosts extends Component<IHomePostsProps> {
@@ -28,15 +30,14 @@ class HomePosts extends Component<IHomePostsProps> {
     }
 
     render() {
-        const { posts } = this.props.props;
+        const { posts } = this.props.posts;
         const homePostArray = reverseArray(posts);
 
         if (homePostArray.length < 9) {
-            defaultItems.map((item: any) => (
+            defaultItems.map((item: IPosts) => (
                 homePostArray.push(item)
             ));
         }
-        console.log(homePostArray);
 
         const firstPost = homePostArray.slice(0, 1);
         const secondPost = homePostArray.slice(1, 2);
@@ -69,8 +70,8 @@ class HomePosts extends Component<IHomePostsProps> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    props: state.posts
+const mapStateToProps = (state: IHopePostsState) => ({
+    posts: state.posts
 });
 
 export default connect(mapStateToProps, { fetchPosts })(HomePosts);

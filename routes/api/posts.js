@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post.js');
 
-// Make an absolute path
-const resolve = require('path').resolve;
-
 router.get('/', async (req, res) => {
     try {
         const post = await Post.find({});

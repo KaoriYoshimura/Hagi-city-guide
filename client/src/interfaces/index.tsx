@@ -9,7 +9,7 @@ export interface IonClickSideBar {
 }
 
 export interface ISubSidyComponents {
-    children: any;
+    children: React.ReactNode;
 }
 
 export interface IHeroProps {
@@ -29,7 +29,7 @@ export interface IPost {
 }
 export interface IMainProps {
     pageName: string;
-    children: any;
+    children: React.ReactNode;
 }
 
 export interface IEvent {
@@ -63,21 +63,21 @@ export interface IFile {
     name: string;
 }
 
-export interface IHomePostsState {
-    fetchPosts: any;
-    posts: [];
-}
-
 export interface IPosts {
     _id: string;
     image: string;
     title: string;
     category: string;
+    description: string;
     isDefault?: boolean;
     defaultAlt?: string;
     date?: string;
-    description: string;
     updated?: string;
+}
+
+export interface IPostRootState {
+    posts: IPosts[];
+    post: {};
 }
 
 export interface IFixedArticle {

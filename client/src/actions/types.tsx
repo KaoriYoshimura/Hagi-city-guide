@@ -10,12 +10,12 @@ export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 
 interface AddPostAction {
     type: typeof ADD_POST;
-    payload: any;
+    payload: string;
 }
 
 interface EditPostAction {
     type: typeof EDIT_POST;
-    payload: any[];
+    payload: string[];
 }
 
 export type PostActionTypes = AddPostAction | EditPostAction;
