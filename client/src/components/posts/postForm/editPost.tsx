@@ -144,7 +144,6 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
         } catch (err) {
             if (err.response.status === 500) {
                 this.props.setMessage('There was a problem with the server', COLOR_VARIANTS.DANGER);
-
             } else {
                 this.props.setMessage(err.response.data.msg, COLOR_VARIANTS.DANGER);
             }

@@ -18,7 +18,6 @@ export const addPost = (newPost: PostActionTypes) => async (dispatch: (arg0: { t
 };
 
 export const fetchPosts = () => (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    console.log('fetchPosts action');
     axios.get('/api/posts')
         .then(res => dispatch({
             type: FETCH_POSTS,
@@ -27,7 +26,6 @@ export const fetchPosts = () => (dispatch: (arg0: { type: string; payload: any }
 };
 
 export const fetchSinglePost = (id: string) => (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    console.log('single fetchPost action');
     axios.get(`/api/posts/${id}`)
         .then(res => dispatch({
             type: FETCH_POST,
@@ -44,7 +42,6 @@ export const deletePost = (id: string) => (dispatch: (arg0: { type: any; payload
 };
 
 export const editPost = (id: string, updatedPost: PostActionTypes) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
-    console.log(updatedPost);
     try {
         const res = await axios.put(`/api/posts/${id}`, updatedPost);
 
