@@ -75,9 +75,21 @@ export interface IPosts {
     updated?: string;
 }
 
+// For Posts reducers
 export interface IPostRootState {
     posts: IPosts[];
     post: {};
+}
+
+// For home and postList
+export interface IPostsProps {
+    posts: IPostRootState;
+    fetchPosts: () => void;
+}
+
+// For home and postList
+export interface IPostsState {
+    posts: IPostRootState;
 }
 
 export interface IFixedArticle {

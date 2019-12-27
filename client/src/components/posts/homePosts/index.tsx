@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/postActions';
-import { IPosts, IFixedArticle, IPostRootState } from '../../../interfaces';
+import { IPosts, IFixedArticle, IPostsProps, IPostsState } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
 import * as fixedItems from '../../../constants/homeFixedItems';
 import { defaultItems } from '../../../constants/homeDefaultItems';
@@ -9,16 +9,8 @@ import PostArticle from '../homeArticle/postArticle';
 import FixedArticle from '../homeArticle/fixedArticle';
 
 import './homePosts.scss';
-interface IHomePostsProps {
-    posts: IPostRootState;
-    fetchPosts: () => void;
-}
 
-export interface IHopePostsState {
-    posts: IPostRootState;
-}
-
-class HomePosts extends Component<IHomePostsProps> {
+class HomePosts extends Component<IPostsProps> {
     componentDidMount() {
         this.props.fetchPosts();
     }
@@ -70,7 +62,7 @@ class HomePosts extends Component<IHomePostsProps> {
     }
 }
 
-const mapStateToProps = (state: IHopePostsState) => ({
+const mapStateToProps = (state: IPostsState) => ({
     posts: state.posts
 });
 
