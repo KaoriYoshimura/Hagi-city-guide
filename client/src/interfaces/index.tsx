@@ -87,7 +87,7 @@ export interface IPostsProps {
     fetchPosts: () => void;
 }
 
-// For home and postList
+// For mapStateToProps
 export interface IPostsState {
     posts: IPostRootState;
 }

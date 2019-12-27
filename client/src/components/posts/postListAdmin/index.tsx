@@ -3,34 +3,39 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import Moment from 'react-moment';
-import { fetchPosts, deletePost } from '../../../actions/postActions';
-import { setMessage } from '../../../actions/messageActions';
-import { IPosts } from '../../../interfaces';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fetchPosts, deletePost } from '../../../actions/postActions';
+import { setMessage } from '../../../actions/messageActions';
+import { IPosts, IPostsState, IPostRootState } from '../../../interfaces';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import Message from '../../../ui/message/';
+
 import './postListAdmin.scss';
 
-interface IHomePostsProps {
-    props: any;
-    fetchPosts(): any;
-    deletePost(id: string): any;
-    setMessage: any;
+interface IPostListAdminProps {
+    posts: IPostRootState;
+    fetchPosts: () => void;
+    deletePost: (id: string) => void;
+    setMessage: (arg0: string, arg1: string) => void;
 }
 
-class PostListAdmin extends Component<IHomePostsProps> {
+class PostListAdmin extends Component<IPostListAdminProps> {
     componentDidMount() {
         this.props.fetchPosts();
     }
 
     onClickDelete = (id: string) => {
-        this.props.setMessage('Post has been deleted successfully', COLOR_VARIANTS.INFO);
-        this.props.deletePost(id);
+        const isConfirmedToDelete = window.confirm('Are you sure?');
+
+        if (isConfirmedToDelete) {
+            this.props.setMessage('Post has been deleted successfully', COLOR_VARIANTS.INFO);
+            this.props.deletePost(id);
+        }
     }
 
     render() {
-        const { posts } = this.props.props;
+        const { posts } = this.props.posts;
         return (
             <div className={classNames('homePosts')}>
                 <div className="post-list-admin-container">
@@ -98,9 +103,8 @@ class PostListAdmin extends Component<IHomePostsProps> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
-    props: state.posts
+const mapStateToProps = (state: IPostsState) => ({
+    posts: state.posts
 });
 
-// {fetchPosts: fetchPost} shorthand
 export default connect(mapStateToProps, { fetchPosts, deletePost, setMessage })(PostListAdmin);
