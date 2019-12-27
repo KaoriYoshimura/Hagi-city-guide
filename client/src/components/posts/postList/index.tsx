@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import classNames from 'classnames';
 import Truncate from 'react-truncate';
 import { fetchPosts, deletePost } from '../../../actions/postActions';
-import { IPosts, IPostsState, IPostsProps } from '../../../interfaces';
+import { IPost, IPostsState, IPostsProps } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
 import Label from '../../../ui/label';
 
@@ -24,7 +24,7 @@ class PostList extends Component<IPostsProps> {
             <div className={classNames('container', 'post-list-container')}>
                 {/* Show table if there is post */}
                 {posts.length > 0 ? (
-                    postAray.map((post: IPosts) => (
+                    postAray.map((post: IPost) => (
                         <article
                             key={post._id}
                             className="post-container"

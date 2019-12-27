@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/postActions';
-import { IPosts, IFixedArticle, IPostsProps, IPostsState } from '../../../interfaces';
+import { IPost, IFixedArticle, IPostsProps, IPostsState } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
 import * as fixedItems from '../../../constants/homeFixedItems';
 import { defaultItems } from '../../../constants/homeDefaultItems';
@@ -15,7 +15,7 @@ class HomePosts extends Component<IPostsProps> {
         this.props.fetchPosts();
     }
 
-    createAccessMapArticle = (article: IPosts | IFixedArticle) => {
+    createAccessMapArticle = (article: IPost | IFixedArticle) => {
         const fixedArticle = [];
         fixedArticle.push(article);
         return fixedArticle;
@@ -26,7 +26,7 @@ class HomePosts extends Component<IPostsProps> {
         const homePostArray = reverseArray(posts);
 
         if (homePostArray.length < 9) {
-            defaultItems.map((item: IPosts) => (
+            defaultItems.map((item: IPost) => (
                 homePostArray.push(item)
             ));
         }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { fetchSinglePost, editPost } from '../../../actions/postActions';
-import { IPosts, ICategoryOptions, IPostFormState, IPostState, IPostForm, IEvent } from '../../../interfaces';
+import { IPost, ICategoryOptions, IPostFormState, IPostState, IPostForm, IEvent } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import Message from '../../../ui/message';
@@ -13,7 +13,7 @@ import './postForm.scss';
 interface IEditPostsProps {
     fetchSinglePost: (id: string) => void;
     editPost: (id: string, updatedPost: IPostForm) => void;
-    post: IPosts;
+    post: IPost;
     id: string;
     setMessage: (arg0: string, arg1: string) => void;
 }

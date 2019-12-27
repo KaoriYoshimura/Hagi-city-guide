@@ -7,14 +7,14 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchPosts, deletePost } from '../../../actions/postActions';
 import { setMessage } from '../../../actions/messageActions';
-import { IPosts, IPostsState } from '../../../interfaces';
+import { IPost, IPostsState } from '../../../interfaces';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import Message from '../../../ui/message/';
 
 import './postListAdmin.scss';
 
 interface IPostListAdminProps {
-    posts: IPosts[];
+    posts: IPost[];
     fetchPosts: () => void;
     deletePost: (id: string) => void;
     setMessage: (arg0: string, arg1: string) => void;
@@ -58,7 +58,7 @@ class PostListAdmin extends Component<IPostListAdminProps> {
                                 </thead>
                                 {/* Table body */}
                                 <tbody>
-                                    {posts.map((post: IPosts) => (
+                                    {posts.map((post: IPost) => (
                                         <tr key={post._id}>
                                             <td>{post._id}</td>
 

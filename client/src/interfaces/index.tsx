@@ -1,5 +1,10 @@
 import { RouteComponentProps } from 'react-router-dom';
 
+export interface IEvent {
+    target: any;
+    preventDefault: Function;
+}
+
 export interface IBlackVariantProps {
     blackVariant: boolean;
 }
@@ -18,33 +23,24 @@ export interface IHeroProps {
     pageName: string;
 }
 
-export interface IPost {
-    title: string;
-    description: string;
-    image: string | any;
-    category: string;
-    file: string;
-    fileName: string;
-    uploadedFile?: {};
-}
-
 export interface IPostForm {
     title: string;
     description: string;
     image: string | any;
     category: string;
-    // file: string;
-    // fileName: string;
-    // uploadedFile?: {};
 }
+
+export interface IPostFormState {
+    post: IPostForm | any;
+    options: any;
+    message: IMessageState;
+    isMessageDisplay: boolean;
+    shouldRedirect: boolean;
+}
+
 export interface IMainProps {
     pageName: string;
     children: React.ReactNode;
-}
-
-export interface IEvent {
-    target: any;
-    preventDefault: Function;
 }
 
 export interface ICategoryOptions {
@@ -56,14 +52,6 @@ export interface IMessageState {
     variant: string;
     text: string;
 }
-export interface IPostFormState {
-    post: IPostForm | any;
-    // [x: number]: any;
-    options: any;
-    message: IMessageState;
-    isMessageDisplay: boolean;
-    shouldRedirect: boolean;
-}
 
 export interface IFile {
     name: string;
@@ -73,7 +61,7 @@ export interface IFile {
     name: string;
 }
 
-export interface IPosts {
+export interface IPost {
     _id: string;
     image: string;
     title: string;
@@ -87,19 +75,19 @@ export interface IPosts {
 
 // For Posts reducers
 export interface IPostRootState {
-    posts: IPosts[];
+    posts: IPost[];
     post: {};
 }
 
 // For Single Post reducers
 export interface IPostRootStateSingle {
     posts: [];
-    post: IPosts;
+    post: IPost;
 }
 
 // For home and postList
 export interface IPostsProps {
-    posts: IPosts[];
+    posts: IPost[];
     fetchPosts: () => void;
 }
 

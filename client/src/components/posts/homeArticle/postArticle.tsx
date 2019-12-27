@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IPosts } from '../../../interfaces';
+import { IPost } from '../../../interfaces';
 import Label from '../../../ui/label';
 import './homeArticle.scss';
 
 const PostArticle = (props: any) => (
     <>
-        {props.posts.map((post: IPosts) => (
+        {props.posts.map((post: IPost) => (
             <article
                 key={post._id}
                 className="article-container post"

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import { fetchSinglePost } from '../../../actions/postActions';
-import { IPosts, IPostState } from '../../../interfaces';
+import { IPost, IPostState } from '../../../interfaces';
 
 import './singlePost.scss';
 
 interface ISinglePostProps {
     fetchSinglePost: (id: string) => void;
-    post: IPosts;
+    post: IPost;
     id: string;
 }
 
