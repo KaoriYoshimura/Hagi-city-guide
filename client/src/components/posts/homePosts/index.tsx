@@ -22,7 +22,7 @@ class HomePosts extends Component<IPostsProps> {
     }
 
     render() {
-        const { posts } = this.props.posts;
+        const { posts } = this.props;
         const homePostArray = reverseArray(posts);
 
         if (homePostArray.length < 9) {
@@ -63,7 +63,7 @@ class HomePosts extends Component<IPostsProps> {
 }
 
 const mapStateToProps = (state: IPostsState) => ({
-    posts: state.posts
+    posts: state.posts.posts
 });
 
 export default connect(mapStateToProps, { fetchPosts })(HomePosts);

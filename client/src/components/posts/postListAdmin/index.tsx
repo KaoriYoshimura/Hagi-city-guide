@@ -7,14 +7,14 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchPosts, deletePost } from '../../../actions/postActions';
 import { setMessage } from '../../../actions/messageActions';
-import { IPosts, IPostsState, IPostRootState } from '../../../interfaces';
+import { IPosts, IPostsState } from '../../../interfaces';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import Message from '../../../ui/message/';
 
 import './postListAdmin.scss';
 
 interface IPostListAdminProps {
-    posts: IPostRootState;
+    posts: IPosts[];
     fetchPosts: () => void;
     deletePost: (id: string) => void;
     setMessage: (arg0: string, arg1: string) => void;
@@ -35,7 +35,7 @@ class PostListAdmin extends Component<IPostListAdminProps> {
     }
 
     render() {
-        const { posts } = this.props.posts;
+        const { posts } = this.props;
         return (
             <div className={classNames('homePosts')}>
                 <div className="post-list-admin-container">
@@ -104,7 +104,7 @@ class PostListAdmin extends Component<IPostListAdminProps> {
 }
 
 const mapStateToProps = (state: IPostsState) => ({
-    posts: state.posts
+    posts: state.posts.posts
 });
 
 export default connect(mapStateToProps, { fetchPosts, deletePost, setMessage })(PostListAdmin);

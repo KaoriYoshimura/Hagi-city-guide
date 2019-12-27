@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import classNames from 'classnames';
 import Truncate from 'react-truncate';
 import { fetchPosts, deletePost } from '../../../actions/postActions';
-import { IPosts, IPostsProps, IPostsState } from '../../../interfaces';
+import { IPosts, IPostsState, IPostsProps } from '../../../interfaces';
 import reverseArray from '../../reverseArray';
 import Label from '../../../ui/label';
 
@@ -17,7 +17,7 @@ class PostList extends Component<IPostsProps> {
     }
 
     render() {
-        const { posts } = this.props.posts;
+        const { posts } = this.props;
         const postAray = reverseArray(posts);
 
         return (
@@ -70,7 +70,7 @@ class PostList extends Component<IPostsProps> {
 }
 
 const mapStateToProps = (state: IPostsState) => ({
-    posts: state.posts
+    posts: state.posts.posts
 });
 
 export default connect(mapStateToProps, { fetchPosts, deletePost })(PostList);

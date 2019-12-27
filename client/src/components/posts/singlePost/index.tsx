@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSinglePost, editPost } from '../../../actions/postActions';
-import { IPosts } from '../../../interfaces';
 import Moment from 'react-moment';
-
+import { fetchSinglePost } from '../../../actions/postActions';
+import { IPosts, IPostState } from '../../../interfaces';
 
 import './singlePost.scss';
 
-interface IEditPostsProps {
-    fetchSinglePost: any;
-    editPost: any;
+interface ISinglePostProps {
+    fetchSinglePost: (id: string) => void;
     post: IPosts;
     id: string;
 }
 
-class SinglePost extends Component<IEditPostsProps> {
+class SinglePost extends Component<ISinglePostProps> {
     componentDidMount() {
         this.props.fetchSinglePost(this.props.id);
     }
@@ -44,8 +42,8 @@ class SinglePost extends Component<IEditPostsProps> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: IPostState) => ({
     post: state.posts.post
 });
 
-export default connect(mapStateToProps, { fetchSinglePost, editPost })(SinglePost);
+export default connect(mapStateToProps, { fetchSinglePost })(SinglePost);

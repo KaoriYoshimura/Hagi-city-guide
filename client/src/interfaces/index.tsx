@@ -81,15 +81,26 @@ export interface IPostRootState {
     post: {};
 }
 
+// For Single Post reducers
+export interface IPostRootStateSingle {
+    posts: [];
+    post: IPosts;
+}
+
 // For home and postList
 export interface IPostsProps {
-    posts: IPostRootState;
+    posts: IPosts[];
     fetchPosts: () => void;
 }
 
-// For mapStateToProps
+// For mapStateToProps(posts array)
 export interface IPostsState {
     posts: IPostRootState;
+}
+
+// For mapStateToProps(Single post)
+export interface IPostState {
+    posts: IPostRootStateSingle;
 }
 
 export interface IFixedArticle {
