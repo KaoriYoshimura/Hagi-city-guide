@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
 import { fetchSinglePost, editPost } from '../../../actions/postActions';
-import { IPosts, ICategoryOptions, IPostFormState } from '../../../interfaces';
+import { IPosts, ICategoryOptions, IPostFormState, IPostState, IPostForm, IEvent } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import Message from '../../../ui/message';
-import './postForm.scss';
 import { setMessage } from '../../../actions/messageActions';
 
+import './postForm.scss';
+
 interface IEditPostsProps {
-    fetchSinglePost: any;
-    editPost: any;
+    fetchSinglePost: (id: string) => void;
+    editPost: (id: string, updatedPost: IPostForm) => void;
     post: IPosts;
     id: string;
-    setMessage: any;
+    setMessage: (arg0: string, arg1: string) => void;
 }
 
 class EditPost extends Component<IEditPostsProps, IPostFormState> {
@@ -61,7 +61,7 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
         }));
     }
 
-    onChangeFile = (e: any) => {
+    onChangeFile = (e: IEvent) => {
         const { files } = e.target;
 
         this.setState(prevState => ({
@@ -95,7 +95,7 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
         }
     };
 
-    onChange = (e: any) => {
+    onChange = (e: IEvent) => {
         const { name, value } = e.target;
 
         this.setState(prevState => {
@@ -105,7 +105,7 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
         });
     };
 
-    onSubmit = async (e: any) => {
+    onSubmit = async (e: IEvent) => {
         e.preventDefault();
 
         if (this.state.post.file === File) {
@@ -199,7 +199,7 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: IPostState) => ({
     post: state.posts.post
 });
 

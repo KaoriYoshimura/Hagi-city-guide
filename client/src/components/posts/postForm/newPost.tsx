@@ -3,15 +3,16 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { addPost } from '../../../actions/postActions';
 import { setMessage } from '../../../actions/messageActions';
-import { IPostFormState } from '../../../interfaces';
+import { IPostFormState, IPostForm, IEvent } from '../../../interfaces';
 import { CATEGORY_OPTIONS } from '../../../constants/category';
 import Message from '../../../ui/message/';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
+
 import './postForm.scss';
 
 interface INewPostProps {
-    addPost: any;
-    setMessage: any;
+    addPost: (newPost: IPostForm) => void;
+    setMessage: (arg0: string, arg1: string) => void;
 }
 
 class NewPost extends Component<INewPostProps, IPostFormState> {
@@ -34,7 +35,7 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
         shouldRedirect: false
     }
 
-    onChangeFile = (e: any) => {
+    onChangeFile = (e: IEvent) => {
         const { files } = e.target;
 
         this.setState(prevState => ({
@@ -68,7 +69,7 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
         }
     };
 
-    onChange = async (e: any) => {
+    onChange = async (e: IEvent) => {
         const { name, value } = e.target;
 
         this.setState(prevState => {
@@ -95,7 +96,7 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
         }));
     }
 
-    onSubmit = (e: any) => {
+    onSubmit = (e: IEvent) => {
         e.preventDefault();
 
         const { post } = this.state;

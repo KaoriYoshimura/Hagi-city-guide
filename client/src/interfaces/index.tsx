@@ -19,13 +19,23 @@ export interface IHeroProps {
 }
 
 export interface IPost {
-    category: string;
+    title: string;
     description: string;
     image: string | any;
-    title: string;
+    category: string;
     file: string;
     fileName: string;
     uploadedFile?: {};
+}
+
+export interface IPostForm {
+    title: string;
+    description: string;
+    image: string | any;
+    category: string;
+    // file: string;
+    // fileName: string;
+    // uploadedFile?: {};
 }
 export interface IMainProps {
     pageName: string;
@@ -47,8 +57,8 @@ export interface IMessageState {
     text: string;
 }
 export interface IPostFormState {
-    post: IPost | any;
-    [x: number]: any;
+    post: IPostForm | any;
+    // [x: number]: any;
     options: any;
     message: IMessageState;
     isMessageDisplay: boolean;

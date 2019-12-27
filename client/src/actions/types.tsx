@@ -8,14 +8,15 @@ export const SET_MESSAGE = 'SET_MESSAGE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 
 
-interface AddPostAction {
-    type: typeof ADD_POST;
-    payload: string;
-}
+// interface AddPostAction {
+//     type: typeof ADD_POST;
+//     payload: string;
+// }
 
-interface EditPostAction {
-    type: typeof EDIT_POST;
-    payload: string[];
-}
+// // interface EditPostAction {
+// //     type: typeof EDIT_POST;
+// //     payload: string[];
+// // }
 
-export type PostActionTypes = AddPostAction | EditPostAction;
+// // export type PostActionTypes = AddPostAction | EditPostAction;
+// export type PostActionTypes = AddPostAction;

@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { FETCH_POSTS, FETCH_POST, ADD_POST, EDIT_POST, DELETE_POST, PostActionTypes } from './types';
+import { FETCH_POSTS, FETCH_POST, ADD_POST, EDIT_POST, DELETE_POST } from './types';
+import { IPostForm } from '../interfaces';
 
-export const addPost = (newPost: PostActionTypes) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
+export const addPost = (newPost: IPostForm) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
     try {
         const res = await axios.post('/api/posts', newPost);
 
@@ -41,7 +42,7 @@ export const deletePost = (id: string) => (dispatch: (arg0: { type: any; payload
         }));
 };
 
-export const editPost = (id: string, updatedPost: PostActionTypes) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
+export const editPost = (id: string, updatedPost: IPostForm) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
     try {
         const res = await axios.put(`/api/posts/${id}`, updatedPost);
 
