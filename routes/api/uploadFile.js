@@ -12,7 +12,6 @@ router.post('/', (req, res) => {
     const file = req.files.file;
     file.mv(`${resolve('client')}/public/uploads/${file.name}`, err => {
         if (err) {
-            console.log(file)
             return res.status(500).send(err);
         }
 

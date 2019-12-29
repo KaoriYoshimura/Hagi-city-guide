@@ -362,7 +362,7 @@ module.exports = {
         "wrap-regex": "off",
 
         // ECMAScript 6
-        // "arrow-body-style": ["error", "as-needed"],
+        "arrow-body-style": ["error", "as-needed"],
         "arrow-parens": ["error", "as-needed"],
         "arrow-spacing": ["error"],
         "constructor-super": "error",
@@ -385,7 +385,7 @@ module.exports = {
         "object-shorthand": ["error"],
         "prefer-arrow-callback": ["error"],
         "prefer-const": ["error"],
-        // "prefer-destructuring": ["warn"],
+        "prefer-destructuring": ["warn"],
         "prefer-numeric-literals": ["off"],
         "prefer-rest-params": "error",
         "prefer-spread": "error",

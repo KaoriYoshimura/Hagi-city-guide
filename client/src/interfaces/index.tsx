@@ -2,7 +2,7 @@ import { RouteComponentProps } from 'react-router-dom';
 
 export interface IEvent {
     target: any;
-    preventDefault: Function;
+    preventDefault(): void;
 }
 
 export interface IBlackVariantProps {
@@ -23,20 +23,6 @@ export interface IHeroProps {
     pageName: string;
 }
 
-export interface IPostForm {
-    title: string;
-    description: string;
-    image: string | any;
-    category: string;
-}
-
-export interface IPostFormState {
-    post: IPostForm | any;
-    options: any;
-    message: IMessageState;
-    isMessageDisplay: boolean;
-    shouldRedirect: boolean;
-}
 
 export interface IMainProps {
     pageName: string;
@@ -46,19 +32,6 @@ export interface IMainProps {
 export interface ICategoryOptions {
     name: string;
     value: string;
-}
-
-export interface IMessageState {
-    variant: string;
-    text: string;
-}
-
-export interface IFile {
-    name: string;
-}
-
-export interface IFile {
-    name: string;
 }
 
 export interface IPost {

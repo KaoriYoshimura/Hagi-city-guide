@@ -3,10 +3,12 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { addPost } from '../../../actions/postActions';
 import { setMessage } from '../../../actions/messageActions';
-import { IPostFormState, IPostForm, IEvent } from '../../../interfaces';
-import { CATEGORY_OPTIONS } from '../../../constants/category';
+import { IPostFormState, IPostForm } from '../../../interfaces/postForm';
+import { IEvent } from '../../../interfaces';
+import { postFormState } from './postFormState';
 import Message from '../../../ui/message/';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
+import { uploadFile } from './postFormFunctions';
 
 import './postForm.scss';
 
@@ -16,60 +18,44 @@ interface INewPostProps {
 }
 
 class NewPost extends Component<INewPostProps, IPostFormState> {
-    state = {
-        options: CATEGORY_OPTIONS,
-        post: {
-            file: '',
-            fileName: '',
-            uploadedFile: {},
-            title: '',
-            description: '',
-            category: '',
-            image: '',
-        },
-        message: {
-            variant: '',
-            text: ''
-        },
-        isMessageDisplay: false,
-        shouldRedirect: false
-    }
+    state = postFormState
 
     onChangeFile = (e: IEvent) => {
         const { files } = e.target;
 
+        // Set state and uploadFile
         this.setState(prevState => ({
             post: {
                 ...prevState.post,
-                file: files[0],
                 fileName: files[0].name
             }
         }));
+        uploadFile(files[0]);
 
-        const file = e.target.files[0];
+        // Decleare FileReader to preview selected image
         const reader = new FileReader();
 
         reader.onloadend = () => {
             this.setState(prevState => ({
                 post: {
                     ...prevState.post,
-                    image: reader.result,
+                    previewURL: reader.result,
                 }
             }));
         };
 
-        if (file) {
-            reader.readAsDataURL(file);
+        if (files[0]) {
+            reader.readAsDataURL(files[0]);
             this.setState(prevState => ({
                 post: {
                     ...prevState.post,
-                    image: reader.result,
+                    previewURL: reader.result,
                 }
             }));
         }
     };
 
-    onChange = async (e: IEvent) => {
+    onChange = (e: IEvent) => {
         const { name, value } = e.target;
 
         this.setState(prevState => {
@@ -77,38 +63,21 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
             post[name] = value;
             return { post };
         });
-
-        const formData = new FormData();
-        formData.append('file', this.state.post.file);
-        const res = await axios.post('/api/uploadFile', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-        });
-
-        const { fileName, filePath } = res.data;
-
-        this.setState(prevState => ({
-            post: {
-                ...prevState.post,
-                uploadedFile: { fileName, filePath }
-            }
-        }));
     }
 
     onSubmit = (e: IEvent) => {
         e.preventDefault();
 
         const { post } = this.state;
-        if (post.title === '' || post.description === '' || post.image === '' || post.category === '') {
+        if (post.title === '' || post.description === '' || post.fileName === '' || post.category === '') {
             this.props.setMessage('Please fill in all field.', COLOR_VARIANTS.DANGER);
         } else {
             try {
                 const newPost = {
-                    title: this.state.post.title,
-                    description: this.state.post.description,
-                    image: this.state.post.fileName,
-                    category: this.state.post.category,
+                    title: post.title,
+                    description: post.description,
+                    image: post.fileName,
+                    category: post.category,
                 };
 
                 this.props.addPost(newPost);
@@ -154,10 +123,10 @@ class NewPost extends Component<INewPostProps, IPostFormState> {
                     <div>
                         <label>Image <span className="required">&#42;</span></label>
                         <input type="file" onChange={this.onChangeFile} className="file-input" />
-                        {post.image ? (
+                        {post.previewURL ? (
                             <figure className="image-preview">
                                 <img
-                                    src={post.image}
+                                    src={post.previewURL}
                                     alt={post.title}
                                 />
                             </figure>

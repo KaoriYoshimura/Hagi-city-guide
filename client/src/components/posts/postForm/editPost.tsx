@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { fetchSinglePost, editPost } from '../../../actions/postActions';
-import { IPost, ICategoryOptions, IPostFormState, IPostState, IPostForm, IEvent } from '../../../interfaces';
-import { CATEGORY_OPTIONS } from '../../../constants/category';
+import { IPost, ICategoryOptions, IPostState, IEvent } from '../../../interfaces';
+import { IPostFormState, IPostForm } from '../../../interfaces/postForm';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import Message from '../../../ui/message';
 import { setMessage } from '../../../actions/messageActions';
+import { postFormState } from './postFormState';
+import { uploadFile } from './postFormFunctions';
 
 import './postForm.scss';
 
@@ -19,27 +20,7 @@ interface IEditPostsProps {
 }
 
 class EditPost extends Component<IEditPostsProps, IPostFormState> {
-    constructor(props: IEditPostsProps) {
-        super(props);
-        this.state = {
-            options: CATEGORY_OPTIONS,
-            post: {
-                file: '',
-                fileName: '',
-                uploadedFile: {},
-                title: '',
-                description: '',
-                category: '',
-                image: '',
-            },
-            message: {
-                variant: '',
-                text: ''
-            },
-            isMessageDisplay: false,
-            shouldRedirect: false
-        };
-    }
+    state = postFormState
 
     componentDidMount() {
         this.props.fetchSinglePost(this.props.id);
@@ -64,32 +45,33 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
     onChangeFile = (e: IEvent) => {
         const { files } = e.target;
 
+        // Set state and uploadFile
         this.setState(prevState => ({
             post: {
                 ...prevState.post,
-                file: files[0],
                 fileName: files[0].name
             }
         }));
+        uploadFile(files[0]);
 
-        const file = e.target.files[0];
+        // Decleare FileReader to preview selected image
         const reader = new FileReader();
 
         reader.onloadend = () => {
             this.setState(prevState => ({
                 post: {
                     ...prevState.post,
-                    image: reader.result,
+                    previewURL: reader.result,
                 }
             }));
         };
 
-        if (file) {
-            reader.readAsDataURL(file);
+        if (files[0]) {
+            reader.readAsDataURL(files[0]);
             this.setState(prevState => ({
                 post: {
                     ...prevState.post,
-                    image: reader.result,
+                    previewURL: reader.result,
                 }
             }));
         }
@@ -105,37 +87,18 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
         });
     };
 
-    onSubmit = async (e: IEvent) => {
+    onSubmit = (e: IEvent) => {
         e.preventDefault();
 
-        if (this.state.post.file === File) {
-            const formData = new FormData();
-            formData.append('file', this.state.post.file);
-            const res = await axios.post('/api/uploadFile', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-            });
-
-            const { fileName, filePath } = res.data;
-
-            this.setState(prevState => ({
-                post: {
-                    ...prevState.post,
-                    uploadedFile: { fileName, filePath }
-                }
-            }));
-        }
-
-
+        const { post } = this.state;
         try {
             const date = new Date();
 
             const updatedPost = {
-                title: this.state.post.title,
-                description: this.state.post.description,
-                image: this.state.post.fileName,
-                category: this.state.post.category,
+                title: post.title,
+                description: post.description,
+                image: post.fileName,
+                category: post.category,
                 updated: date
             };
 

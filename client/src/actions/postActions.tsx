@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { FETCH_POSTS, FETCH_POST, ADD_POST, EDIT_POST, DELETE_POST } from './types';
-import { IPostForm } from '../interfaces';
+import { IPostForm } from '../interfaces/postForm';
 
 export const addPost = (newPost: IPostForm) => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
     try {
