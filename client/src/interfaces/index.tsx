@@ -9,8 +9,8 @@ export interface IBlackVariantProps {
     blackVariant: boolean;
 }
 export interface IonClickSideBar {
-    onClickClose: any;
-    onClickDisplay?: any;
+    onClickClose: () => void;
+    onClickDisplay?: boolean;
 }
 
 export interface ISubSidyComponents {
@@ -18,7 +18,7 @@ export interface ISubSidyComponents {
 }
 
 export interface IHeroProps {
-    children: any;
+    children: React.ReactNode;
     pageHeading: string;
     pageName: string;
 }
