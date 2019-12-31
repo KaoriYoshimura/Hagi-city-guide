@@ -1,0 +1,52 @@
+@import '../../style/styles';
+
+.auth-form-container {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70%;
+
+    .auth-form {
+        margin:0px auto 10px;
+        padding: 0px 12px 10px 20px;
+
+        div {
+            margin: 10px 0 0 0;
+        }
+
+        label {
+           margin:0 0 3px 0;
+           padding:0px;
+           display:block;
+        }
+
+        .input-field{
+            box-sizing: border-box;
+            border:1px solid $uiBackgroundColor;
+            padding: 7px;
+            margin:0px;
+            outline: none;
+            border-radius: 2px;
+            width: 80%;
+
+
+            &:focus {
+                background-color: lighten($uiBackgroundColor, 75);
+            }
+        }
+
+        input[type=submit] {
+            @include buttonStyle($uiBackgroundColor, $fontSubColor, $uiBackgroundColor);
+
+            &:hover {
+                @include buttonStyle(lighten($uiBackgroundColor, 10), $fontSubColor, $uiBackgroundColor)
+            }
+
+        }
+
+        .required {
+            color: red;
+        }
+
+    }
+}
