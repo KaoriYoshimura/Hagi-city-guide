@@ -1,36 +1,50 @@
 @import '../../../style/styles';
 
 @mixin navLinksStyle($color, $hoverColor, $textShadow) {
-        margin: 1rem 0;
-        padding: 0 $spacingBetweenDiv;
+    margin: 1rem 0;
+    padding: 0 $spacingBetweenDiv;
+    font-family: $fontHeadingTitleSub;
 
-        a {
-            text-transform: uppercase;
-            position: relative;
-            border-bottom: 2px solid transparent;
-            font-weight: bold;
-            color: $color;
-            text-shadow: $textShadow;
+    a {
+        text-transform: uppercase;
+        position: relative;
+        border-bottom: 2px solid transparent;
+        font-weight: bold;
+        color: $color;
+        text-shadow: $textShadow;
 
-            &:hover {
-                color: $hoverColor;
-            }
-        }
-
-        .active {
+        &:hover {
             color: $hoverColor;
         }
+    }
 
+    .active {
+        color: $hoverColor;
+    }
+}
 
+@mixin linkWithBorder($border) {
+    padding: 1px 7px;
+    border: 1px solid $border;
+    border-radius: $buttonRadius;
 }
 
 .nav-links-container {
+    .login {
+        @include linkWithBorder($fontSubColor);
+    }
+
     li {
         @include navLinksStyle($fontSubColor, $navhoverColor, $textShadow);
 
     }
-        &.blackVariant {
-            @include navLinksStyle($fontColorMain, $hoverColor, none);
+
+    &.blackVariant {
+        @include navLinksStyle($fontColorMain, $hoverColor, none);
+
+        .login {
+            @include linkWithBorder($fontColorMain);
         }
     }
+}
 

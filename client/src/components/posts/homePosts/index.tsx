@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../../../actions/postActions';
 import { IPost, IFixedArticle, IPostsProps, IPostsState } from '../../../interfaces';
-import reverseArray from '../../reverseArray';
+import reverseArray from '../reverseArray';
 import * as fixedItems from '../../../constants/homeFixedItems';
 import { defaultItems } from '../../../constants/homeDefaultItems';
 import PostArticle from '../homeArticle/postArticle';

@@ -9,6 +9,8 @@ import AdminEditPost from './pages/admin/adminEditPost';
 import AdminPostList from './pages/admin/adminPostList';
 import AdminPostForm from './pages/admin/adminPostForm';
 import Post from './pages/post';
+import Register from './pages/auth/register';
+import Login from './pages/auth/login';
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/posts" component={Posts} />
           <Route exact path="/posts/:id" component={Post} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/admin" component={AdminPostList} />
           <Route exact path="/admin/:id" component={AdminEditPost} />
           <Route exact path="/admin-form" component={AdminPostForm} />

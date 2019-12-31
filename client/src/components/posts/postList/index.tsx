@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import Truncate from 'react-truncate';
 import { fetchPosts, deletePost } from '../../../actions/postActions';
 import { IPost, IPostsState, IPostsProps } from '../../../interfaces';
-import reverseArray from '../../reverseArray';
+import reverseArray from '../reverseArray';
 import Label from '../../../ui/label';
 
 import './postList.scss';

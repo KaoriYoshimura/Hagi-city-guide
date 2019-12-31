@@ -6,7 +6,7 @@
     color: $fColor;
     display: inline-block;
     text-transform: uppercase;
-    border-radius: 2px;
+    border-radius: $buttonRadius;
     border: 1px solid $bColor;
     cursor: pointer;
     margin: $mainSpacing;

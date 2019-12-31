@@ -25,10 +25,10 @@ const NavLinks = (props: INavBarProps) => (
             </a>
         </li>
         <li>
-            <NavLink to={'/admin'} exact>admin</NavLink>
+            <a href="mailto: info@hagi.com">contact</a>
         </li>
         <li>
-            <a href="mailto: info@hagi.com">contact</a>
+            <NavLink to={'/login'} exact className="login">Login</NavLink>
         </li>
     </ul>
 );
