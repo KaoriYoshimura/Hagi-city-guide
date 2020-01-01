@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-// import { addPost } from '../../../actions/postActions';
+import { register } from '../../../actions/authActions';
 import { setMessage } from '../../../actions/messageActions';
 import { IEvent } from '../../../interfaces';
 import Message from '../../../ui/message';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
+import { INewUser } from '../../../interfaces/user';
 
 import '../authForm.scss';
 
@@ -21,7 +21,7 @@ interface IRegisterFormState {
 }
 
 interface INewPostProps {
-    // addPost: (newPost: IPostForm) => void;
+    register: (newUser: INewUser) => void;
     setMessage: (arg0: string, arg1: string) => void;
 }
 
@@ -46,32 +46,12 @@ class RegisterForm extends Component<INewPostProps, IRegisterFormState> {
         });
     }
 
-    onSubmit = async (e: IEvent) => {
+    onSubmit = (e: IEvent) => {
         e.preventDefault();
 
         const { name, email, password, confirmPassword } = this.state.formData;
         if (password === confirmPassword) {
-            const newUser = {
-                name,
-                email,
-                password
-            };
-
-            try {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                };
-                const body = JSON.stringify(newUser);
-
-                const res = await axios.post('/api/users', body, config);
-                console.log(res.data);
-            } catch (err) {
-                console.error(err.response);
-            }
-
-            this.props.setMessage('ready to go', COLOR_VARIANTS.INFO);
+            this.props.register({ name, email, password });
         } else {
             this.props.setMessage('Password do not match.', COLOR_VARIANTS.DANGER);
         }
@@ -105,13 +85,13 @@ class RegisterForm extends Component<INewPostProps, IRegisterFormState> {
                         <input type="submit" value="Sign up" />
                     </div>
                 </form>
+                <Message />
                 <p className="text">
                     Have a account?<Link to="/login">Log in</Link>
                 </p>
-                <Message />
             </div>
         );
     }
 }
 
-export default connect(null, { /* addPost,  */setMessage })(RegisterForm);
+export default connect(null, { register, setMessage })(RegisterForm);
