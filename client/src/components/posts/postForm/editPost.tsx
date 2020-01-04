@@ -6,8 +6,8 @@ import { IPostFormState, IPostForm } from '../../../interfaces/postForm';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 import Message from '../../../ui/message';
 import { setMessage } from '../../../actions/messageActions';
-import { postFormState } from './postFormState';
-import { uploadFile } from './postFormFunctions';
+import { postFormState } from '../../../utils/postFormState';
+import { uploadFile } from '../../../utils/postFormFunctions';
 
 import './postForm.scss';
 

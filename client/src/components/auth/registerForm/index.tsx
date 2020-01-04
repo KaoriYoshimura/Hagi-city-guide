@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { register } from '../../../actions/authActions';
 import { setMessage } from '../../../actions/messageActions';
 import { IEvent } from '../../../interfaces';
@@ -23,6 +23,7 @@ interface IRegisterFormState {
 interface INewPostProps {
     register: (newUser: INewUser) => void;
     setMessage: (arg0: string, arg1: string) => void;
+    isAuthenticated: boolean;
 }
 
 class RegisterForm extends Component<INewPostProps, IRegisterFormState> {
@@ -62,6 +63,10 @@ class RegisterForm extends Component<INewPostProps, IRegisterFormState> {
     }
 
     render() {
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/admin" />;
+        }
+
         return (
             <div className="auth-form-container">
                 <form className="auth-form" onSubmit={this.onSubmit}>
@@ -94,4 +99,8 @@ class RegisterForm extends Component<INewPostProps, IRegisterFormState> {
     }
 }
 
-export default connect(null, { register, setMessage })(RegisterForm);
+const mapStateToProps = (state: { auth: { isAuthenticated: boolean } }) => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { register, setMessage })(RegisterForm);

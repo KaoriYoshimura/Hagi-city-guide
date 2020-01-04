@@ -4,9 +4,9 @@ const auth = require('../../middleware/auth');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator/check');
 
-const User = require('../../models/User');
+const User = require('../../models/User.js');
 
 
 router.get('/', auth, async (req, res) => {
@@ -14,7 +14,6 @@ router.get('/', auth, async (req, res) => {
         const user = await User.findById(req.user.id).select('-password');
         res.json(user);
     } catch (err) {
-        console.error(err.message);
         res.status(500).send('Server Error');
     }
 });
@@ -30,13 +29,12 @@ router.post('/', [
     const { email, password } = req.body;
 
     try {
-        // Check if email is unique
         let user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ errors: [{ msg: 'Email does not exist' }] });
         }
 
-        isPassWordCorrect = await bcrypt.compare(password, user.password);
+        const isPassWordCorrect = await bcrypt.compare(password, user.password);
 
         if (!isPassWordCorrect) {
             return res.status(400).json({ errors: [{ msg: 'Password does not match' }] });
@@ -57,7 +55,6 @@ router.post('/', [
             });
 
     } catch (err) {
-        console.error(err.message);
         res.status(500).send('Server error');
     }
 });

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-// import { addPost } from '../../../actions/postActions';
+import { Link, Redirect } from 'react-router-dom';
+import { login } from '../../../actions/authActions';
 import { setMessage } from '../../../actions/messageActions';
 import { IEvent } from '../../../interfaces';
 import Message from '../../../ui/message';
-import { COLOR_VARIANTS } from '../../../constants/colorVariant';
 
 import '../authForm.scss';
 
@@ -19,8 +17,9 @@ interface ILoginFormState {
 }
 
 interface INewPostProps {
-    // addPost: (newPost: IPostForm) => void;
+    login: (email: string, password: string) => void;
     setMessage: (arg0: string, arg1: string) => void;
+    isAuthenticated: boolean;
 }
 
 class LoginForm extends Component<INewPostProps, ILoginFormState> {
@@ -29,7 +28,7 @@ class LoginForm extends Component<INewPostProps, ILoginFormState> {
             email: '',
             password: '',
         },
-        isMessageDisplay: false
+        isMessageDisplay: false,
     }
 
     onChange = (e: IEvent) => {
@@ -42,10 +41,10 @@ class LoginForm extends Component<INewPostProps, ILoginFormState> {
         });
     }
 
-    onSubmit = async (e: IEvent) => {
+    onSubmit = (e: IEvent) => {
         e.preventDefault();
-
-        this.props.setMessage('ready to go', COLOR_VARIANTS.INFO);
+        const { email, password } = this.state.formData;
+        this.props.login(email, password);
     };
 
     messageClickHandler = () => {
@@ -53,6 +52,10 @@ class LoginForm extends Component<INewPostProps, ILoginFormState> {
     }
 
     render() {
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/admin" />;
+        }
+
         return (
             <div className="auth-form-container">
                 <form className="auth-form" onSubmit={this.onSubmit}>
@@ -77,4 +80,8 @@ class LoginForm extends Component<INewPostProps, ILoginFormState> {
     }
 }
 
-export default connect(null, { /* addPost,  */setMessage })(LoginForm);
+const mapStateToProps = (state: { auth: { isAuthenticated: boolean } }) => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login, setMessage })(LoginForm);

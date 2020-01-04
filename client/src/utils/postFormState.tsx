@@ -1,4 +1,4 @@
-import { CATEGORY_OPTIONS } from '../../../constants/category';
+import { CATEGORY_OPTIONS } from '../constants/category';
 
 export const postInitialState = {
     title: '',

@@ -4,10 +4,10 @@ import { addPost } from '../../../actions/postActions';
 import { setMessage } from '../../../actions/messageActions';
 import { IPostFormState, IPostForm } from '../../../interfaces/postForm';
 import { IEvent } from '../../../interfaces';
-import { postFormState } from './postFormState';
+import { postFormState } from '../../../utils/postFormState';
 import Message from '../../../ui/message/';
 import { COLOR_VARIANTS } from '../../../constants/colorVariant';
-import { uploadFile } from './postFormFunctions';
+import { uploadFile } from '../../../utils/postFormFunctions';
 
 import './postForm.scss';
 
