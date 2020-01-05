@@ -31,21 +31,25 @@ class NavLinks extends Component<INavBarProps> {
                     <NavLink to={'/posts'} exact>posts</NavLink>
                 </li>
                 <li>
-                    <a href={'http://www.hagishi.com/en/access/'} target="_blank" rel="noopener noreferrer">
-                        access
-                    </a>
-                </li>
-                <li>
                     <a href="mailto: info@hagi.com">contact</a>
                 </li>
                 {!loading && (
-                    <li>
+                    <>
                         {isAuthenticated ? (
-                            <a onClick={this.props.logout} href="#!" className="login">Logout</a>
+                            <>
+                                <li>
+                                    <NavLink to={'/admin'} exact>Admin</NavLink>
+                                </li>
+                                <li>
+                                    <a onClick={this.props.logout} href="#!" className="login">Logout</a>
+                                </li>
+                            </>
                         ) : (
-                                <NavLink to={'/login'} exact className="login">Login</NavLink>
+                                <li>
+                                    <NavLink to={'/login'} exact className="login">Login</NavLink>
+                                </li>
                             )}
-                    </li>
+                    </>
                 )}
             </ul>
         );

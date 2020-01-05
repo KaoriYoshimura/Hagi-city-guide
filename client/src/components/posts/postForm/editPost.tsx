@@ -146,7 +146,7 @@ class EditPost extends Component<IEditPostsProps, IPostFormState> {
                         <input type="file" onChange={this.onChangeFile} className="file-input" />
                         <figure className="image-preview">
                             <img
-                                src={post.image}
+                                src={post.previewURL}
                                 alt={post.title}
                             />
                         </figure>
