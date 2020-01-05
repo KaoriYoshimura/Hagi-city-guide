@@ -33,7 +33,7 @@ class NavLinks extends Component<INavBarProps> {
                 <li>
                     <a href={'http://www.hagishi.com/en/access/'} target="_blank" rel="noopener noreferrer">
                         access
-            </a>
+                    </a>
                 </li>
                 <li>
                     <a href="mailto: info@hagi.com">contact</a>

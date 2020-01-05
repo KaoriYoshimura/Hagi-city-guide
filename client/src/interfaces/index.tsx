@@ -87,5 +87,5 @@ export interface IMatchParams {
     id: string;
 }
 
-// For Post and AdminEditPost
+// For Post comonent
 export type IPostProps = RouteComponentProps<IMatchParams>

@@ -8,3 +8,8 @@ export interface IAuthInitialState {
     loading: boolean;
     user: any;
 }
+
+
+export interface IAdminPageProps {
+    auth: IAuthInitialState;
+}
