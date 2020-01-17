@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { IonClickSideBar } from '../../../interfaces';
+import { IonClickSideBar } from '../../../interfaces/header';
 import NavLinks from '../navLinks';
 import './sidebar.scss';
 

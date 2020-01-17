@@ -8,8 +8,6 @@ export const POST_ERROR = 'POST_ERROR';
 // Message
 export const SET_MESSAGE = 'SET_MESSAGE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
-// Post form
-export const SET_IMAGE = 'SET_IMAGE';
 // Auth Form
 export const USER_LOADED = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';

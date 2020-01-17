@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Navbar from './navbar';
-import SideBar from './sidebar/index.';
+import SideBar from './sidebar';
 import BackDrop from '../../ui/backDrop/backDrop';
 import { IBlackVariantProps } from '../../interfaces';
 

@@ -8,14 +8,11 @@ export interface IEvent {
 export interface IBlackVariantProps {
     blackVariant: boolean;
 }
-export interface IonClickSideBar {
-    onClickClose: () => void;
-    onClickDisplay?: boolean;
-}
 
 export interface ISubSidyComponents {
     children: React.ReactNode;
 }
+
 
 export interface IHeroProps {
     children: React.ReactNode;
